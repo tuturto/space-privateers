@@ -1,20 +1,24 @@
-name:                spacepirates
-version:             0.1.0.0
-synopsis:            Simple space pirate roguelike
-description:         Space Pirates is a roguelike game set in space.
-homepage:            https://github.com/tuturto
-license:             BSD3
-license-file:        LICENSE
-author:              Tuukka Turto
-maintainer:          tuukka.turto@oktaeder.net
-category:            Game
-build-type:          Simple
+name:                 spacepirates
+version:              0.1.0.0
+synopsis:             Simple space pirate roguelike
+description:          Space Pirates is a roguelike game set in space.
+homepage:             https://github.com/tuturto/space-privateers
+license:              BSD3
+license-file:         LICENSE
+author:               Tuukka Turto
+maintainer:           tuukka.turto@oktaeder.net
+category:             Game
+build-type:           Simple
 
 -- Extra files to be distributed with the package, such as examples or a 
 -- README.
 -- extra-source-files:  
 
-cabal-version:        >=1.10
+cabal-version:        >= 1.10
+source-repository head
+  type:               git
+  location:           git://github.com/tuturto/space-privateers.git
+
 executable spacepirates
   hs-source-dirs:     GameDefinition
   main-is:            Main.hs
@@ -27,6 +31,7 @@ executable spacepirates
                       Content.RuleKind,
                       Content.TileKind,
                       Paths_spacepirates
+
   build-depends:      base             >=4.7       && <4.8,
                       LambdaHack       >= 0.2.12   && < 0.2.13,
                       enummapset-th    >= 0.6.0.0  && < 1,
@@ -37,6 +42,7 @@ executable spacepirates
 
   default-extensions: MonoLocalBinds, ScopedTypeVariables, OverloadedStrings
                       BangPatterns, RecordWildCards, NamedFieldPuns
+
   other-extensions:   CPP, TemplateHaskell, MultiParamTypeClasses, RankNTypes,
                       TypeFamilies, FlexibleContexts, FlexibleInstances,
                       DeriveFunctor, FunctionalDependencies,
