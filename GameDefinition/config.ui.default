@@ -1,0 +1,26 @@
+; ; This is a commented out copy of the default UI settings config file
+; ; that is embedded in the binary.
+; ; A user config file can overrides these options. The game looks for it at
+; ; ~/.LambdaHack/config.ui.ini (or a similar path, depending on the OS).
+; ; Warning: options are case-sensitive and only ';' for comments is permitted.
+
+; [extra_commands]
+; ; Handy shorthands with Vi keys:
+; Macro_1 = ("comma", (CmdItem, Macro "" ["g"]))
+; Macro_2 = ("period", (CmdMove, Macro "" ["KP_Begin"]))
+
+; [hero_names]
+; HeroName_0 = Haskell Alvin
+; HeroName_1 = Alonzo Barkley
+; HeroName_2 = Ines Galenti
+; HeroName_3 = Ernst Abraham
+; HeroName_4 = Samuel Saunders
+; HeroName_5 = Roger Robin
+
+; [ui]
+; font = "Terminus,Monospace normal normal normal normal 12"
+; historyMax = 5000
+; maxFps = 15
+; noAnim = False
+; runStopMsgs = False
+[dummy]
