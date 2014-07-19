@@ -1,4 +1,4 @@
--- | Monsters and heroes for LambdaHack.
+-- | Monsters and heroes for Space Privateers
 module Content.ActorKind ( cdefs ) where
 
 import Game.LambdaHack.Common.Ability
@@ -15,9 +15,9 @@ cdefs = ContentDef
   , getFreq = afreq
   , validate = validateActorKind
   , content =
-      [hero, projectile, eye, fastEye, nose]
+      [hero, projectile, shambler, greaterShambler, quine]
   }
-hero,        projectile, eye, fastEye, nose :: ActorKind
+hero,        projectile, shambler, greaterShambler, quine :: ActorKind
 
 hero = ActorKind
   { asymbol = '@'
@@ -47,9 +47,9 @@ projectile = ActorKind  -- includes homing missiles
   , acanDo  = [Track]
   }
 
-eye = ActorKind
-  { asymbol = 'e'
-  , aname   = "reducible eye"
+shambler = ActorKind
+  { asymbol = 'w'
+  , aname   = "warp shambler"
   , afreq   = [("monster", 60), ("horror", 60)]
   , acolor  = BrRed
   , ahp     = rollDice 7 4
@@ -60,9 +60,9 @@ eye = ActorKind
   , aregen  = 100
   , acanDo  = [minBound..maxBound]
   }
-fastEye = ActorKind
-  { asymbol = 'e'
-  , aname   = "super-fast eye"
+greaterShambler = ActorKind
+  { asymbol = 'w'
+  , aname   = "greater warp shambler"
   , afreq   = [("monster", 15), ("horror", 15)]
   , acolor  = BrBlue
   , ahp     = rollDice 1 6
@@ -73,9 +73,9 @@ fastEye = ActorKind
   , aregen  = 10  -- Regenerates fast (at max HP most of the time!).
   , acanDo  = [minBound..maxBound]
   }
-nose = ActorKind
-  { asymbol = 'n'
-  , aname   = "point-free nose"
+quine = ActorKind
+  { asymbol = 'q'
+  , aname   = "quine"
   , afreq   = [("monster", 20), ("horror", 20)]
   , acolor  = Green
   , ahp     = rollDice 17 2

@@ -1,4 +1,4 @@
--- | Weapons and treasure for LambdaHack.
+-- | Weapons and treasure for Space Privateers
 module Content.ItemKind ( cdefs ) where
 
 import Game.LambdaHack.Common.Color
@@ -152,7 +152,7 @@ scroll3 = scroll
   }
 sword = ItemKind
   { isymbol  = ')'
-  , iname    = "sword"
+  , iname    = "cutlass"
   , ifreq    = [("useful", 40)]
   , iflavour = zipPlain [BrCyan]
   , icount   = intToDeep 1

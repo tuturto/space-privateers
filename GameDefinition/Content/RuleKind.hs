@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
--- | Game rules and assorted game setup data for LambdaHack.
+-- | Game rules and assorted game setup data for Space Pirates
 module Content.RuleKind ( cdefs ) where
 
 import Control.Arrow (first)
@@ -30,7 +30,7 @@ cdefs = ContentDef
 standard :: RuleKind
 standard = RuleKind
   { rsymbol        = 's'
-  , rname          = "standard LambdaHack ruleset"
+  , rname          = "standard Space Privateers ruleset"
   , rfreq          = [("standard", 100)]
   -- Check whether one position is accessible from another.
   -- Precondition: the two positions are next to each other.
@@ -39,7 +39,7 @@ standard = RuleKind
   , raccessible    = Nothing
   , raccessibleDoor = Just $ \spos tpos ->
                                 not $ isDiagonal $ displacement spos tpos
-  , rtitle         = "LambdaHack"
+  , rtitle         = "Space Privateers"
   , rpathsDataFile = Self.getDataFileName
   , rpathsVersion  = Self.version
   , ritemMelee     = ")"
