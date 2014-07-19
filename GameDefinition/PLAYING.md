@@ -1,33 +1,33 @@
-Playing LambdaHack
-==================
-
-LambdaHack is a small dungeon crawler illustrating the roguelike game engine
-library also called LambdaHack. Playing the game involves walking around
-the dungeon, alone or in a party of fearless adventurers, setting up ambushes,
-hiding in shadow, covering tracks, breaking through to deeper caves,
-bumping into monsters, doors and walls, gathering magical treasure
-and making creative use of it. The bloodthirsty monsters do the same,
-intelligence allowing, while tirelessly chasing the elusive heroes
-by smell and sight.
-
-Once the few basic command keys and on-screen symbols are learned,
-mastery and enjoyment of the game is the matter of tactical skill
-and literary imagination. To be honest, a lot of imagination is required
-for this rudimentary game, but it's playable and winnable.
-The game also features experimental multiplayer cooperative and competitive
-modes, but they are troublesome to play with the shared-screen
-and shared-keyboard interface available at this time.
-Contributions welcome.
+Playing Space Pirates
+=====================
 
 
-Dungeon
--------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+City Vessel
+-----------
 
 The heroes are marked on the map with symbols `@` and `1` through `9`.
-Their goal is to explore the dungeon, battle the horrors within,
+Their goal is to explore the ship, battle the horrors within,
 gather as much gold and gems as possible, and escape to tell the tale.
-The dungeon of the campaign mode game consists of 10 levels and each level
-consists of a large number of tiles. The basic tile kinds are as follows.
+
+The basic tile kinds are as follows.
 
                dungeon terrain type               on-screen symbol
                floor                              .
@@ -159,13 +159,13 @@ that can be specified on the command line when starting the game server.
 Use at your own peril! :) Of these, you may find the screensaver modes
 the least spoilery and the most fun, e.g.:
 
-    LambdaHack --newGame --noMore --maxFps 45 --savePrefix test --gameMode testCampaign --difficulty 1
+    spacepirates --newGame --noMore --maxFps 45 --savePrefix test --gameMode testCampaign --difficulty 1
 
 
 Monsters
 --------
 
-Heroes are not alone in the dungeon. Monsters roam the dark caves
+Heroes are not alone in the city vessel. Monsters roam the dark corridors
 and crawl from damp holes day and night. While heroes pay attention
 to all other party members and take care to move one at a time,
 monsters don't care about each other and all move at once,
@@ -192,7 +192,7 @@ When the last hero dies, the game ends.
 On Winning and Dying
 --------------------
 
-You win the game if you escape the dungeon alive (or eliminate
+You win the game if you escape the city vessel alive (or eliminate
 all opposition, in some game modes). Your score is
 the sum of all gold you've plundered plus 100 gold pieces for each gem.
 Only the loot in possession of the party members on the current level

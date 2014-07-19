@@ -9,11 +9,10 @@ author:               Tuukka Turto
 maintainer:           tuukka.turto@oktaeder.net
 category:             Game
 build-type:           Simple
-
--- Extra files to be distributed with the package, such as examples or a 
--- README.
--- extra-source-files:  
-
+data-files:           GameDefinition/config.ui.default,
+                      GameDefinition/scores
+extra-source-files:   GameDefinition/PLAYING.md, GameDefinition/MainMenu.ascii,
+                      README.md, LICENSE, CREDITS, changelog
 cabal-version:        >= 1.10
 source-repository head
   type:               git
@@ -42,9 +41,8 @@ executable spacepirates
 
   default-extensions: MonoLocalBinds, ScopedTypeVariables, OverloadedStrings
                       BangPatterns, RecordWildCards, NamedFieldPuns
-
-  other-extensions:   CPP, TemplateHaskell, MultiParamTypeClasses, RankNTypes,
-                      TypeFamilies, FlexibleContexts, FlexibleInstances,
-                      DeriveFunctor, FunctionalDependencies,
-                      GeneralizedNewtypeDeriving, TupleSections,
-                      DeriveFoldable, DeriveTraversable  
+  other-extensions:   TemplateHaskell
+  ghc-options: -Wall -fwarn-orphans -fwarn-tabs -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction -fwarn-unrecognised-pragmas
+  ghc-options: -fno-warn-auto-orphans -fno-warn-implicit-prelude
+  ghc-options: -fno-ignore-asserts -funbox-strict-fields
+  ghc-options: -threaded -with-rtsopts=-C0.005
