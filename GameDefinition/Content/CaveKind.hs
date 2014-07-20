@@ -1,4 +1,4 @@
--- | Cave layouts for LambdaHack.
+-- | Cave layouts for Space Privateers
 module Content.CaveKind ( cdefs ) where
 
 import Data.Ratio
@@ -21,7 +21,7 @@ rogue,        arena, empty, noise, combat, battle :: CaveKind
 
 rogue = CaveKind
   { csymbol       = '$'
-  , cname         = "A maze of twisty passages"
+  , cname         = "General quarters"
   , cfreq         = [("dng", 100), ("caveRogue", 1)]
   , cxsize        = fst normalLevelBound + 1
   , cysize        = snd normalLevelBound + 1
@@ -49,7 +49,7 @@ rogue = CaveKind
   }
 arena = rogue
   { csymbol       = 'A'
-  , cname         = "Underground city"
+  , cname         = "A service deck"
   , cfreq         = [("dng", 30), ("caveArena", 1)]
   , cgrid         = rollDiceXY [(2, 2)] [(2, 2)]
   , cminPlaceSize = rollDiceXY [(2, 2), (3, 1)] [(4, 1)]
@@ -64,7 +64,7 @@ arena = rogue
   }
 empty = rogue
   { csymbol       = '.'
-  , cname         = "Tall cavern"
+  , cname         = "a storage deck"
   , cfreq         = [("dng", 20), ("caveEmpty", 1)]
   , cgrid         = rollDiceXY [(1, 2), (1, 1)] [(1, 1)]
   , cminPlaceSize = rollDiceXY [(10, 1)] [(10, 1)]
@@ -83,7 +83,7 @@ empty = rogue
   }
 noise = rogue
   { csymbol       = '!'
-  , cname         = "Glittering cave"
+  , cname         = "Mech Bay"
   , cfreq         = [("dng", 20), ("caveNoise", 1)]
   , cgrid         = rollDiceXY [(2, 2)] [(1, 2), (1, 1)]
   , cminPlaceSize = rollDiceXY [(3, 2), (2, 1)] [(5, 1)]
