@@ -133,7 +133,7 @@ peekSkirmish = ModeKind
 playersCampaign, playersSkirmish, playersBattle, playersPvP, playersCoop, playersDefense, playersTestCampaign, playersTestSkirmish, playersTestBattle, playersTestPvP, playersTestCoop, playersTestDefense, playersPeekCampaign, playersPeekSkirmish :: Players
 
 playersCampaign = Players
-  { playersList = [ playerHero {playerInitial = 1}
+  { playersList = [ playerHero {playerInitial = 3}
                   , playerMonster ]
   , playersEnemy = [("Adventurer Party", "Monster Hive")]
   , playersAlly = [] }
