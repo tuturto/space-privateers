@@ -1,12 +1,15 @@
 -- | Weapons and treasure for Space Privateers
 module Content.ItemKind ( cdefs ) where
 
+import Content.ActorKind
+import Content.ItemKindOrgan
+import Content.ItemKindShrapnel
 import Game.LambdaHack.Common.Color
 import Game.LambdaHack.Common.ContentDef
+import Game.LambdaHack.Common.Dice
 import Game.LambdaHack.Common.Effect
 import Game.LambdaHack.Common.Flavour
-import Game.LambdaHack.Common.ItemFeature
-import Game.LambdaHack.Common.Random
+import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ItemKind
 
 cdefs :: ContentDef ItemKind
@@ -15,12 +18,14 @@ cdefs = ContentDef
   , getName = iname
   , getFreq = ifreq
   , validate = validateItemKind
-  , content =
-      [amulet, dart, gem1, gem2, gem3, currency, harpoon, potion1, potion2, potion3, ring, scroll1, scroll2, scroll3, sword, wand1, wand2, fist, foot, tentacle, fragrance, mist_healing, mist_wounding, glass_piece, smoke]
+  , content = items ++ organs ++ shrapnels ++ actors
   }
 amulet,        dart, gem1, gem2, gem3, currency, harpoon, potion1, potion2, potion3, ring, scroll1, scroll2, scroll3, sword, wand1, wand2, fist, foot, tentacle, fragrance, mist_healing, mist_wounding, glass_piece, smoke :: ItemKind
 
-gem, potion, scroll, wand :: ItemKind  -- generic templates
+gem, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
+
+item :: [ItemKind]
+items = [amulet, dart, gem1, gem2, gem3, currency, harpoon, potion1, potion2, potion3, ring, scroll1, scroll2, scroll3, sword, wand1, wand2, fist, foot, tentacle, fragrance, mist_healing, mist_wounding, glass_piece, smoke]
 
 -- castDeep (aDb, xDy) = castDice aDb + (lvl - 1) * castDice xDy / (depth - 1)
 
@@ -160,7 +165,7 @@ sword = ItemKind
   , iverbProject = "heave"
   , iweight  = 2000
   , itoThrow = -50  -- ensuring it hits with the tip costs speed
-  , ifeature = [Cause $ Hurt (rollDice 5 1) (rollDeep (1, 2) (4, 2))]
+  , ifeature = [Cause $ Hurt (rollDice 2 4) (rollDeep (1, 2) (4, 2))]
   }
 wand = ItemKind
   { isymbol  = '/'

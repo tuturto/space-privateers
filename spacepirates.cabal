@@ -31,12 +31,12 @@ executable spacepirates
                       Content.TileKind,
                       Paths_spacepirates
 
-  build-depends:      base             >=4.7       && <4.8,
-                      LambdaHack       >= 0.2.12   && < 0.2.13,
-                      enummapset-th    >= 0.6.0.0  && < 1,
-                      filepath         >= 1.2.0.1  && < 2,
-                      template-haskell >= 2.6      && < 3,
-                      text             >= 0.11.2.3 && < 2
+  build-depends:      base              >=4.7       && <4.8,
+                      LambdaHack        >= 0.2.14   && < 0.2.15,
+                      enummapset-th     >= 0.6.0.0  && < 1,
+                      filepath          >= 1.2.0.1  && < 2,
+                      template-haskell  >= 2.6      && < 3,
+                      text              >= 0.11.2.3 && < 2
   default-language:   Haskell2010
 
   default-extensions: MonoLocalBinds, ScopedTypeVariables, OverloadedStrings
