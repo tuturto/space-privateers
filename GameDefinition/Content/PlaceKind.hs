@@ -19,16 +19,19 @@ rect = PlaceKind  -- Valid for any nonempty area, hence low frequency.
   { psymbol  = 'r'
   , pname    = "room"
   , pfreq    = [("rogue", 100)]
+  , prarity  = [(1, 1)]
   , pcover   = CStretch
   , pfence   = FNone
   , ptopLeft = [ "--"
                , "|."
                ]
+  , poverride = []
   }
 pillar = PlaceKind
   { psymbol  = 'p'
   , pname    = "pillar room"
   , pfreq    = [("rogue", 1000)]  -- larger rooms require support pillars
+  , prarity  = [(1, 1)]
   , pcover   = CStretch
   , pfence   = FNone
   , ptopLeft = [ "-----"
@@ -37,6 +40,7 @@ pillar = PlaceKind
                , "|...."
                , "|...."
                ]
+  , poverride = []
   }
 pillarC = pillar
   { ptopLeft = [ "-----"
@@ -58,11 +62,13 @@ colonnade = PlaceKind
   { psymbol  = 'c'
   , pname    = "colonnade"
   , pfreq    = [("rogue", 500)]
+  , prarity  = [(1, 1)]
   , pcover   = CAlternate
   , pfence   = FFloor
   , ptopLeft = [ "O."
                , ".O"
                ]
+  , poverride = []
   }
 colonnadeW = colonnade
   { ptopLeft = [ "O."

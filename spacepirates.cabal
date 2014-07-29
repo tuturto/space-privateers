@@ -33,6 +33,7 @@ executable spacepirates
 
   build-depends:      base              >=4.7       && <4.8,
                       LambdaHack        >= 0.2.14   && < 0.2.15,
+                      containers        >= 0.5      && < 1,
                       enummapset-th     >= 0.6.0.0  && < 1,
                       filepath          >= 1.2.0.1  && < 2,
                       template-haskell  >= 2.6      && < 3,

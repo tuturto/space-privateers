@@ -2,6 +2,8 @@
 -- for LambdaHack.
 module Content.FactionKind ( cdefs ) where
 
+import qualified Data.EnumMap.Strict as EM
+
 import Game.LambdaHack.Common.Ability
 import Game.LambdaHack.Common.ContentDef
 import Game.LambdaHack.Content.FactionKind
@@ -21,35 +23,31 @@ hero = FactionKind
   { fsymbol        = '@'
   , fname          = "hero"
   , ffreq          = [("hero", 1)]
-  , fAbilityLeader = allAbilities
-  , fAbilityOther  = meleeAdjacent
+  , fSkillsLeader = allSkills
+  , fSkillsOther  = meleeAdjacent
   }
 
 monster = FactionKind
   { fsymbol        = 'm'
   , fname          = "monster"
   , ffreq          = [("monster", 1), ("summon", 50)]
-  , fAbilityLeader = allAbilities
-  , fAbilityOther  = allAbilities
+  , fSkillsLeader = allSkills
+  , fSkillsOther  = allSkills
   }
 
 horror = FactionKind
   { fsymbol        = 'h'
   , fname          = "horror"
   , ffreq          = [("horror", 1), ("summon", 50)]
-  , fAbilityLeader = allAbilities
-  , fAbilityOther  = allAbilities
+  , fSkillsLeader = allSkills
+  , fSkillsOther  = allSkills
   }
 
+meleeAdjacent, _meleeAndRanged, allSkills :: Skills
 
-_noAbility, _onlyFollowTrack, meleeAdjacent, _meleeAndRanged, allAbilities :: [Ability]
+meleeAdjacent = EM.fromList $ zip [AbWait, AbMelee] [1, 1..]
 
-_noAbility = []  -- not even projectiles will fly
+-- Melee and reaction fire.
+_meleeAndRanged = EM.fromList $ zip [AbWait, AbMelee, AbProject] [1, 1..]
 
-_onlyFollowTrack = [Track]  -- projectiles enabled
-
-meleeAdjacent = [Track, Melee]
-
-_meleeAndRanged = [Track, Melee, Ranged]  -- melee and reaction fire
-
-allAbilities = [minBound..maxBound]
+allSkills = unitSkills

@@ -2,6 +2,7 @@
 module Content.TileKind ( cdefs ) where
 
 import Control.Arrow (first)
+import Data.Maybe
 import Data.Text (Text)
 import qualified Data.Text as T
 
@@ -206,15 +207,15 @@ floorArenaLit = floorCorridorLit
   }
 floorActorLit = floorArenaLit
   { tfreq    = [("floorActorLit", 1), ("battleSet", 100)]
-  , tfeature = CanActor : tfeature floorArenaLit
+  , tfeature = OftenActor : tfeature floorArenaLit
   }
 floorItemLit = floorArenaLit
   { tfreq    = []
-  , tfeature = CanItem : tfeature floorArenaLit
+  , tfeature = OftenItem : tfeature floorArenaLit
   }
 floorActorItemLit = floorItemLit
   { tfreq    = [("legendLit", 100), ("emptySet", 1)]
-  , tfeature = CanActor : tfeature floorItemLit
+  , tfeature = OftenActor : tfeature floorItemLit
   }
 floorRedLit = floorArenaLit
   { tname    = "brick pavement"
@@ -246,14 +247,15 @@ makeDark :: TileKind -> TileKind
 makeDark k = let textLit :: Text -> Text
                  textLit t = maybe t (<> "Dark") $ T.stripSuffix "Lit" t
                  litFreq = map (first textLit) $ tfreq k
-                 litFeat (OpenTo t) = OpenTo $ textLit t
-                 litFeat (CloseTo t) = CloseTo $ textLit t
-                 litFeat (ChangeTo t) = ChangeTo $ textLit t
-                 litFeat (HideAs t) = HideAs $ textLit t
-                 litFeat (RevealAs t) = RevealAs $ textLit t
-                 litFeat feat = feat
+                 litFeat (OpenTo t) = Just $ OpenTo $ textLit t
+                 litFeat (CloseTo t) = Just $ CloseTo $ textLit t
+                 litFeat (ChangeTo t) = Just $ ChangeTo $ textLit t
+                 litFeat (HideAs t) = Just $ HideAs $ textLit t
+                 litFeat (RevealAs t) = Just $ RevealAs $ textLit t
+                 litFeat OftenItem = Nothing
+                 litFeat feat = Just $ feat
              in k { tfreq    = litFreq
-                  , tfeature = Dark : map litFeat (tfeature k)
+                  , tfeature = Dark : mapMaybe litFeat (tfeature k)
                   }
 
 makeDarkColor :: TileKind -> TileKind

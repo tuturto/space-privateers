@@ -4,8 +4,8 @@ module Content.CaveKind ( cdefs ) where
 import Data.Ratio
 
 import Game.LambdaHack.Common.ContentDef
+import Game.LambdaHack.Common.Dice
 import Game.LambdaHack.Common.Misc
-import Game.LambdaHack.Common.Random as Random
 import Game.LambdaHack.Content.CaveKind
 
 cdefs :: ContentDef CaveKind
@@ -15,9 +15,9 @@ cdefs = ContentDef
   , getFreq = cfreq
   , validate = validateCaveKind
   , content =
-      [rogue, arena, empty, noise, combat, battle]
+      [rogue, arena, empty, noise]
   }
-rogue,        arena, empty, noise, combat, battle :: CaveKind
+rogue,        arena, empty, noise :: CaveKind
 
 rogue = CaveKind
   { csymbol       = '$'
@@ -25,20 +25,22 @@ rogue = CaveKind
   , cfreq         = [("dng", 100), ("caveRogue", 1)]
   , cxsize        = fst normalLevelBound + 1
   , cysize        = snd normalLevelBound + 1
-  , cgrid         = rollDiceXY [(3, 2)] [(1, 2), (2, 1)]
-  , cminPlaceSize = rollDiceXY [(2, 2), (2, 1)] [(4, 1)]
-  , cmaxPlaceSize = rollDiceXY [(fst normalLevelBound, 1)]
-                               [(snd normalLevelBound, 1)]
-  , cdarkChance   = rollDeep (1, 54) (0, 0)
-  , cnightChance  = intToDeep 100
+  , cgrid         = DiceXY (3 * d 2) (d 2 + 2)
+  , cminPlaceSize = DiceXY (2 * d 2 + 2) 4
+  , cmaxPlaceSize = DiceXY 15 10
+  , cdarkChance   = d 54 + d 20
+  , cnightChance  = 51
   , cauxConnects  = 1%3
   , cmaxVoid      = 1%6
   , cminStairDist = 30
   , cdoorChance   = 1%2
   , copenChance   = 1%10
   , chidden       = 8
-  , citemNum      = rollDice 7 2
-  , citemFreq     = [(70, "useful"), (30, "treasure")]
+  , cactorFreq    = [("monster", 50), ("horror", 25)]
+  , citemNum      = 7 * d 2
+  , citemFreq     = [("useful", 70), ("treasure", 30)]
+  , cplaceFreq    = [("rogue", 100)]
+  , cpassable     = False
   , cdefTile        = "fillerWall"
   , cdarkCorTile    = "floorCorridorDark"
   , clitCorTile     = "floorCorridorLit"
@@ -51,13 +53,13 @@ arena = rogue
   { csymbol       = 'A'
   , cname         = "A service deck"
   , cfreq         = [("dng", 30), ("caveArena", 1)]
-  , cgrid         = rollDiceXY [(2, 2)] [(2, 2)]
-  , cminPlaceSize = rollDiceXY [(2, 2), (3, 1)] [(4, 1)]
-  , cdarkChance   = rollDeep (1, 80) (1, 60)
-  , cnightChance  = intToDeep 0
+  , cgrid         = DiceXY (2 * d 2) (2 * d 2)
+  , cminPlaceSize = DiceXY (2 * d 2 + 3) 4
+  , cdarkChance   = d 80 + d 60
+  , cnightChance  = 0
   , cmaxVoid      = 1%3
   , chidden       = 1000
-  , citemNum      = rollDice 5 2  -- few rooms
+  , citemNum      = 5 * d 2  -- few rooms
   , cdefTile      = "arenaSet"
   , cdarkCorTile  = "trailLit"  -- let paths around rooms be lit
   , clitCorTile   = "trailLit"
@@ -66,17 +68,15 @@ empty = rogue
   { csymbol       = '.'
   , cname         = "a storage deck"
   , cfreq         = [("dng", 20), ("caveEmpty", 1)]
-  , cgrid         = rollDiceXY [(1, 2), (1, 1)] [(1, 1)]
-  , cminPlaceSize = rollDiceXY [(10, 1)] [(10, 1)]
-  , cmaxPlaceSize = rollDiceXY [(fst normalLevelBound * 3 `div` 5, 1)]
-                               [(snd normalLevelBound * 3 `div` 5, 1)]
-  , cdarkChance   = rollDeep (1, 80) (1, 80)
-  , cnightChance  = intToDeep 0
+  , cgrid         = DiceXY (d 2 + 1) 1
+  , cminPlaceSize = DiceXY (d 5 + 5) (d 5 + 5)
+  , cdarkChance   = d 80 + d 80
+  , cnightChance  = 0
   , cauxConnects  = 1
   , cmaxVoid      = 1%2
   , cminStairDist = 50
   , chidden       = 1000
-  , citemNum      = rollDice 8 2  -- whole floor strewn with treasure
+  , citemNum      = d 8 + 2  -- whole floor strewn with treasure
   , cdefTile      = "emptySet"
   , cdarkCorTile  = "trailLit"  -- let paths around rooms be lit
   , clitCorTile   = "floorArenaLit"
@@ -85,39 +85,14 @@ noise = rogue
   { csymbol       = '!'
   , cname         = "Mech Bay"
   , cfreq         = [("dng", 20), ("caveNoise", 1)]
-  , cgrid         = rollDiceXY [(2, 2)] [(1, 2), (1, 1)]
-  , cminPlaceSize = rollDiceXY [(3, 2), (2, 1)] [(5, 1)]
-  , cdarkChance   = rollDeep (1, 80) (1, 40)
-  , cnightChance  = rollDeep (1, 40) (1, 40)
+  , cgrid         = DiceXY (2 * d 2 + 2) 1
+  , cminPlaceSize = DiceXY (3 * d 2 + 2) 5
+  , cdarkChance   = d 80 + d 40
+  , cnightChance  = d 40 + d 40
   , cmaxVoid      = 0
   , chidden       = 1000
-  , citemNum      = rollDice 4 2  -- fewer rooms
+  , citemNum      = d 4 + 2  -- fewer rooms
   , cdefTile      = "noiseSet"
   , cdarkCorTile  = "trailLit"  -- let trails give off light
   , clitCorTile   = "trailLit"
-  }
-combat = rogue
-  { csymbol       = 'C'
-  , cname         = "Combat arena"
-  , cfreq         = [("caveCombat", 1)]
-  , cgrid         = rollDiceXY [(2, 2), (3, 1)] [(1, 2), (2, 1)]
-  , cminPlaceSize = rollDiceXY [(3, 1)] [(3, 1)]
-  , cmaxPlaceSize = rollDiceXY [(5, 1)] [(5, 1)]
-  , cdarkChance   = intToDeep 100
-  , cnightChance  = rollDeep (1, 67) (0, 0)
-  , chidden       = 1000
-  , cauxConnects  = 0
-  , cdoorChance   = 1
-  , copenChance   = 0
-  , citemNum      = rollDice 12 2
-  , citemFreq     = [(100, "useful")]
-  , cdefTile      = "combatSet"
-  , cdarkCorTile  = "trailLit"  -- let trails give off light
-  , clitCorTile   = "floorArenaLit"
-  }
-battle = combat  -- TODO: actors can get stuck forever among trees
-  { csymbol       = 'B'
-  , cname         = "Battle arena"
-  , cfreq         = [("caveBattle", 1)]
-  , cdefTile      = "battleSet"
   }
