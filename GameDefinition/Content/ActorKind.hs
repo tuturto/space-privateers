@@ -1,28 +1,26 @@
 
 -- | Monsters and heroes for Space Privateers
-module Content.ActorKind ( cdefs ) where
+module Content.ActorKind ( actors ) where
 
-import qualified Data.EnumMap.Strict as EM
-
-import Game.LambdaHack.Common.Ability
 import Game.LambdaHack.Common.Color
-import Game.LambdaHack.Common.ContentDef
-import Game.LambdaHack.Common.Random
-import Game.LambdaHack.Common.Time
+import Game.LambdaHack.Common.Effect
+import Game.LambdaHack.Common.Flavour
+import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ItemKind
 
 
 actors :: [ItemKind]
 actors = [hero, shambler, greaterShambler, quine]
+hero,           shambler, greaterShambler, quine :: ItemKind
 
 hero = ItemKind
   { isymbol   = '@'
   , iname     = "hero"
   , ifreq     = [("hero", 1)]
-  , iflavour  = BrWhite  -- modified if many hero factions
+  , iflavour  = zipPlain [BrWhite]  -- modified if many hero factions
   , icount    = 1
   , irarity   = [(1, 5)]
-  , iverbhit  = "thud"
+  , iverbHit  = "thud"
   , iweight   = 80000
   , iaspects  = [ AddMaxHP 50, AddMaxCalm 60, AddSpeed 20, AddSight 3]
   , ieffects  = []
@@ -35,10 +33,10 @@ shambler = ItemKind
   { isymbol   = 'w'
   , iname     = "warp shambler"
   , ifreq     = [("monster", 60), ("horror", 60)]
-  , iflavour  = BrRed
+  , iflavour  = zipPlain [BrRed]
   , icount    = 1
   , irarity   = [(1, 10), (10, 6)]
-  , iverbhit  = "thud"
+  , iverbHit  = "thud"
   , iweight   = 80000
   , iaspects  = [ AddMaxHP 15, AddMaxCalm 60, AddSpeed 20, AddSight 4]
   , ieffects  = []
@@ -51,7 +49,7 @@ greaterShambler = shambler
   { isymbol   = 'w'
   , iname     = "greater warp shambler"
   , ifreq     = [("monster", 15), ("horror", 15)]
-  , iflavour  = BrBlue
+  , iflavour  = zipPlain [BrBlue]
   , irarity   = [(1, 10), (10, 6)]
   , iweight   = 70000
   , iaspects  = [ AddMaxHP 10, AddMaxCalm 60, AddSpeed 30, AddSight 4]
@@ -61,10 +59,10 @@ quine = ItemKind
   { isymbol   = 'q'
   , iname     = "quine"
   , ifreq     = [("monster", 20), ("horror", 20)]
-  , iflavour  = Green
+  , iflavour  = zipPlain [Green]
   , icount    = 1
   , irarity   = [(1, 10), (10, 6)]
-  , iverbhit  = "thud"
+  , iverbHit  = "thud"
   , iweight   = 80000
   , iaspects  = [ AddMaxHP 20, AddMaxCalm 60, AddSpeed 20, AddSight 4]
   , ieffects  = []
