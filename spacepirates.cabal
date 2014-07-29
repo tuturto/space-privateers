@@ -21,14 +21,18 @@ source-repository head
 executable spacepirates
   hs-source-dirs:     GameDefinition
   main-is:            Main.hs
-  other-modules:      Content.ActorKind,
+  other-modules:      Client.UI.Content.KeyKind,
                       Content.CaveKind,
                       Content.FactionKind,
                       Content.ItemKind,
+                      Content.ItemKindActor,
+                      Content.ItemKindOrgan,
+                      Content.ItemKindShrapnel,
                       Content.ModeKind,
                       Content.PlaceKind,
                       Content.RuleKind,
                       Content.TileKind,
+                      TieKnot,
                       Paths_spacepirates
 
   build-depends:      base              >=4.7       && <4.8,

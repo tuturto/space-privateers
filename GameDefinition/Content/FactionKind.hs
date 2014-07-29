@@ -15,39 +15,59 @@ cdefs = ContentDef
   , getFreq = ffreq
   , validate = validateFactionKind
   , content =
-      [hero, monster, horror]
+      [hero, civilian, monster, animal, horror]
   }
-hero,        monster, horror :: FactionKind
+hero,        civilian, monster, animal, horror :: FactionKind
 
 hero = FactionKind
-  { fsymbol        = '@'
-  , fname          = "hero"
-  , ffreq          = [("hero", 1)]
+  { fsymbol       = '1'
+  , fname         = "hero"
+  , ffreq         = [("hero", 1)]
   , fSkillsLeader = allSkills
   , fSkillsOther  = meleeAdjacent
   }
 
+civilian = FactionKind
+  { fsymbol       = '@'
+  , fname         = "civilian"
+  , ffreq         = [("civilian", 1)]
+  , fSkillsLeader = allSkills
+  , fSkillsOther  = allSkills  -- not coordinated by any leadership
+  }
+
 monster = FactionKind
-  { fsymbol        = 'm'
-  , fname          = "monster"
-  , ffreq          = [("monster", 1), ("summon", 50)]
+  { fsymbol       = 'm'
+  , fname         = "monster"
+  , ffreq         = [("monster", 1)]
   , fSkillsLeader = allSkills
   , fSkillsOther  = allSkills
+  }
+
+animal = FactionKind
+  { fsymbol       = 'd'
+  , fname         = "animal"
+  , ffreq         = [("animal", 1)]
+  , fSkillsLeader = animalSkills
+  , fSkillsOther  = animalSkills
   }
 
 horror = FactionKind
-  { fsymbol        = 'h'
-  , fname          = "horror"
-  , ffreq          = [("horror", 1), ("summon", 50)]
+  { fsymbol       = 'h'
+  , fname         = "horror"
+  , ffreq         = [("horror", 1)]
   , fSkillsLeader = allSkills
   , fSkillsOther  = allSkills
   }
 
-meleeAdjacent, _meleeAndRanged, allSkills :: Skills
+
+meleeAdjacent, _meleeAndRanged, animalSkills, allSkills :: Skills
 
 meleeAdjacent = EM.fromList $ zip [AbWait, AbMelee] [1, 1..]
 
 -- Melee and reaction fire.
 _meleeAndRanged = EM.fromList $ zip [AbWait, AbMelee, AbProject] [1, 1..]
+
+animalSkills =
+  EM.fromList $ zip [AbMove, AbMelee, AbAlter, AbWait, AbTrigger] [1, 1..]
 
 allSkills = unitSkills

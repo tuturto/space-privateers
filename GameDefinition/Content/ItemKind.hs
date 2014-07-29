@@ -3,7 +3,7 @@ module Content.ItemKind ( cdefs ) where
 
 import Data.List
 
-import Content.ActorKind
+import Content.ItemKindActor
 import Content.ItemKindOrgan
 import Content.ItemKindShrapnel
 import Game.LambdaHack.Common.Color

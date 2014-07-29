@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
--- | Game rules and assorted game setup data for Space Pirates
+-- | Game rules and assorted game setup data for LambdaHack.
 module Content.RuleKind ( cdefs ) where
 
 import Language.Haskell.TH.Syntax
@@ -25,15 +25,16 @@ cdefs = ContentDef
 standard :: RuleKind
 standard = RuleKind
   { rsymbol        = 's'
-  , rname          = "standard Space Privateers ruleset"
+  , rname          = "standard LambdaHack ruleset"
   , rfreq          = [("standard", 100)]
   -- Check whether one position is accessible from another.
-  -- Precondition: the two positions are next to each other.
-  -- Apart of checking the target tile, we forbid diagonal movement
-  -- to and from doors.
+  -- Precondition: the two positions are next to each other
+  -- and the target tile is walkable. For LambdaHack we forbid
+  -- diagonal movement to and from doors.
   , raccessible    = Nothing
-  , raccessibleDoor = Just $ \spos tpos -> not $ isDiagonal $ spos `vectorToFrom` tpos
-  , rtitle         = "Space Privateers"
+  , raccessibleDoor =
+      Just $ \spos tpos -> not $ isDiagonal $ spos `vectorToFrom` tpos
+  , rtitle         = "LambdaHack"
   , rpathsDataFile = Self.getDataFileName
   , rpathsVersion  = Self.version
   -- The strings containing the default configuration file
