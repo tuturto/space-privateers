@@ -1,4 +1,4 @@
--- | Cave layouts for LambdaHack.
+-- | Cave layouts for Space Privateers.
 module Content.CaveKind ( cdefs ) where
 
 import Data.Ratio
@@ -21,7 +21,7 @@ rogue,        arena, empty, noise, battle, skirmish, ambush, safari1, safari2, s
 
 rogue = CaveKind
   { csymbol       = 'R'
-  , cname         = "A maze of twisty passages"
+  , cname         = "General quarters"
   , cfreq         = [("dng", 100), ("caveRogue", 1)]
   , cxsize        = fst normalLevelBound + 1
   , cysize        = snd normalLevelBound + 1
@@ -36,7 +36,7 @@ rogue = CaveKind
   , cdoorChance   = 1%2
   , copenChance   = 1%10
   , chidden       = 8
-  , cactorFreq    = [("monster", 50), ("animal", 50)]
+  , cactorFreq    = [("merchant", 50), ("chaos", 45), ("horror", 5)]
   , citemNum      = 10 * d 2
   , citemFreq     = [("useful", 70), ("treasure", 30)]
   , cplaceFreq    = [("rogue", 100)]
@@ -51,7 +51,7 @@ rogue = CaveKind
   }
 arena = rogue
   { csymbol       = 'A'
-  , cname         = "Underground city"
+  , cname         = "Maintenance deck"
   , cfreq         = [("dng", 30), ("caveArena", 1)]
   , cgrid         = DiceXY (2 * d 2) (2 * d 2)
   , cminPlaceSize = DiceXY (2 * d 2 + 3) 4
@@ -59,16 +59,16 @@ arena = rogue
   , cnightChance  = 0
   , cmaxVoid      = 1%3
   , chidden       = 1000
-  , cactorFreq    = [("monster", 70), ("animal", 30)]
-  , citemNum      = 8 * d 2  -- few rooms
+  , cactorFreq    = [("merchant", 70), ("chaos", 25), ("horror", 5)]
+  , citemNum      = 8 * d 2
   , cpassable     = True
   , cdefTile      = "arenaSet"
-  , cdarkCorTile  = "trailLit"  -- let trails give off light
+  , cdarkCorTile  = "trailLit"
   , clitCorTile   = "trailLit"
   }
 empty = rogue
   { csymbol       = 'E'
-  , cname         = "Tall cavern"
+  , cname         = "Storage level"
   , cfreq         = [("dng", 20), ("caveEmpty", 1)]
   , cgrid         = DiceXY (d 2 + 1) 1
   , cminPlaceSize = DiceXY 10 10
@@ -79,8 +79,8 @@ empty = rogue
   , cmaxVoid      = 1%2
   , cminStairDist = 50
   , chidden       = 1000
-  , cactorFreq    = [("monster", 10), ("animal", 90)]
-  , citemNum      = 6 * d 2  -- few rooms
+  , cactorFreq    = [("merchant", 50), ("chaos", 25), ("horror", 25)]
+  , citemNum      = 6 * d 2
   , cpassable     = True
   , cdefTile      = "emptySet"
   , cdarkCorTile  = "floorArenaDark"
@@ -88,7 +88,7 @@ empty = rogue
   }
 noise = rogue
   { csymbol       = 'N'
-  , cname         = "Glittering cave"
+  , cname         = "Engineering deck"
   , cfreq         = [("dng", 10), ("caveNoise", 1)]
   , cgrid         = DiceXY 3 3
   , cminPlaceSize = DiceXY 8 4
@@ -97,15 +97,15 @@ noise = rogue
   , cauxConnects  = 0
   , cmaxVoid      = 0
   , chidden       = 1000
-  , cactorFreq    = [("monster", 80), ("animal", 20)]
-  , citemNum      = 12 * d 2  -- an incentive to explore the labyrinth
+  , cactorFreq    = [("merchant", 70), ("chaos", 25), ("horror", 5)]
+  , citemNum      = 12 * d 2
   , cpassable     = True
   , cplaceFreq    = [("noise", 50), ("rogue", 50)]
   , cdefTile      = "noiseSet"
   , cdarkCorTile  = "floorArenaDark"
   , clitCorTile   = "floorArenaLit"
   }
-battle = rogue  -- few lights and many solids, to help the less numerous heroes
+battle = rogue
   { csymbol       = 'B'
   , cname         = "Old battle ground"
   , cfreq         = [("caveBattle", 1)]
@@ -149,8 +149,8 @@ skirmish = rogue  -- many random solid tiles, to break LOS, since it's a day
   }
 ambush = rogue  -- lots of lights, to give a chance to snipe
   { csymbol       = 'M'
-  , cname         = "Public garden at night"
-  , cfreq         = [("caveAmbush", 1)]
+  , cname         = "Warp Drive"
+  , cfreq         = [("dng", 10), ("caveAmbush", 1)]
   , cgrid         = DiceXY (2 * d 2 + 3) (d 2 + 2)
   , cminPlaceSize = DiceXY 3 3
   , cmaxPlaceSize = DiceXY 5 5
@@ -160,7 +160,7 @@ ambush = rogue  -- lots of lights, to give a chance to snipe
   , cdoorChance   = 1%10
   , copenChance   = 9%10
   , chidden       = 1000
-  , cactorFreq    = []
+  , cactorFreq    = [("merchant", 10), ("chaos", 25), ("horror", 65)]
   , citemNum      = 12 * d 2
   , citemFreq     = [("useful", 100)]
   , cplaceFreq    = [("ambush", 100)]

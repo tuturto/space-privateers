@@ -1,4 +1,4 @@
--- | The main source code file of LambdaHack the game.
+-- | The main source code file of Space Privateers the game.
 module Main ( main ) where
 
 import System.Environment (getArgs)

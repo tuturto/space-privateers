@@ -1,5 +1,5 @@
 -- | The type of kinds of game factions (heroes, enemies, NPCs, etc.)
--- for LambdaHack.
+-- for Space Privateers.
 module Content.FactionKind ( cdefs ) where
 
 import qualified Data.EnumMap.Strict as EM
@@ -15,9 +15,9 @@ cdefs = ContentDef
   , getFreq = ffreq
   , validate = validateFactionKind
   , content =
-      [hero, civilian, monster, animal, horror]
+      [hero, merchant, chaos, horror]
   }
-hero,        civilian, monster, animal, horror :: FactionKind
+hero,        merchant, chaos, horror :: FactionKind
 
 hero = FactionKind
   { fsymbol       = '1'
@@ -27,28 +27,20 @@ hero = FactionKind
   , fSkillsOther  = meleeAdjacent
   }
 
-civilian = FactionKind
+merchant = FactionKind
   { fsymbol       = '@'
-  , fname         = "civilian"
-  , ffreq         = [("civilian", 1)]
-  , fSkillsLeader = allSkills
-  , fSkillsOther  = allSkills  -- not coordinated by any leadership
-  }
-
-monster = FactionKind
-  { fsymbol       = 'm'
-  , fname         = "monster"
-  , ffreq         = [("monster", 1)]
+  , fname         = "merchant"
+  , ffreq         = [("merchant", 1)]
   , fSkillsLeader = allSkills
   , fSkillsOther  = allSkills
   }
 
-animal = FactionKind
-  { fsymbol       = 'd'
-  , fname         = "animal"
-  , ffreq         = [("animal", 1)]
-  , fSkillsLeader = animalSkills
-  , fSkillsOther  = animalSkills
+chaos = FactionKind
+  { fsymbol       = 'c'
+  , fname         = "chaos"
+  , ffreq         = [("chaos", 1)]
+  , fSkillsLeader = allSkills
+  , fSkillsOther  = allSkills
   }
 
 horror = FactionKind
