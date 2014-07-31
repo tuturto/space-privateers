@@ -1,7 +1,7 @@
-name:                 spacepirates
+name:                 SpacePrivateers
 version:              0.1.0.0
 synopsis:             Simple space pirate roguelike
-description:          Space Pirates is a roguelike game set in space.
+description:          Space Privateers is a roguelike game set in space.
 homepage:             https://github.com/tuturto/space-privateers
 license:              BSD3
 license-file:         LICENSE
@@ -18,7 +18,7 @@ source-repository head
   type:               git
   location:           git://github.com/tuturto/space-privateers.git
 
-executable spacepirates
+executable SpacePrivateers
   hs-source-dirs:     GameDefinition
   main-is:            Main.hs
   other-modules:      Client.UI.Content.KeyKind,
@@ -33,7 +33,7 @@ executable spacepirates
                       Content.RuleKind,
                       Content.TileKind,
                       TieKnot,
-                      Paths_spacepirates
+                      Paths_SpacePrivateers
 
   build-depends:      base              >=4.7       && <4.8,
                       LambdaHack        >= 0.2.14   && < 0.2.15,
@@ -47,7 +47,10 @@ executable spacepirates
   default-extensions: MonoLocalBinds, ScopedTypeVariables, OverloadedStrings
                       BangPatterns, RecordWildCards, NamedFieldPuns
   other-extensions:   TemplateHaskell
-  ghc-options: -Wall -fwarn-orphans -fwarn-tabs -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction -fwarn-unrecognised-pragmas
+  ghc-options: -Wall -fwarn-orphans -fwarn-tabs -fwarn-incomplete-uni-patterns
+  ghc-options: -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction
+  ghc-options: -fwarn-unrecognised-pragmas
   ghc-options: -fno-warn-auto-orphans -fno-warn-implicit-prelude
   ghc-options: -fno-ignore-asserts -funbox-strict-fields
   ghc-options: -threaded -with-rtsopts=-C0.005
+
