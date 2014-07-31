@@ -23,7 +23,7 @@ campaign = ModeKind
   , mfreq    = [("campaign", 1)]
   , mplayers = playersCampaign
   , mcaves   = cavesCampaign
-  , mdesc    = "Don't let wanton curiosity, greed and the creeping abstraction madness keep you down there in the darkness for too long!"
+  , mdesc    = "Get ready to assault the city vessel and plunder some loot!"
   }
 
 playersCampaign :: Players
@@ -36,7 +36,6 @@ playersCampaign = Players
   , playersEnemy = [ ("Space Privateers", "Merchant Mariners")
                    , ("Space Privateers", "Forces of Chaos") 
                    , ("Space Privateers", "Horrors of Warp")
-                   , ("Merchant Mariners", "Space Privateers")
                    , ("Merchant Mariners", "Forces of Chaos") 
                    , ("Merchant Mariners", "Horrors of Warp") ]
   , playersAlly = [("Forces of Chaos", "Horrors of Warp")] }
@@ -62,7 +61,7 @@ playerMerchant = Player
   , playerIsHero = False
   , playerEntry = -1
   , playerInitial = 3
-  , playerLeader = True
+  , playerLeader = False
   , playerAI = True
   , playerUI = False
   }
@@ -72,9 +71,9 @@ playerChaos = Player
   , playerFaction = "chaos"
   , playerIsSpawn = True
   , playerIsHero = False
-  , playerEntry = -3
+  , playerEntry = -1
   , playerInitial = 5
-  , playerLeader = True
+  , playerLeader = False
   , playerAI = True
   , playerUI = False
   }
@@ -82,7 +81,7 @@ playerChaos = Player
 playerHorror = Player
   { playerName = "Horrors of Warp"
   , playerFaction = "horror"
-  , playerIsSpawn = False
+  , playerIsSpawn = True
   , playerIsHero = False
   , playerEntry = -1
   , playerInitial = 0

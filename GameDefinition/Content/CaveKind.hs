@@ -149,7 +149,7 @@ skirmish = rogue  -- many random solid tiles, to break LOS, since it's a day
   }
 ambush = rogue  -- lots of lights, to give a chance to snipe
   { csymbol       = 'M'
-  , cname         = "Warp Drive"
+  , cname         = "Hydroponic Farm"
   , cfreq         = [("dng", 10), ("caveAmbush", 1)]
   , cgrid         = DiceXY (2 * d 2 + 3) (d 2 + 2)
   , cminPlaceSize = DiceXY 3 3

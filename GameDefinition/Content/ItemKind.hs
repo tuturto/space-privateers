@@ -25,9 +25,9 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [bolas, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, jumpingPole, monocle, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, woodenTorch, armorLeather, armorMail, whetstone]
+  [bolas, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, jumpingPole, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, woodenTorch, armorLeather, armorMail, whetstone, grenade1, grenade2]
 
-bolas,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, jumpingPole, monocle, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, woodenTorch, armorLeather, armorMail, whetstone :: ItemKind
+bolas,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, jumpingPole, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, woodenTorch, armorLeather, armorMail, whetstone, grenade, grenade1, grenade2 :: ItemKind
 
 gem, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
 
@@ -45,13 +45,13 @@ dart = ItemKind
   , iaspects = [AddHurtRanged ((d 6 + dl 6) |*| 10)]
   , ieffects = [Hurt (3 * d 1)]
   , ifeature = []
-  , idesc    = "Little, but sharp and sturdy."  -- "Much inferior to arrows though, especially given the contravariance problems."  --- funny, but destroy the suspension of disbelief; this is supposed to be a Lovecraftian horror and any hilarity must ensue from the failures in making it so and not from actively trying to be funny; also, mundane objects are not supposed to be scary or transcendental; the scare is in horrors from the abstract dimension visiting our ordinary reality; without the contrast there's no horror and no wonder, so also the magical items must be contrasted with ordinary XIX century and antique items
+  , idesc    = "Little, but sharp and sturdy."
   , ikit     = []
   }
 dart200 = ItemKind
   { isymbol  = '|'
   , iname    = "fine dart"
-  , ifreq    = [("useful", 100), ("any arrow", 50)]  -- TODO: until arrows added
+  , ifreq    = [("useful", 100), ("any arrow", 50)]
   , iflavour = zipPlain [BrRed]
   , icount   = 3 * d 3
   , irarity  = [(4, 20)]
@@ -106,10 +106,11 @@ net = ItemKind
   , iverbHit = "entangle"
   , iweight  = 1000
   , iaspects = []
-  , ieffects = [ Paralyze (5 + d 5)
+  , ieffects = [ Hurt (1 * d 2)
+               , Paralyze (5 + d 5)
                , DropBestWeapon, DropEqp ']' False ]
   , ifeature = []
-  , idesc    = "A wide net with weights along the edges. Entangles weapon and armor alike."
+  , idesc    = "A web made of monofilaments. Will both cut and entagle the prey."
   , ikit     = []
   }
 
@@ -169,15 +170,15 @@ brassLantern = ItemKind
 gem = ItemKind
   { isymbol  = '*'
   , iname    = "gem"
-  , ifreq    = [("treasure", 100)]  -- x3, but rare on shallow levels
-  , iflavour = zipPlain $ delete BrYellow brightCol  -- natural, so not fancy
+  , ifreq    = [("treasure", 100)]
+  , iflavour = zipPlain $ delete BrYellow brightCol
   , icount   = 1
   , irarity  = []
   , iverbHit = "tap"
   , iweight  = 50
-  , iaspects = [AddLight 1, AddSpeed (-1)]  -- reflects strongly, distracts
+  , iaspects = [AddLight 1, AddSpeed (-1)]
   , ieffects = []
-  , ifeature = [ Durable  -- prevent destruction by evil monsters
+  , ifeature = [ Durable
                , Precious ]
   , idesc    = "Useless, and still worth around 100 gold each. Would gems of thought and pearls of artful design be valued that much in our age of Science and Progress!"
   , ikit     = []
@@ -221,7 +222,7 @@ gorget = ItemKind
   , iaspects = [Periodic $ d 4 + dl 4, AddArmorMelee 1, AddArmorRanged 1]
   , ieffects = [RefillCalm 1]
   , ifeature = [ Precious, EqpSlot EqpSlotPeriodic "", Identified
-               , toVelocity 50 ]  -- not dense enough
+               , toVelocity 50 ]
   , idesc    = "Highly ornamental, cold, large, steel medallion on a chain. Unlikely to offer much protection as an armor piece, but the old, worn engraving reassures you."
   , ikit     = []
   }
@@ -237,7 +238,7 @@ necklace = ItemKind
   , iaspects = []
   , ieffects = []
   , ifeature = [ Precious, EqpSlot EqpSlotPeriodic ""
-               , toVelocity 50 ]  -- not dense enough
+               , toVelocity 50 ]
   , idesc    = "Menacing Greek symbols shimmer with increasing speeds along a chain of fine encrusted links. After a tense build-up, a prismatic arc shoots towards the ground and the iridescence subdues, becomes ordered and resembles a harmless ornament again, for a time."
   , ikit     = []
   }
@@ -280,9 +281,9 @@ necklace7 = necklace
 
 -- * Non-periodic jewelry
 
-monocle = ItemKind
+oculus = ItemKind
   { isymbol  = '='
-  , iname    = "monocle"
+  , iname    = "oculus cursus"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain [White]
   , icount   = 1
@@ -292,7 +293,7 @@ monocle = ItemKind
   , iaspects = [AddSight $ dl 3]
   , ieffects = []
   , ifeature = [Precious, Identified, Durable, EqpSlot EqpSlotAddSight ""]
-  , idesc    = "Let's you better focus your weaker eye."
+  , idesc    = "Arcane device to boost your sight."
   , ikit     = []
   }
 ring = ItemKind
@@ -307,7 +308,7 @@ ring = ItemKind
   , iaspects = []
   , ieffects = []
   , ifeature = [Precious, Identified]
-  , idesc    = "It looks like an ordinary object, but it's in fact a generator of exceptional effects: adding to some of your natural abilities and subtracting from others. You'd profit enormously if you could find a way to multiply such generators..."  -- TODO: merge rings: do not add effects though, because it would make the ring too powerful (only one eqp slot taken); define correct, but not overpowered multiplication, if possible
+  , idesc    = "It looks like an ordinary object, but it's in fact a generator of exceptional effects: adding to some of your natural abilities and subtracting from others. You'd profit enormously if you could find a way to multiply such generators..."
   , ikit     = []
   }
 ring1 = ring
@@ -340,7 +341,7 @@ ring5 = ring  -- by the time it's found, probably no space in eqp
 
 potion = ItemKind
   { isymbol  = '!'
-  , iname    = "potion"
+  , iname    = "vial"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain stdCol ++ zipFancy brightCol
   , icount   = 1
@@ -349,9 +350,9 @@ potion = ItemKind
   , iweight  = 200
   , iaspects = []
   , ieffects = []
-  , ifeature = [ toVelocity 50  -- oily, bad grip
+  , ifeature = [ toVelocity 50
                , Applicable, Fragile ]
-  , idesc    = "A flask of bubbly, slightly oily liquid of a suspect color."  -- purely natural; no maths, no magic  -- TODO: move distortion to a special flask item or when some precious magical item is destroyed (jewelry?)?
+  , idesc    = "A flask of bubbly, slightly oily liquid of a suspect color."
   , ikit     = []
   }
 potion1 = potion
@@ -359,7 +360,7 @@ potion1 = potion
                , OnSmash (ApplyPerfume), OnSmash (Explode "fragrance") ]
   }
 potion2 = potion
-  { ifreq    = [("useful", 1)]  -- extremely rare
+  { ifreq    = [("useful", 1)]
   , irarity  = [(10, 1)]
   , ieffects = [ NoEffect "of musky concoction", Impress, DropBestWeapon
                , OnSmash (Explode "pheromone")]
@@ -367,7 +368,7 @@ potion2 = potion
 potion3 = potion
   { ieffects = [RefillHP 5, OnSmash (Explode "healing mist")]
   }
-potion4 = potion  -- TODO: a bit boring
+potion4 = potion
   { irarity  = [(1, 5)]
   , ieffects = [RefillHP (-5), OnSmash (Explode "wounding mist")]
   }
@@ -410,21 +411,47 @@ potion10 = potion
   , ieffects = [ NoEffect "of glue", Paralyze (5 + d 5)
                , OnSmash (Explode "glue")]
   }
-
+grenade = ItemKind
+  { isymbol  = '*'
+  , iname    = "grenade"
+  , ifreq    = [("useful", 100), ("weapon", 100)]
+  , iflavour = zipPlain stdCol ++ zipFancy brightCol
+  , icount   = 1
+  , irarity  = [(1, 5), (10, 8)]
+  , iverbHit = "explode"
+  , iweight  = 200
+  , iaspects = []
+  , ieffects = []
+  , ifeature = [ toVelocity 200
+               , Fragile 
+               , Identified ]
+  , idesc    = "Small metal canister, with safety latch and finely engraved surface."
+  , ikit     = []
+  }
+grenade1 = grenade
+  { irarity  = [(1, 100), (10, 100)]
+  , ieffects = [ NoEffect "of explosion"
+               , OnSmash (Explode "explosion blast 10") ]
+  }
+grenade2 = grenade
+  { irarity  = [(1, 100), (10, 100)]
+  , ieffects = [ NoEffect "of burning"
+               , OnSmash (Explode "burning oil 2") ]
+  }
 -- * Non-exploding consumables, not specifically designed for throwing
 
 scroll = ItemKind
   { isymbol  = '?'
   , iname    = "scroll"
   , ifreq    = [("useful", 100), ("any scroll", 100)]
-  , iflavour = zipFancy stdCol ++ zipPlain darkCol  -- arcane and old
+  , iflavour = zipFancy stdCol ++ zipPlain darkCol
   , icount   = 1
   , irarity  = [(1, 10), (10, 7)]
   , iverbHit = "thump"
   , iweight  = 50
   , iaspects = []
   , ieffects = []
-  , ifeature = [ toVelocity 25  -- bad shape, even rolled up
+  , ifeature = [ toVelocity 25
                , Applicable ]
   , idesc    = "Scraps of haphazardly scribbled mysteries from beyond. Is this equation an alchemical recipe? Is this diagram an extradimensional map? Is this formula a secret call sign?"
   , ikit     = []
@@ -487,7 +514,7 @@ armorLeather = ItemKind
                , AddArmorMelee $ (1 + dl 3) |*| 5
                , AddArmorRanged $ (1 + dl 3) |*| 5 ]
   , ieffects = []
-  , ifeature = [ toVelocity 30  -- unwieldy to throw and blunt
+  , ifeature = [ toVelocity 30
                , Durable, EqpSlot EqpSlotAddArmorMelee "", Identified ]
   , idesc    = "A stiff jacket formed from leather boiled in bee wax. Smells much better than the rest of your garment."
   , ikit     = []
@@ -514,7 +541,7 @@ gloveFencing = ItemKind
   , iaspects = [ AddHurtMelee $ 2 * (d 3 + 2 * dl 5)
                , AddArmorRanged $ d 2 + dl 2 ]
   , ieffects = []
-  , ifeature = [ toVelocity 30  -- flaps and flutters
+  , ifeature = [ toVelocity 30
                , Durable, EqpSlot EqpSlotAddArmorRanged "", Identified ]
   , idesc    = "A fencing glove from rough leather ensuring a good grip. Also quite effective in deflecting or even catching slow projectiles."
   , ikit     = []
@@ -538,8 +565,7 @@ gloveJousting = gloveFencing
                , AddArmorRanged $ 2 * (d 2 + dl 3) ]
   , idesc    = "Rigid, steel, jousting handgear. If only you had a lance. And a horse."
   }
--- Shield doesn't protect against ranged attacks to prevent
--- micromanagement: walking with shield, melee without.
+
 buckler = ItemKind
   { isymbol  = '['
   , iname    = "buckler"
@@ -551,7 +577,7 @@ buckler = ItemKind
   , iweight  = 2000
   , iaspects = [AddArmorMelee 40, AddHurtMelee (-30)]
   , ieffects = []
-  , ifeature = [ toVelocity 30  -- unwieldy to throw and blunt
+  , ifeature = [ toVelocity 30
                , Durable, EqpSlot EqpSlotAddArmorMelee "", Identified ]
   , idesc    = "Heavy and unwieldy. Absorbs a percentage of melee damage, both dealt and sustained. Too small to intercept projectiles with."
   , ikit     = []
@@ -562,7 +588,7 @@ shield = buckler
   , iflavour = zipPlain [Green]
   , iweight  = 3000
   , iaspects = [AddArmorMelee 80, AddHurtMelee (-70)]
-  , ifeature = [ toVelocity 20  -- unwieldy to throw and blunt
+  , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotAddArmorMelee "", Identified ]
   , idesc    = "Large and unwieldy. Absorbs a percentage of melee damage, both dealt and sustained. Too heavy to intercept projectiles with."
   }
@@ -580,7 +606,7 @@ dagger = ItemKind
   , iweight  = 1000
   , iaspects = [AddHurtMelee $ 2 * (d 3 + 2 * dl 5), AddArmorMelee $ d 4 + dl 4]
   , ieffects = [Hurt (4 * d 1)]
-  , ifeature = [ toVelocity 40  -- ensuring it hits with the tip costs speed
+  , ifeature = [ toVelocity 40
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "A short dagger for thrusting and parrying blows. Does not penetrate deeply, but is hard to block. Especially useful in conjunction with a larger weapon."
   , ikit     = []
@@ -596,7 +622,7 @@ hammer = ItemKind
   , iweight  = 1500
   , iaspects = [AddHurtMelee $ d 3 + 2 * dl 5]
   , ieffects = [Hurt (6 * d 1)]
-  , ifeature = [ toVelocity 20  -- ensuring it hits with the sharp tip costs
+  , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "It may not cause grave wounds, but neither does it glance off nor ricochet. Great sidearm for opportunistic blows against armored foes."
   , ikit     = []
@@ -612,7 +638,7 @@ sword = ItemKind
   , iweight  = 2000
   , iaspects = []
   , ieffects = [Hurt (9 * d 1)]
-  , ifeature = [ toVelocity 20  -- ensuring it hits with the tip costs speed
+  , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "Difficult to master; deadly when used effectively. The steel is particularly hard and keen, but rusts quickly without regular maintenance."
   , ikit     = []
@@ -628,7 +654,7 @@ halberd = ItemKind
   , iweight  = 3000
   , iaspects = [AddArmorMelee $ 2 * (d 4 + dl 4)]
   , ieffects = [Hurt (12 * d 1)]
-  , ifeature = [ toVelocity 20  -- not balanced
+  , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "Versatile, with great reach and leverage. Foes are held at a distance."
   , ikit     = []
@@ -645,15 +671,15 @@ wand = ItemKind
   , irarity  = []  -- TODO: add charges, etc.
   , iverbHit = "club"
   , iweight  = 300
-  , iaspects = [AddLight 1, AddSpeed (-1)]  -- pulsing with power, distracts
+  , iaspects = [AddLight 1, AddSpeed (-1)]
   , ieffects = []
-  , ifeature = [ toVelocity 125  -- magic
+  , ifeature = [ toVelocity 125
                , Applicable, Durable ]
-  , idesc    = "Buzzing with dazzling light that shines even through appendages that handle it."  -- TODO: add math flavour
+  , idesc    = "Buzzing with dazzling light that shines even through appendages that handle it."
   , ikit     = []
   }
 wand1 = wand
-  { ieffects = []  -- TODO: emit a cone of sound shrapnel that makes enemy cover his ears and so drop '|' and '{'
+  { ieffects = []
   }
 wand2 = wand
   { ieffects = []
@@ -671,9 +697,7 @@ jumpingPole = ItemKind
   , iverbHit = "prod"
   , iweight  = 10000
   , iaspects = []
-  , ieffects = [InsertMove 2]  -- TODO: implement with timed speed instead
-                               -- and then make Durable, freq 2, and just trade
-                               -- taken turn now for a free turn later
+  , ieffects = [InsertMove 2]
   , ifeature = [Applicable, Identified]
   , idesc    = "Makes you vulnerable at take-off, but then you are free like a bird."
   , ikit     = []

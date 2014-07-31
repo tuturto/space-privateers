@@ -1,4 +1,4 @@
--- | Rooms, halls and passages for LambdaHack.
+-- | Rooms, halls and passages for Space Privateers.
 module Content.PlaceKind ( cdefs ) where
 
 import Game.LambdaHack.Common.ContentDef
