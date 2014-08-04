@@ -12,11 +12,11 @@ import Game.LambdaHack.Content.ItemKind
 
 actors :: [ItemKind]
 actors =
-  [warrior, adventurer, blacksmith, forester, scientist, clerk, hairdresser, lawyer, peddler, taxCollector, eye, fastEye, nose, elbow, armadillo, gilaMonster, komodoDragon, hyena, alligator, hornetSwarm, thornbush, geyser]
+  [warrior, scout, eye, fastEye, nose, elbow, armadillo, gilaMonster, komodoDragon, hyena, alligator, hornetSwarm, thornbush, geyser]
 
-warrior,    adventurer, blacksmith, forester, scientist, clerk, hairdresser, lawyer, peddler, taxCollector, eye, fastEye, nose, elbow, armadillo, gilaMonster, komodoDragon, hyena, alligator, hornetSwarm, thornbush, geyser :: ItemKind
+warrior,    scout, eye, fastEye, nose, elbow, armadillo, gilaMonster, komodoDragon, hyena, alligator, hornetSwarm, thornbush, geyser :: ItemKind
 
--- * Hunams
+-- * Heroes (hero)
 
 warrior = ItemKind
   { isymbol  = '@'
@@ -35,26 +35,20 @@ warrior = ItemKind
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
                 ("starting weapon", CEqp)]
   }
-adventurer = warrior
-  { iname    = "adventurer" }
-blacksmith = warrior
-  { iname    = "blacksmith" }
-forester = warrior
-  { iname    = "forester" }
-scientist = warrior
-  { iname    = "scientist" }
 
-clerk = warrior
-  { iname    = "clerk"
-  , ifreq    = [("civilian", 100)] }
-hairdresser = clerk
-  { iname    = "hairdresser" }
-lawyer = clerk
-  { iname    = "lawyer" }
-peddler = clerk
-  { iname    = "peddler" }
-taxCollector = clerk
-  { iname    = "tax collector" }
+scout = warrior
+  { iname    = "scout"
+  , iaspects = [ AddMaxHP 40, AddMaxCalm 60, AddSpeed 25
+               , AddSight 4 ]
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
+                ("any arrow", CInv), ("any vial", CInv), ("any vial", CInv)]
+  }
+
+-- * Merchant Mariners (merchant)
+
+-- * Forces of Chaos (chaos)
+
+-- * Horrors (horror)
 
 -- * Monsters
 
