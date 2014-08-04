@@ -417,7 +417,7 @@ grenade = ItemKind
   , ifreq    = [("useful", 100), ("weapon", 100)]
   , iflavour = zipPlain stdCol ++ zipFancy brightCol
   , icount   = 1
-  , irarity  = [(1, 5), (10, 8)]
+  , irarity  = [(1, 1), (10, 3)]
   , iverbHit = "explode"
   , iweight  = 200
   , iaspects = []
@@ -429,13 +429,13 @@ grenade = ItemKind
   , ikit     = []
   }
 grenade1 = grenade
-  { irarity  = [(1, 100), (10, 100)]
-  , ieffects = [ NoEffect "of explosion"
+  { irarity  = [(1, 1), (10, 3)]
+  , ieffects = [ NoEffect "of explosionis"
                , OnSmash (Explode "explosion blast 10") ]
   }
 grenade2 = grenade
-  { irarity  = [(1, 100), (10, 100)]
-  , ieffects = [ NoEffect "of burning"
+  { irarity  = [(1, 1), (10, 3)]
+  , ieffects = [ NoEffect "of ignisium"
                , OnSmash (Explode "burning oil 2") ]
   }
 -- * Non-exploding consumables, not specifically designed for throwing
