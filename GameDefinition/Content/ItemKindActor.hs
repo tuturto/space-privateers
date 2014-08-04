@@ -20,19 +20,20 @@ warrior,    adventurer, blacksmith, forester, scientist, clerk, hairdresser, law
 
 warrior = ItemKind
   { isymbol  = '@'
-  , iname    = "warrior"  -- modified if in hero faction
-  , ifreq    = [("hero", 100), ("civilian", 100)]
-  , iflavour = zipPlain [BrBlack]  -- modified if in hero faction
+  , iname    = "warrior"
+  , ifreq    = [("hero", 100)]
+  , iflavour = zipPlain [BrBlack]
   , icount   = 1
   , irarity  = [(1, 5)]
   , iverbHit = "thud"
   , iweight  = 80000
   , iaspects = [ AddMaxHP 50, AddMaxCalm 60, AddSpeed 20
-               , AddSight 3 ]  -- no via eyes, but feel, hearing, etc.
+               , AddSight 3 ]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = ""
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan)]
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
+                ("any starting weapon", CInv)]
   }
 adventurer = warrior
   { iname    = "adventurer" }

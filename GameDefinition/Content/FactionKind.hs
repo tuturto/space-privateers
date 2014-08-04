@@ -47,8 +47,8 @@ horror = FactionKind
   { fsymbol       = 'h'
   , fname         = "horror"
   , ffreq         = [("horror", 1)]
-  , fSkillsLeader = allSkills
-  , fSkillsOther  = allSkills
+  , fSkillsLeader = animalSkills
+  , fSkillsOther  = animalSkills
   }
 
 
