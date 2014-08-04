@@ -33,7 +33,7 @@ warrior = ItemKind
   , ifeature = [Durable, Identified]
   , idesc    = ""
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
-                ("any starting weapon", CInv)]
+                ("starting weapon", CEqp)]
   }
 adventurer = warrior
   { iname    = "adventurer" }
