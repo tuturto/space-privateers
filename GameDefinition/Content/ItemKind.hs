@@ -25,9 +25,9 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [bolas, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, jumpingPole, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, woodenTorch, armorLeather, armorMail, whetstone, grenade1, grenade2]
+  [bolas, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2]
 
-bolas,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, jumpingPole, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, woodenTorch, armorLeather, armorMail, whetstone, grenade, grenade1, grenade2 :: ItemKind
+bolas,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade, grenade1, grenade2 :: ItemKind
 
 gem, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
 
@@ -68,7 +68,7 @@ dart200 = ItemKind
 
 bolas = ItemKind
   { isymbol  = '|'
-  , iname    = "bolas set"
+  , iname    = "decipulum majoris"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain [BrYellow]
   , icount   = dl 4
@@ -78,12 +78,12 @@ bolas = ItemKind
   , iaspects = []
   , ieffects = [Hurt (2 * d 1), Paralyze (5 + d 5), ActivateInv '!']
   , ifeature = []
-  , idesc    = "Wood balls tied with hemp rope for tripping, entangling and bringing down crashing."
+  , idesc    = "A web of springs in form of spheres. When thrown, this weapon can trip unwary opponents."
   , ikit     = []
   }
 harpoon = ItemKind
   { isymbol  = '|'
-  , iname    = "harpoon"
+  , iname    = "Force spear"
   , ifreq    = [("useful", 100), ("starting weapon", 100)]
   , iflavour = zipPlain [Brown]
   , icount   = dl 5
@@ -116,22 +116,6 @@ net = ItemKind
 
 -- * Lights
 
-woodenTorch = ItemKind
-  { isymbol  = '('
-  , iname    = "wooden torch"
-  , ifreq    = [("useful", 100)]
-  , iflavour = zipPlain [Brown]
-  , icount   = 1
-  , irarity  = [(1, 10)]
-  , iverbHit = "scorch"
-  , iweight  = 1200
-  , iaspects = [ AddLight 3
-               , AddSight (-2) ]  -- not only flashes, but also sparks
-  , ieffects = [Burn 3]
-  , ifeature = [EqpSlot EqpSlotAddLight "", Identified]
-  , idesc    = "A smoking, heavy wooden torch, burning in an unsteady fire."
-  , ikit     = []
-  }
 oilLamp = ItemKind
   { isymbol  = '('
   , iname    = "oil lamp"
@@ -640,7 +624,7 @@ sword = ItemKind
   , ieffects = [Hurt (9 * d 1)]
   , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
-  , idesc    = "Difficult to master; deadly when used effectively. The steel is particularly hard and keen, but rusts quickly without regular maintenance."
+  , idesc    = "Common vibroblade, favoured by those who like to get close and personal."
   , ikit     = []
   }
 halberd = ItemKind
@@ -687,21 +671,6 @@ wand2 = wand
 
 -- * Assorted tools
 
-jumpingPole = ItemKind
-  { isymbol  = '('
-  , iname    = "jumping pole"
-  , ifreq    = [("useful", 100)]
-  , iflavour = zipPlain [White]
-  , icount   = 1
-  , irarity  = [(1, 4), (10, 2)]
-  , iverbHit = "prod"
-  , iweight  = 10000
-  , iaspects = []
-  , ieffects = [InsertMove 2]
-  , ifeature = [Applicable, Identified]
-  , idesc    = "Makes you vulnerable at take-off, but then you are free like a bird."
-  , ikit     = []
-  }
 whetstone = ItemKind
   { isymbol  = '~'
   , iname    = "whetstone"
