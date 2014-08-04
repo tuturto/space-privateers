@@ -40,7 +40,7 @@ scout = warrior
   { iname    = "scout"
   , iaspects = [ AddMaxHP 40, AddMaxCalm 60, AddSpeed 25
                , AddSight 4 ]
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 5", COrgan),
                 ("any arrow", CInv), ("any vial", CInv), ("any vial", CInv)]
   }
 
