@@ -10,33 +10,33 @@ import Game.LambdaHack.Content.ItemKind
 
 shrapnels :: [ItemKind]
 shrapnels =
-  [fragrance, pheromone, firecracker2, firecracker3, firecracker4, firecracker5, firecracker6, firecracker7, mistHealing, mistWounding, distortion, waste, burningOil2, burningOil3, burningOil4, explosionBlast10, explosionBlast20, glassPiece, smoke, boilingWater, glue]
+  [fragrance, pheromone, firecracker2, firecracker3, firecracker4, firecracker5, firecracker6, firecracker7, mistHealing, mistWounding, distortion, waste, burningIgnisium2, burningIgnisium3, burningIgnisium4, explosionBlast10, explosionBlast20, glassPiece, smoke, boilingWater, glue]
 
-fragrance,    pheromone, firecracker2, firecracker3, firecracker4, firecracker5, firecracker6, firecracker7, mistHealing, mistWounding, distortion, waste, burningOil2, burningOil3, burningOil4, explosionBlast10, explosionBlast20, glassPiece, smoke, boilingWater, glue :: ItemKind
+fragrance,    pheromone, firecracker2, firecracker3, firecracker4, firecracker5, firecracker6, firecracker7, mistHealing, mistWounding, distortion, waste, burningIgnisium2, burningIgnisium3, burningIgnisium4, explosionBlast10, explosionBlast20, glassPiece, smoke, boilingWater, glue :: ItemKind
 
 -- * Parameterized shrapnel
 
-burningOil :: Int -> ItemKind
-burningOil n = ItemKind
+burningIgnisium :: Int -> ItemKind
+burningIgnisium n = ItemKind
   { isymbol  = '*'
-  , iname    = "burning oil"
-  , ifreq    = [("burning oil" <+> tshow n, 1)]
+  , iname    = "burning ignisium"
+  , ifreq    = [("burning ignisium" <+> tshow n, 1)]
   , iflavour = zipFancy [BrYellow]
-  , icount   = intToDice (n * 4)
+  , icount   = intToDice (n * 5)
   , irarity  = [(1, 1)]
   , iverbHit = "burn"
   , iweight  = 1
-  , iaspects = [AddLight 2]
+  , iaspects = [AddLight 3]
   , ieffects = [ Burn (n `div` 2)
-               , Paralyze (intToDice $ n `div` 2) ]  -- tripping on oil
+               , Paralyze (intToDice $ n `div` 2) ]
   , ifeature = [ toVelocity (min 100 $ n * 7)
                , Fragile, Identified ]
-  , idesc    = "Sticky oil, burning brightly."
+  , idesc    = "Flaming ignisium, burning brightly."
   , ikit     = []
   }
-burningOil2 = burningOil 2
-burningOil3 = burningOil 3
-burningOil4 = burningOil 4
+burningIgnisium2 = burningIgnisium 2
+burningIgnisium3 = burningIgnisium 3
+burningIgnisium4 = burningIgnisium 4
 explosionBlast :: Int -> ItemKind
 explosionBlast n = ItemKind
   { isymbol  = '*'

@@ -126,10 +126,10 @@ oilLamp = ItemKind
   , iverbHit = "burn"
   , iweight  = 1000
   , iaspects = [AddLight 3, AddSight (-1)]
-  , ieffects = [Burn 3, Paralyze 3, OnSmash (Explode "burning oil 3")]
-  , ifeature = [ toVelocity 70  -- hard not to spill the oil while throwing
+  , ieffects = [Burn 3, Paralyze 3, OnSmash (Explode "burning ignisium 3")]
+  , ifeature = [ toVelocity 70
                , Fragile, EqpSlot EqpSlotAddLight "", Identified ]
-  , idesc    = "A clay lamp filled with plant oil feeding a tiny wick."
+  , idesc    = "A clay lamp filled with ignisium feeding a tiny wick."
   , ikit     = []
   }
 brassLantern = ItemKind
@@ -142,7 +142,7 @@ brassLantern = ItemKind
   , iverbHit = "burn"
   , iweight  = 2400
   , iaspects = [AddLight 4, AddSight (-1)]
-  , ieffects = [Burn 4, Paralyze 4, OnSmash (Explode "burning oil 4")]
+  , ieffects = [Burn 4, Paralyze 4, OnSmash (Explode "burning ignisium 4")]
   , ifeature = [ toVelocity 70  -- hard to throw so that it opens and burns
                , Fragile, EqpSlot EqpSlotAddLight "", Identified ]
   , idesc    = "Very bright and very heavy brass lantern."
@@ -420,7 +420,7 @@ grenade1 = grenade
 grenade2 = grenade
   { irarity  = [(1, 1), (10, 3)]
   , ieffects = [ NoEffect "of ignisium"
-               , OnSmash (Explode "burning oil 2") ]
+               , OnSmash (Explode "burning ignisium 2") ]
   }
 -- * Non-exploding consumables, not specifically designed for throwing
 
