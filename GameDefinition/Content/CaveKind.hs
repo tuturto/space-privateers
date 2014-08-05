@@ -15,9 +15,9 @@ cdefs = ContentDef
   , getFreq = cfreq
   , validate = validateCaveKind
   , content =
-      [rogue, arena, empty, noise, battle, skirmish, ambush, safari1, safari2, safari3]
+      [rogue, munitorium, arena, empty, noise, battle, skirmish, ambush, safari1, safari2, safari3]
   }
-rogue,        arena, empty, noise, battle, skirmish, ambush, safari1, safari2, safari3 :: CaveKind
+rogue,        munitorium, arena, empty, noise, battle, skirmish, ambush, safari1, safari2, safari3 :: CaveKind
 
 rogue = CaveKind
   { csymbol       = 'R'
@@ -49,6 +49,24 @@ rogue = CaveKind
   , clegendDarkTile = "legendDark"
   , clegendLitTile  = "legendLit"
   }
+munitorium = rogue
+  { csymbol         = 'M'
+  , cname           = "Munitorium"
+  , cfreq           = [("dng", 15), ("munitorium", 1)]
+  , cgrid           = DiceXY 3 3
+  , cminPlaceSize   = DiceXY 15 4
+  , cmaxPlaceSize   = DiceXY 25 10
+  , cdarkChance     = dl 5
+  , cnightChance    = d 20
+  , cactorFreq      = [("merchant", 80), ("chaos", 5), ("horror", 15)]
+  , citemNum        = 8 * d 2
+  , citemFreq       = [("weapon", 70), ("armour", 20), ("useful", 10)]
+  , cplaceFreq      = [("rogue", 100)]
+  , cpassable       = True
+  , cdefTile        = "arenaSet"
+  , cdarkCorTile    = "floorArenaDark"
+  , clitCorTile     = "floorArenaLit"
+}
 arena = rogue
   { csymbol       = 'A'
   , cname         = "Maintenance deck"
