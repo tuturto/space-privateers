@@ -15,9 +15,9 @@ cdefs = ContentDef
   , getFreq = ffreq
   , validate = validateFactionKind
   , content =
-      [hero, merchant, chaos, horror]
+      [hero, merchant, chaos, spawn, horror]
   }
-hero,        merchant, chaos, horror :: FactionKind
+hero,        merchant, chaos, spawn, horror :: FactionKind
 
 hero = FactionKind
   { fsymbol       = '1'
@@ -42,6 +42,14 @@ chaos = FactionKind
   , fSkillsLeader = allSkills
   , fSkillsOther  = allSkills
   }
+
+spawn = FactionKind
+  { fsymbol       = 's'
+  , fname         = "spawn"
+  , ffreq         = [("spawn", 1)]
+  , fSkillsLeader = animalSkills
+  , fSkillsOther  = animalSkills
+  } 
 
 horror = FactionKind
   { fsymbol       = 'h'

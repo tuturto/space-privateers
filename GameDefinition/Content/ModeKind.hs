@@ -32,15 +32,16 @@ playersCampaign = Players
   { playersList = [ playerHero
                   , playerMerchant
                   , playerChaos
-                  , playerHorror ]
+                  , playerHorror
+                  , playerSpawn ]
   , playersEnemy = [ ("Space Privateers", "Merchant Mariners")
                    , ("Space Privateers", "Forces of Chaos") 
-                   , ("Space Privateers", "Horrors of Warp")
+                   , ("Space Privateers", "Spawns of Warp")
                    , ("Merchant Mariners", "Forces of Chaos") 
-                   , ("Merchant Mariners", "Horrors of Warp") ]
-  , playersAlly = [("Forces of Chaos", "Horrors of Warp")] }
+                   , ("Merchant Mariners", "Spawns of Warp") ]
+  , playersAlly = [("Forces of Chaos", "Spawns of Warp")] }
 
-playerHero, playerMerchant, playerChaos, playerHorror :: Player
+playerHero, playerMerchant, playerChaos, playerSpawn, playerHorror :: Player
 
 playerHero = Player
   { playerName = "Space Privateers"
@@ -81,6 +82,18 @@ playerChaos = Player
 playerHorror = Player
   { playerName = "Horrors of Warp"
   , playerFaction = "horror"
+  , playerIsSpawn = True
+  , playerIsHero = False
+  , playerEntry = -1
+  , playerInitial = 0
+  , playerLeader = False
+  , playerAI = True
+  , playerUI = False
+  }
+
+playerSpawn = Player
+  { playerName = "Spawns of Warp"
+  , playerFaction = "spawn"
   , playerIsSpawn = True
   , playerIsHero = False
   , playerEntry = -1
