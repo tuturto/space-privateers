@@ -25,9 +25,9 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [bolas, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2]
+  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2]
 
-bolas,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2 :: ItemKind
+decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2 :: ItemKind
 
 gem, grenade, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
 
@@ -43,7 +43,7 @@ dart = ItemKind
   , iverbHit = "prick"
   , iweight  = 50
   , iaspects = [AddHurtRanged ((d 6 + dl 6) |*| 10)]
-  , ieffects = [Hurt (3 * d 1)]
+  , ieffects = [Hurt (d 2)]
   , ifeature = []
   , idesc    = "Little, but sharp and sturdy."
   , ikit     = []
@@ -58,7 +58,7 @@ dart200 = ItemKind
   , iverbHit = "prick"
   , iweight  = 50
   , iaspects = [AddHurtRanged ((d 6 + dl 6) |*| 10)]
-  , ieffects = [Hurt (2 * d 1)]
+  , ieffects = [Hurt (d 2)]
   , ifeature = [toVelocity 200]
   , idesc    = "Finely balanced for throws of great speed."
   , ikit     = []
@@ -66,7 +66,7 @@ dart200 = ItemKind
 
 -- * Exotic thrown weapons
 
-bolas = ItemKind
+decipulum = ItemKind
   { isymbol  = '|'
   , iname    = "decipulum majoris"
   , ifreq    = [("useful", 100), ("weapon", 50)]
@@ -76,7 +76,7 @@ bolas = ItemKind
   , iverbHit = "entangle"
   , iweight  = 500
   , iaspects = []
-  , ieffects = [Hurt (2 * d 1), Paralyze (5 + d 5), ActivateInv '!']
+  , ieffects = [Hurt (d 2), Paralyze (5 + d 5), ActivateInv '!']
   , ifeature = []
   , idesc    = "A web of springs in form of spheres. When thrown, this weapon can trip unwary opponents."
   , ikit     = []
@@ -91,7 +91,7 @@ harpoon = ItemKind
   , iverbHit = "hook"
   , iweight  = 4000
   , iaspects = [AddHurtRanged ((d 2 + 2 * dl 5) |*| 10)]
-  , ieffects = [Hurt (4 * d 1), PullActor (ThrowMod 200 50)]
+  , ieffects = [Hurt (d 4), PullActor (ThrowMod 200 50)]
   , ifeature = []
   , idesc    = "The cruel, barbed head lodges in its victim so painfully that the weakest tug of the thin line sends the victim flying."
   , ikit     = []
@@ -106,7 +106,7 @@ net = ItemKind
   , iverbHit = "entangle"
   , iweight  = 1000
   , iaspects = []
-  , ieffects = [ Hurt (1 * d 2)
+  , ieffects = [ Hurt (d 2)
                , Paralyze (5 + d 5)
                , DropBestWeapon, DropEqp ']' False ]
   , ifeature = []
@@ -589,7 +589,7 @@ dagger = ItemKind
   , iverbHit = "stab"
   , iweight  = 1000
   , iaspects = [AddHurtMelee $ 2 * (d 3 + 2 * dl 5), AddArmorMelee $ d 4 + dl 4]
-  , ieffects = [Hurt (4 * d 1)]
+  , ieffects = [Hurt (d 4)]
   , ifeature = [ toVelocity 40
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "A short dagger for thrusting and parrying blows. Does not penetrate deeply, but is hard to block. Especially useful in conjunction with a larger weapon."
@@ -597,18 +597,18 @@ dagger = ItemKind
   }
 hammer = ItemKind
   { isymbol  = ')'
-  , iname    = "war hammer"
-  , ifreq    = [("useful", 100), ("weapon", 60)]
+  , iname    = "storm hammer"
+  , ifreq    = [("useful", 100), ("weapon", 60), ("starting weapon", 100)]
   , iflavour = zipPlain [BrMagenta]
   , icount   = 1
   , irarity  = [(4, 12), (10, 2)]
   , iverbHit = "club"
   , iweight  = 1500
   , iaspects = [AddHurtMelee $ d 3 + 2 * dl 5]
-  , ieffects = [Hurt (6 * d 1)]
+  , ieffects = [Hurt (d 6), PushActor (ThrowMod 200 50)]
   , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
-  , idesc    = "It may not cause grave wounds, but neither does it glance off nor ricochet. Great sidearm for opportunistic blows against armored foes."
+  , idesc    = "Mighty hammer that releases blast of electricity when it hits target."
   , ikit     = []
   }
 sword = ItemKind
@@ -621,7 +621,7 @@ sword = ItemKind
   , iverbHit = "slash"
   , iweight  = 2000
   , iaspects = []
-  , ieffects = [Hurt (9 * d 1)]
+  , ieffects = [Hurt (d 8)]
   , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "Common vibroblade, favoured by those who like to get close and personal."
@@ -637,7 +637,7 @@ halberd = ItemKind
   , iverbHit = "impale"
   , iweight  = 3000
   , iaspects = [AddArmorMelee $ 2 * (d 4 + dl 4)]
-  , ieffects = [Hurt (12 * d 1)]
+  , ieffects = [Hurt (d 12)]
   , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "Versatile, with great reach and leverage. Foes are held at a distance."
