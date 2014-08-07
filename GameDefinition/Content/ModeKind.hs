@@ -1,4 +1,4 @@
--- | The type of kinds of game modes for LambdaHack.
+-- | The type of kinds of game modes for Space Privateers.
 module Content.ModeKind ( cdefs ) where
 
 import qualified Data.IntMap.Strict as IM

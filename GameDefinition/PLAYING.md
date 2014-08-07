@@ -1,14 +1,8 @@
-Playing LambdaHack
-==================
+Playing Space Privateers
+========================
 
-LambdaHack is a small dungeon crawler illustrating the roguelike game engine
-of the same name. Playing the game involves exploring spooky dungeons,
-alone or in a party of fearless adventurers, setting up ambushes
-for unwary creatures, hiding in shadows, bumping into unspeakable horrors,
-hidden passages and gorgeous magical treasure and making creative use
-of it all. The madness-inspiring abominations that multiply in the depths
-perform the same feats, due to their aberrant, abstract hyper-intelligence,
-while tirelessly chasing the elusive heroes by sight, sound and smell.
+Space Privateers is a dungeon crawler set in space. Playing the game involves
+exploring corridors of a city vessel and plundering as much loot as possible.
 
 Once the few basic command keys and on-screen symbols are learned,
 mastery and enjoyment of the game is the matter of tactical skill
@@ -16,19 +10,21 @@ and literary imagination. To be honest, a lot of imagination is required
 for this rudimentary game, but it's playable and winnable.
 Contributions are welcome.
 
+Space Privateers uses LambdaHack engine and lot of content in the game is
+derived from it.
 
 Heroes
 ------
 
 The heroes are marked on the map with symbols `@` and `1` through `9`.
-Their goal is to explore the dungeon, battle the horrors within,
+Their goal is to explore the city vessel, battle the horrors within,
 gather as much gold and gems as possible, and escape to tell the tale.
 
 The currently chosen party leader is highlighted on the screen
 and his attributes are displayed at the bottommost status line,
 which in its most complex form may look as follows.
 
-    *@12 Adventurer  4d1+5% Calm: 20/60 HP: 33/50 Target: basilisk  [**___]
+    *@12 Captain     4d1+5% Calm: 20/60 HP: 33/50 Target: merchant  [**___]
 
 The line starts with the list of party members (unless only one member
 resides on the currently displayed level) and the shortened name of the team.
@@ -36,7 +32,7 @@ Then comes the damage of the leader's weapon (but regardless of the figures,
 each attack inflicts at least 1 damage), then his current and maximum
 Calm (composure, focus, attentiveness), then his current and maximum
 HP (hit points, health). At the end, the personal target of the leader
-is described, in this case a basilisk monster, with hit points drawn as a bar.
+is described, in this case a merchant mariner, with hit points drawn as a bar.
 
 The other status line describes the current location in relation to the party.
 
@@ -50,13 +46,13 @@ At the end comes the length of the shortest path from the leader
 to the cursor position and the straight-line distance between the two points.
 
 
-Dungeon
--------
+City vessel
+-----------
 
-The dungeon of the campaign mode game consists of 10 levels and each level
-consists of a large number of tiles. The basic tile kinds are as follows.
+The city vessel consists of 10 levels and each level consists of a large number
+of tiles. The basic tile kinds are as follows.
 
-               dungeon terrain type               on-screen symbol
+               terrain type                       on-screen symbol
                ground                             .
                corridor                           #
                wall (horizontal and vertical)     - and |
@@ -66,7 +62,7 @@ consists of a large number of tiles. The basic tile kinds are as follows.
                stairs down                        >
                open door                          | and -
                closed door                        +
-               bedrock                            blank
+               vessel hull                        blank
 
 The game world is persistent, i.e., every time the player visits a level
 during a single game, its layout is the same.
@@ -205,21 +201,10 @@ squad combat, stealth, asymmetric battles and more game elements.
                 CTRL-a         new Campaign game
                 CTRL-d         cycle next game difficulty
 
-There are also some debug, testing and cheat options and game modes
-that can be specified on the command line when starting the game server.
-Use at your own peril! :) Of these, you may find the screensaver game modes
-the least spoilery and the most fun, e.g.:
-
-    LambdaHack --savePrefix test --newGame --noMore --maxFps 60 --automateAll --gameMode campaign --difficulty 1
-
-The `--automateAll` option strictly corresponds to the `CTRL-A` command,
-but most of the debug options have no corresponding commands.
-
-
 Monsters
 --------
 
-Heroes are not alone in the dungeon. Monstrosities, natural
+Heroes are not alone in the city vessel. Monstrosities, natural
 and out of this world, roam the dark caves and crawl from damp holes
 day and night. While heroes pay attention to all other party members
 and take care to move one at a time, monsters don't care about each other
@@ -246,12 +231,9 @@ When the last hero dies, the game ends in defeat.
 On Winning and Dying
 --------------------
 
-You win the game if you escape the dungeon alive or, in game modes with
-no exit opportunity, if you eliminate all opposition. In the former case,
-your score is based on the gold and precious gems you've plundered,
-plus a bonus based on the number of heroes you lost. In the latter case,
-your score is based on the number of turns you spent overcoming your foes
-and, as a bonus, the number of enemies you've subdued.
+You win the game if you escape the city vessel alive. Your score is based on the
+gold and precious gems you've plundered, plus a bonus based on the number of
+heroes you lost.
 
 If all your heroes fall, you are awarded a score for your valiant deeds,
 but no winning bonus. When, invariably, a new overconfident party

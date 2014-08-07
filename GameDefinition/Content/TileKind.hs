@@ -1,4 +1,4 @@
--- | Terrain tiles for LambdaHack.
+-- | Terrain tiles for Space Privateers
 module Content.TileKind ( cdefs ) where
 
 import Control.Arrow (first)
