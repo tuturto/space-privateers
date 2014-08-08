@@ -35,7 +35,7 @@ executable SpacePrivateers
                       TieKnot,
                       Paths_SpacePrivateers
 
-  build-depends:      base              >=4.7       && <4.8,
+  build-depends:      base              >= 4        && < 5,
                       LambdaHack        >= 0.2.14   && < 0.2.15,
                       containers        >= 0.5      && < 1,
                       enummapset-th     >= 0.6.0.0  && < 1,
