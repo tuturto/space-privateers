@@ -3,6 +3,11 @@ privateer who has recently docked with a merchant city vessel and plans to
 plunder some of the loot before escaping. The task will not be easy and there
 are many dangers awaiting in the deep corridors and rooms of the city vessel.
 
-Space Privateers uses [LambdaHack] [1] engine.
+Currently only Linux 32-bit binaries are provided at [Bintray] [1]. But it is
+possible to fetch package from [Hackage] [2] and build it manually.
 
-[1]: https://github.com/LambdaHack/LambdaHack/
+Space Privateers uses [LambdaHack] [3] engine.
+
+[1]: https://bintray.com/tuturto/SpacePrivateers/space-privateers/view
+[2]: https://hackage.haskell.org/package/SpacePrivateers
+[3]: https://github.com/LambdaHack/LambdaHack/
