@@ -17,7 +17,8 @@ cdefs = ContentDef
   { getSymbol = rsymbol
   , getName = rname
   , getFreq = rfreq
-  , validate = validateRuleKind
+  , validateSingle = validateSingleRuleKind
+  , validateAll = validateAllRuleKind
   , content =
       [standard]
   }
@@ -46,9 +47,10 @@ standard = RuleKind
       lift x)
   , rfirstDeathEnds = False
   , rfovMode = Digital
-  , rsaveBkpClips = 500
+  , rwriteSaveClips = 500
   , rleadLevelClips = 100
   , rscoresFile = "scores"
   , rsavePrefix = "save"
   , rsharedStash = True
+  , rnearby = 10
   }

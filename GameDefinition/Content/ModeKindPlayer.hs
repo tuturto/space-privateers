@@ -26,7 +26,7 @@ playerHero = Player
   }
 
 playerMerchant = Player
-  { playerName = "Merchant Mariners"
+  { fname = "Merchant Mariners"
   , fgroup = "merchant"
   , fskillsOther = _meleeAndRanged
   , fcanEscape = False
@@ -41,7 +41,7 @@ playerMerchant = Player
   }
 
 playerChaos = Player
-  { playerName = "Forces of Chaos"
+  { fname = "Forces of Chaos"
   , fgroup = "chaos"
   , fskillsOther = _meleeAndRanged
   , fcanEscape = False

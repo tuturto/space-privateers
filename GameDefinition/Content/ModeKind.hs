@@ -12,7 +12,8 @@ cdefs = ContentDef
   { getSymbol = msymbol
   , getName = mname
   , getFreq = mfreq
-  , validate = validateModeKind
+  , validateSingle = validateSingleModeKind
+  , validateAll = validateAllModeKind
   , content =
       [campaign]
   }
@@ -22,25 +23,25 @@ campaign = ModeKind
   { msymbol  = 'a'
   , mname    = "campaign"
   , mfreq    = [("campaign", 1)]
-  , mplayers = playersCampaign
+  , mroster  = rosterCampaign
   , mcaves   = cavesCampaign
   , mdesc    = "Get ready to assault the city vessel and plunder some loot!"
   }
 
-playersCampaign :: Players
+rosterCampaign :: Roster
 
-playersCampaign = Players
-  { playersList = [ playerHero
+rosterCampaign = Roster
+  { rosterList =  [ playerHero
                   , playerMerchant
                   , playerChaos
                   , playerHorror
                   , playerSpawn ]
-  , playersEnemy = [ ("Space Privateers", "Merchant Mariners")
-                   , ("Space Privateers", "Forces of Chaos") 
-                   , ("Space Privateers", "Spawns of Warp")
-                   , ("Merchant Mariners", "Forces of Chaos") 
-                   , ("Merchant Mariners", "Spawns of Warp") ]
-  , playersAlly = [("Forces of Chaos", "Spawns of Warp")] }
+  , rosterEnemy = [ ("Space Privateers", "Merchant Mariners")
+                  , ("Space Privateers", "Forces of Chaos") 
+                  , ("Space Privateers", "Spawns of Warp")
+                  , ("Merchant Mariners", "Forces of Chaos") 
+                  , ("Merchant Mariners", "Spawns of Warp") ]
+  , rosterAlly =  [("Forces of Chaos", "Spawns of Warp")] }
 
 cavesCampaign :: Caves
 

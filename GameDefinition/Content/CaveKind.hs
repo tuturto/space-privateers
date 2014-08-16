@@ -13,7 +13,8 @@ cdefs = ContentDef
   { getSymbol = csymbol
   , getName = cname
   , getFreq = cfreq
-  , validate = validateCaveKind
+  , validateSingle = validateSingleCaveKind
+  , validateAll = validateAllCaveKind
   , content =
       [rogue, munitorium]
   }
@@ -36,6 +37,7 @@ rogue = CaveKind
   , cdoorChance     = 1%2
   , copenChance     = 1%10
   , chidden         = 8
+  , cactorCoeff     = 20
   , cactorFreq      = [("merchant", 50), ("chaos", 45), ("spawn", 5)]
   , citemNum        = 10 * d 2
   , citemFreq       = [("useful", 70), ("treasure", 30)]
