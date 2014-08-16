@@ -3,6 +3,7 @@ module Content.ModeKind ( cdefs ) where
 
 import qualified Data.IntMap.Strict as IM
 
+import Content.ModeKindPlayer
 import Game.LambdaHack.Common.ContentDef
 import Game.LambdaHack.Content.ModeKind
 
@@ -40,68 +41,6 @@ playersCampaign = Players
                    , ("Merchant Mariners", "Forces of Chaos") 
                    , ("Merchant Mariners", "Spawns of Warp") ]
   , playersAlly = [("Forces of Chaos", "Spawns of Warp")] }
-
-playerHero, playerMerchant, playerChaos, playerSpawn, playerHorror :: Player
-
-playerHero = Player
-  { playerName = "Space Privateers"
-  , playerFaction = "hero"
-  , playerIsSpawn = False
-  , playerIsHero = True
-  , playerEntry = -1
-  , playerInitial = 3
-  , playerLeader = True
-  , playerAI = False
-  , playerUI = True
-  }
-
-playerMerchant = Player
-  { playerName = "Merchant Mariners"
-  , playerFaction = "merchant"
-  , playerIsSpawn = True
-  , playerIsHero = False
-  , playerEntry = -1
-  , playerInitial = 3
-  , playerLeader = False
-  , playerAI = True
-  , playerUI = False
-  }
-
-playerChaos = Player
-  { playerName = "Forces of Chaos"
-  , playerFaction = "chaos"
-  , playerIsSpawn = True
-  , playerIsHero = False
-  , playerEntry = -1
-  , playerInitial = 5
-  , playerLeader = False
-  , playerAI = True
-  , playerUI = False
-  }
-
-playerHorror = Player
-  { playerName = "Horrors of Warp"
-  , playerFaction = "horror"
-  , playerIsSpawn = True
-  , playerIsHero = False
-  , playerEntry = -1
-  , playerInitial = 0
-  , playerLeader = False
-  , playerAI = True
-  , playerUI = False
-  }
-
-playerSpawn = Player
-  { playerName = "Spawns of Warp"
-  , playerFaction = "spawn"
-  , playerIsSpawn = True
-  , playerIsHero = False
-  , playerEntry = -1
-  , playerInitial = 0
-  , playerLeader = False
-  , playerAI = True
-  , playerUI = False
-  }
 
 cavesCampaign :: Caves
 
