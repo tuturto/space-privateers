@@ -36,7 +36,7 @@ playerMerchant = Player
   , ftactic = TPatrol
   , fentryLevel = -1
   , finitialActors = 3
-  , fleaderMode = LeaderUI $ AutoLeader True False
+  , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
   }
 
@@ -51,7 +51,7 @@ playerChaos = Player
   , ftactic = TExplore
   , fentryLevel = -1
   , finitialActors = 3
-  , fleaderMode = LeaderUI $ AutoLeader True False
+  , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
   }
 

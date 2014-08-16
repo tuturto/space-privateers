@@ -48,6 +48,6 @@ cavesCampaign :: Caves
 cavesCampaign = IM.fromList $ [ (-1, ("caveRogue", Just True))
                               , (-2, ("caveRogue", Nothing))
                               , (-3, ("caveRogue", Nothing)) ]
-                              ++ zip [-4, -5..(-9)] (repeat ("dng", Nothing))
+                              ++ zip [-4, -5..(-9)] (repeat ("campaign random", Nothing))
                               ++ [(-10, ("caveRogue", Nothing))]
 

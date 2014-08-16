@@ -23,7 +23,7 @@ rogue,        munitorium :: CaveKind
 rogue = CaveKind
   { csymbol         = 'R'
   , cname           = "General quarters"
-  , cfreq           = [("dng", 100), ("caveRogue", 1)]
+  , cfreq           = [("campaign random", 100), ("caveRogue", 1)]
   , cxsize          = fst normalLevelBound + 1
   , cysize          = snd normalLevelBound + 1
   , cgrid           = DiceXY (3 * d 2) (d 2 + 2)
@@ -54,7 +54,7 @@ rogue = CaveKind
 munitorium = rogue
   { csymbol         = 'M'
   , cname           = "Munitorium"
-  , cfreq           = [("dng", 15), ("munitorium", 1)]
+  , cfreq           = [("campaign random", 15), ("munitorium", 1)]
   , cgrid           = DiceXY 3 3
   , cminPlaceSize   = DiceXY 15 4
   , cmaxPlaceSize   = DiceXY 25 10
