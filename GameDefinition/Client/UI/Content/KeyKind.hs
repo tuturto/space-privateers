@@ -101,7 +101,7 @@ standardKeys = KeyKind
       , ("p", ([CmdItem], MoveItem [CEqp, CSha] CInv
                                    "pack" "an item into inventory backpack"
                                    False))
-      , ("s", ([CmdItem], MoveItem [CEqp, CInv] CSha
+      , ("s", ([CmdItem], MoveItem [CInv, CEqp] CSha
                                    "stash" "and share an item" False))
       , ("a", ([CmdItem, CmdMinimal], Apply
            [ ApplyItem { verb = "activate"
@@ -151,6 +151,7 @@ standardKeys = KeyKind
       , ("CTRL-v", ([CmdAuto], Repeat 1000))
       , ("CTRL-V", ([CmdAuto], Repeat 10))
       , ("apostrophe", ([CmdAuto], Record))
+      , ("CTRL-T", ([CmdAuto], Tactic))
       , ("CTRL-A", ([CmdAuto], Automate))
 
       -- Assorted
