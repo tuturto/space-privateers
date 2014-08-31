@@ -1,6 +1,6 @@
 -- | Basic players definitions.
 module Content.ModeKindPlayer
-  ( playerHero, playerMerchant, playerChaos, playerHorror, playerSpawn
+  ( playerHero, playerMerchant, playerChaos, playerTechCult, playerHorror, playerSpawn
   ) where
 
 import qualified Data.EnumMap.Strict as EM
@@ -8,7 +8,7 @@ import qualified Data.EnumMap.Strict as EM
 import Game.LambdaHack.Common.Ability
 import Game.LambdaHack.Content.ModeKind
 
-playerHero, playerMerchant, playerChaos, playerHorror, playerSpawn :: Player
+playerHero, playerMerchant, playerChaos, playerHorror, playerTechCult, playerSpawn :: Player
 
 playerHero = Player
   { fname = "Space Privateers"
@@ -36,7 +36,7 @@ playerMerchant = Player
   , ftactic = TPatrol
   , fentryLevel = -1
   , finitialActors = 3
-  , fleaderMode = LeaderAI $ AutoLeader True False
+  , fleaderMode = LeaderAI $ AutoLeader True True
   , fhasUI = False
   }
 
@@ -51,7 +51,7 @@ playerChaos = Player
   , ftactic = TExplore
   , fentryLevel = -1
   , finitialActors = 3
-  , fleaderMode = LeaderAI $ AutoLeader True False
+  , fleaderMode = LeaderAI $ AutoLeader True True
   , fhasUI = False
   }
 
@@ -66,7 +66,22 @@ playerSpawn = Player
   , ftactic = TRoam
   , fentryLevel = -2
   , finitialActors = 3
-  , fleaderMode = LeaderNull
+  , fleaderMode = LeaderAI $ AutoLeader True True
+  , fhasUI = False
+  }
+
+playerTechCult = Player
+  { fname = "Tech Cult"
+  , fgroup = "tech"
+  , fskillsOther = _meleeAndRanged
+  , fcanEscape = True
+  , fneverEmpty = True
+  , fhasNumbers = False
+  , fhasGender = False
+  , ftactic = TFollow
+  , fentryLevel = -1
+  , finitialActors = 4
+  , fleaderMode = LeaderAI $ AutoLeader False False
   , fhasUI = False
   }
 

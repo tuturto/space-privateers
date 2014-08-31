@@ -11,19 +11,21 @@ import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ItemKind
 
 actors :: [ItemKind]
-actors = privateers ++ merchants ++ forcesOfChaos ++ spawns ++ animals
+actors = privateers ++ merchants ++ forcesOfChaos ++ spawns ++ techCultists ++ animals
 
-privateers, merchants, forcesOfChaos, spawns, animals :: [ItemKind]
+privateers, merchants, forcesOfChaos, spawns, techCultists, animals :: [ItemKind]
 
 privateers    = [warrior, scout]
 merchants     = [merchant, merchantSgt]
 forcesOfChaos = [chaosWarrior, chaosLord]
+techCultists  = [priest, cultist]
 spawns        = [warpBeast]
 animals       = [ventLizard]
 
 warrior, scout :: ItemKind
 merchant, merchantSgt :: ItemKind
 chaosWarrior, chaosLord :: ItemKind
+priest, cultist :: ItemKind
 warpBeast :: ItemKind
 ventLizard :: ItemKind
 
@@ -123,6 +125,35 @@ chaosLord    = chaosWarrior
   , idesc    = "Lord of Chaos, leader of warriors"
   }
 
+-- * Tech Cult (tech)
+
+cultist = ItemKind
+  { isymbol  = 't'
+  , iname    = "tech cultist"
+  , ifreq    = [("tech", 100)]
+  , iflavour = zipPlain [BrRed]
+  , icount   = 1
+  , irarity  = [(1, 5)]
+  , iverbHit = "thud"
+  , iweight  = 100000
+  , iaspects = [ AddMaxHP 10, AddMaxCalm 50, AddSpeed 20
+               , AddSight 2 ]
+  , ieffects = []
+  , ifeature = [Durable, Identified]
+  , idesc    = "Tech cultist, follower of the great Machinae"
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 3", COrgan)]
+  }
+
+priest = cultist
+  { iname    = "cult priest"
+  , iflavour = zipPlain [BrWhite]
+  , irarity  = [(1, 1)]
+  , iaspects = [ AddMaxHP 20, AddMaxCalm 70, AddSpeed 20
+               , AddSight 3 ]
+  , idesc    = "Cultist priest, voice of the great Machinae"
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan)]
+  }
+  
 -- * Horrors (spawn)
 
 warpBeast    = ItemKind

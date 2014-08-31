@@ -34,14 +34,18 @@ rosterCampaign = Roster
   { rosterList =  [ playerHero
                   , playerMerchant
                   , playerChaos
+                  , playerTechCult
                   , playerHorror
                   , playerSpawn ]
   , rosterEnemy = [ ("Space Privateers", "Merchant Mariners")
                   , ("Space Privateers", "Forces of Chaos") 
                   , ("Space Privateers", "Spawns of Warp")
                   , ("Merchant Mariners", "Forces of Chaos") 
-                  , ("Merchant Mariners", "Spawns of Warp") ]
-  , rosterAlly =  [("Forces of Chaos", "Spawns of Warp")] }
+                  , ("Merchant Mariners", "Spawns of Warp")
+                  , ("Tech Cult", "Forces of Chaos")
+                  , ("Tech Cult", "Spawns of Warp")]
+  , rosterAlly =  [ ("Forces of Chaos", "Spawns of Warp")
+                  , ("Merchant Mariners", "Tech Cult")] }
 
 cavesCampaign :: Caves
 
