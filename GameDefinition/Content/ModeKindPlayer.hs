@@ -13,12 +13,12 @@ playerHero, playerMerchant, playerChaos, playerHorror, playerTechCult, playerSpa
 playerHero = Player
   { fname = "Space Privateers"
   , fgroup = "hero"
-  , fskillsOther = meleeAdjacent
+  , fskillsOther = allSkills
   , fcanEscape = True
   , fneverEmpty = True
   , fhasNumbers = True
   , fhasGender = True
-  , ftactic = TExplore
+  , ftactic = TFollow
   , fentryLevel = -1
   , finitialActors = 3
   , fleaderMode = LeaderUI $ AutoLeader False False
@@ -36,7 +36,7 @@ playerMerchant = Player
   , ftactic = TPatrol
   , fentryLevel = -1
   , finitialActors = 3
-  , fleaderMode = LeaderAI $ AutoLeader True True
+  , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
   }
 
@@ -51,7 +51,7 @@ playerChaos = Player
   , ftactic = TExplore
   , fentryLevel = -1
   , finitialActors = 3
-  , fleaderMode = LeaderAI $ AutoLeader True True
+  , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
   }
 
@@ -60,30 +60,30 @@ playerSpawn = Player
   , fgroup = "spawn"
   , fskillsOther = animalSkills
   , fcanEscape = False
-  , fneverEmpty = False
+  , fneverEmpty = True
   , fhasNumbers = False
   , fhasGender = False
   , ftactic = TRoam
   , fentryLevel = -2
   , finitialActors = 3
-  , fleaderMode = LeaderAI $ AutoLeader True True
+  , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
   }
 
 playerTechCult = Player
   { fname = "Tech Cult"
   , fgroup = "tech"
-  , fskillsOther = _meleeAndRanged
-  , fcanEscape = True
-  , fneverEmpty = True
+  , fskillsOther = allSkills
+  , fcanEscape = False
+  , fneverEmpty = False
   , fhasNumbers = False
   , fhasGender = False
   , ftactic = TFollow
   , fentryLevel = -1
   , finitialActors = 4
-  , fleaderMode = LeaderAI $ AutoLeader False False
+  , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
-  }
+  } -- TODO: change fleaderMode = LeaderAI $ AutoLeader False True
 
 -- | A special player, for summoned actors that don't belong to any
 -- of the main players of a given game. E.g., animals summoned during
@@ -106,7 +106,7 @@ playerHorror = Player
   , fhasUI = False
   }
 
-meleeAdjacent, _meleeAndRanged, animalSkills :: Skills
+meleeAdjacent, _meleeAndRanged, animalSkills, allSkills :: Skills
 
 meleeAdjacent = EM.fromList $ zip [AbWait, AbMelee] [1, 1..]
 
@@ -115,3 +115,6 @@ _meleeAndRanged = EM.fromList $ zip [AbWait, AbMelee, AbProject] [1, 1..]
 
 animalSkills =
   EM.fromList $ zip [AbMove, AbMelee, AbAlter, AbWait, AbTrigger] [1, 1..]
+
+allSkills = 
+  EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait, AbTrigger] [1, 1..]
