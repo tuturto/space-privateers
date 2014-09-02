@@ -16,9 +16,9 @@ cdefs = ContentDef
   , validateSingle = validateSingleCaveKind
   , validateAll = validateAllCaveKind
   , content =
-      [rogue, munitorium]
+      [rogue, munitorium, temple]
   }
-rogue,        munitorium :: CaveKind
+rogue,        munitorium, temple :: CaveKind
 
 rogue = CaveKind
   { csymbol         = 'R'
@@ -61,6 +61,24 @@ munitorium = rogue
   , cdarkChance     = dl 5
   , cnightChance    = d 20
   , cactorFreq      = [("merchant", 80), ("chaos", 5), ("spawn", 15)]
+  , citemNum        = 8 * d 2
+  , citemFreq       = [("weapon", 70), ("armour", 20), ("useful", 10)]
+  , cplaceFreq      = [("rogue", 100)]
+  , cpassable       = True
+  , cdefTile        = "arenaSet"
+  , cdarkCorTile    = "floorArenaDark"
+  , clitCorTile     = "floorArenaLit"
+}
+temple = rogue
+  { csymbol         = 'T'
+  , cname           = "Temple of Machinae"
+  , cfreq           = [("temple", 1)]
+  , cgrid           = DiceXY 3 3
+  , cminPlaceSize   = DiceXY 15 4
+  , cmaxPlaceSize   = DiceXY 25 10
+  , cdarkChance     = dl 5
+  , cnightChance    = d 20
+  , cactorFreq      = [("chaos", 5), ("spawn", 5)]
   , citemNum        = 8 * d 2
   , citemFreq       = [("weapon", 70), ("armour", 20), ("useful", 10)]
   , cplaceFreq      = [("rogue", 100)]
