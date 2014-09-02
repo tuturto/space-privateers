@@ -28,7 +28,7 @@ playerHero = Player
 playerMerchant = Player
   { fname = "Merchant Mariners"
   , fgroup = "merchant"
-  , fskillsOther = _meleeAndRanged
+  , fskillsOther = meleeAdjacent
   , fcanEscape = False
   , fneverEmpty = False
   , fhasNumbers = False
@@ -73,7 +73,7 @@ playerSpawn = Player
 playerTechCult = Player
   { fname = "Tech Cult"
   , fgroup = "tech"
-  , fskillsOther = allSkills
+  , fskillsOther = techSkills
   , fcanEscape = False
   , fneverEmpty = True
   , fhasNumbers = False
@@ -106,7 +106,7 @@ playerHorror = Player
   , fhasUI = False
   }
 
-meleeAdjacent, _meleeAndRanged, animalSkills, allSkills :: Skills
+meleeAdjacent, _meleeAndRanged, animalSkills, techSkills, allSkills :: Skills
 
 meleeAdjacent = EM.fromList $ zip [AbWait, AbMelee] [1, 1..]
 
@@ -115,6 +115,9 @@ _meleeAndRanged = EM.fromList $ zip [AbWait, AbMelee, AbProject] [1, 1..]
 
 animalSkills =
   EM.fromList $ zip [AbMove, AbMelee, AbAlter, AbWait, AbTrigger] [1, 1..]
+
+techSkills = 
+  EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait] [1, 1..]
 
 allSkills = 
   EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait, AbTrigger] [1, 1..]
