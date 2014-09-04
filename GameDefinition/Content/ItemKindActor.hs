@@ -137,7 +137,7 @@ cultist = ItemKind
   , iverbHit = "thud"
   , iweight  = 100000
   , iaspects = [ AddMaxHP 10, AddMaxCalm 50, AddSpeed 20
-               , AddSight 2 ]
+               , AddSight 2, AddSkills $ EM.singleton AbTrigger (-1) ]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Tech cultist, follower of the great Machinae"
@@ -149,7 +149,7 @@ priest = cultist
   , iflavour = zipPlain [BrWhite]
   , irarity  = [(1, 1)]
   , iaspects = [ AddMaxHP 20, AddMaxCalm 70, AddSpeed 20
-               , AddSight 3 ]
+               , AddSight 3, AddSkills $ EM.singleton AbTrigger (-1) ]
   , idesc    = "Cultist priest, voice of the great Machinae"
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan)]
   }
