@@ -26,9 +26,9 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2]
+  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2, grog]
 
-decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2 :: ItemKind
+decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2, grog :: ItemKind
 
 gem, grenade, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
 
@@ -424,6 +424,22 @@ grenade2 = grenade
                , OnSmash (Explode "burning ignisium 2") ]
   }
 -- * Non-exploding consumables, not specifically designed for throwing
+grog = ItemKind
+  { isymbol  = '!'
+  , iname    = "grog tankard"
+  , ifreq    = [("useful", 100)]
+  , iflavour = zipPlain [Brown]
+  , icount   = 1
+  , irarity  = [(1, 3), (10, 1)]
+  , iverbHit = "splash"
+  , iweight  = 50
+  , iaspects = []
+  , ieffects = [ RefillCalm 30, Paralyze (3 + d 5)]
+  , ifeature = [ toVelocity 25
+               , Applicable, Identified ]
+  , idesc    = "A tankard full of disgusting looking liquid, probably containing at least one or more of the following: kerosene, propylene glycol, sulphuric acid, rum, acetone, scumm, axle grease and battery acid."
+  , ikit     = []
+  }
 
 scroll = ItemKind
   { isymbol  = '?'
