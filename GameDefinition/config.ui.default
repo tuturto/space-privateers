@@ -9,7 +9,7 @@
 ; Macro_1 = ("comma", ([CmdItem], Macro "" ["g"]))
 
 ; [hero_names]
-; HeroName_0 = ("Regulus Secundinus", "he")
+; HeroName_0 = ("Elcid Barrett", "he")
 ; HeroName_1 = ("Sabina Petronia", "she")
 ; HeroName_2 = ("Titus Severus", "he")
 ; HeroName_3 = ("Blandina Domitius", "she")
