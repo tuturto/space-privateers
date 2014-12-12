@@ -9,7 +9,6 @@ import Content.ItemKindShrapnel
 import Game.LambdaHack.Common.Color
 import Game.LambdaHack.Common.ContentDef
 import Game.LambdaHack.Common.Dice
-import Game.LambdaHack.Common.Effect
 import Game.LambdaHack.Common.Flavour
 import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ItemKind
@@ -32,10 +31,32 @@ decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFenci
 
 gem, grenade, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
 
+symbolProjectile = '|'
+_symbolLauncher = '}'
+symbolLight = '('
+symbolTool = '('
+symbolGem = '*'
+symbolGold = '$'
+symbolNecklace = '"'
+symbolRing = '='
+symbolPotion = '!' -- concoction, bottle, jar, vial, canister
+symbolFlask = '!'
+symbolScroll = '?' -- book, note, tablet, remote
+symbolTorsoArmor = '['
+symbolMiscArmor = '['
+_symbolClothes = '('
+symbolShield = '['
+symbolPolearm = ')'
+symbolEdged = ')'
+symbolHafted = ')'
+symbolWand = '/' -- magical rod, transmitter, pistol, rifle
+_symbolStaff = '_' -- scanner
+_symbolFood = ','
+
 -- * Thrown weapons
 
 dart = ItemKind
-  { isymbol  = '|'
+  { isymbol  = symbolProjectile
   , iname    = "dart"
   , ifreq    = [("useful", 100), ("any arrow", 100), ("weapon", 100)]
   , iflavour = zipPlain [Cyan]
@@ -50,7 +71,7 @@ dart = ItemKind
   , ikit     = []
   }
 dart200 = ItemKind
-  { isymbol  = '|'
+  { isymbol  = symbolProjectile
   , iname    = "fine dart"
   , ifreq    = [("useful", 100), ("any arrow", 50), ("weapon", 75)]
   , iflavour = zipPlain [BrRed]
@@ -68,7 +89,7 @@ dart200 = ItemKind
 -- * Exotic thrown weapons
 
 decipulum = ItemKind
-  { isymbol  = '|'
+  { isymbol  = symbolProjectile
   , iname    = "decipulum majoris"
   , ifreq    = [("useful", 100), ("weapon", 50)]
   , iflavour = zipPlain [BrYellow]
@@ -83,7 +104,7 @@ decipulum = ItemKind
   , ikit     = []
   }
 harpoon = ItemKind
-  { isymbol  = '|'
+  { isymbol  = symbolProjectile
   , iname    = "Force spear"
   , ifreq    = [("useful", 100), ("starting weapon", 100), ("weapon", 50)]
   , iflavour = zipPlain [Brown]
@@ -98,7 +119,7 @@ harpoon = ItemKind
   , ikit     = []
   }
 net = ItemKind
-  { isymbol  = '|'
+  { isymbol  = symbolProjectile
   , iname    = "net"
   , ifreq    = [("useful", 100), ("weapon", 60)]
   , iflavour = zipPlain [White]
@@ -118,7 +139,7 @@ net = ItemKind
 -- * Lights
 
 oilLamp = ItemKind
-  { isymbol  = '('
+  { isymbol  = symbolLight
   , iname    = "oil lamp"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain [BrYellow]
@@ -134,7 +155,7 @@ oilLamp = ItemKind
   , ikit     = []
   }
 brassLantern = ItemKind
-  { isymbol  = '('
+  { isymbol  = symbolLight
   , iname    = "brass lantern"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain [BrWhite]
@@ -153,7 +174,7 @@ brassLantern = ItemKind
 -- * Treasure
 
 gem = ItemKind
-  { isymbol  = '*'
+  { isymbol  = symbolGem
   , iname    = "gem"
   , ifreq    = [("treasure", 100)]
   , iflavour = zipPlain $ delete BrYellow brightCol
@@ -178,7 +199,7 @@ gem3 = gem
   { irarity  = [(8, 0), (10, 10)]
   }
 currency = ItemKind
-  { isymbol  = '$'
+  { isymbol  = symbolGold
   , iname    = "gold piece"
   , ifreq    = [("treasure", 100), ("currency", 1)]
   , iflavour = zipPlain [BrYellow]
@@ -196,7 +217,7 @@ currency = ItemKind
 -- * Periodic jewelry
 
 gorget = ItemKind
-  { isymbol  = '"'
+  { isymbol  = symbolNecklace
   , iname    = "gorget"
   , ifreq    = [("useful", 100)]
   , iflavour = zipFancy [BrCyan]
@@ -212,7 +233,7 @@ gorget = ItemKind
   , ikit     = []
   }
 necklace = ItemKind
-  { isymbol  = '"'
+  { isymbol  = symbolNecklace
   , iname    = "necklace"
   , ifreq    = [("useful", 100)]
   , iflavour = zipFancy stdCol ++ zipPlain brightCol
@@ -282,7 +303,7 @@ oculus = ItemKind
   , ikit     = []
   }
 ring = ItemKind
-  { isymbol  = '='
+  { isymbol  = symbolRing
   , iname    = "ring"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain stdCol ++ zipFancy darkCol
@@ -325,7 +346,7 @@ ring5 = ring  -- by the time it's found, probably no space in eqp
 -- * Exploding consumables, often intended to be thrown
 
 potion = ItemKind
-  { isymbol  = '!'
+  { isymbol  = symbolPotion
   , iname    = "vial"
   , ifreq    = [("useful", 100), ("any vial", 100)]
   , iflavour = zipPlain stdCol ++ zipFancy brightCol
@@ -425,7 +446,7 @@ grenade2 = grenade
   }
 -- * Non-exploding consumables, not specifically designed for throwing
 grog = ItemKind
-  { isymbol  = '!'
+  { isymbol  = symbolPotion
   , iname    = "grog tankard"
   , ifreq    = [("useful", 100)]
   , iflavour = zipPlain [Brown]
@@ -442,7 +463,7 @@ grog = ItemKind
   }
 
 scroll = ItemKind
-  { isymbol  = '?'
+  { isymbol  = symbolScroll
   , iname    = "scroll"
   , ifreq    = [("useful", 100), ("any scroll", 100)]
   , iflavour = zipFancy stdCol ++ zipPlain darkCol
@@ -503,7 +524,7 @@ standardSummon = [("monster", 30), ("summonable animal", 70)]
 -- * Armor
 
 armorLeather = ItemKind
-  { isymbol  = '['
+  { isymbol  = symbolTorsoArmor
   , iname    = "leather armor"
   , ifreq    = [("useful", 100), ("armour", 100)]
   , iflavour = zipPlain [Brown]
@@ -531,7 +552,7 @@ armorMail = armorLeather
   , idesc    = "A long shirt woven from iron rings. Discourages foes from attacking your torso, making it harder for them to land a blow."
   }
 gloveFencing = ItemKind
-  { isymbol  = '['
+  { isymbol  = symbolMiscArmor
   , iname    = "leather gauntlet"
   , ifreq    = [("useful", 100), ("armour", 100)]
   , iflavour = zipPlain [BrYellow]
@@ -568,7 +589,7 @@ gloveJousting = gloveFencing
   }
 
 buckler = ItemKind
-  { isymbol  = '['
+  { isymbol  = symbolShield
   , iname    = "buckler"
   , ifreq    = [("useful", 100), ("armour", 100)]
   , iflavour = zipPlain [Blue]
@@ -597,7 +618,7 @@ shield = buckler
 -- * Weapons
 
 dagger = ItemKind
-  { isymbol  = ')'
+  { isymbol  = symbolEdged
   , iname    = "dagger"
   , ifreq    = [("useful", 100), ("starting weapon", 100), ("weapon", 100)]
   , iflavour = zipPlain [BrCyan]
@@ -629,7 +650,7 @@ hammer = ItemKind
   , ikit     = []
   }
 sword = ItemKind
-  { isymbol  = ')'
+  { isymbol  = symbolEdged
   , iname    = "sword"
   , ifreq    = [("useful", 100), ("starting weapon", 100), ("weapon", 75)]
   , iflavour = zipPlain [BrBlue]
@@ -645,7 +666,7 @@ sword = ItemKind
   , ikit     = []
   }
 halberd = ItemKind
-  { isymbol  = ')'
+  { isymbol  = symbolPolearm
   , iname    = "halberd"
   , ifreq    = [("useful", 100), ("weapon", 50)]
   , iflavour = zipPlain [BrYellow]
@@ -664,7 +685,7 @@ halberd = ItemKind
 -- * Wands
 
 wand = ItemKind
-  { isymbol  = '/'
+  { isymbol  = symbolWand
   , iname    = "wand"
   , ifreq    = [("useful", 100)]
   , iflavour = zipFancy brightCol

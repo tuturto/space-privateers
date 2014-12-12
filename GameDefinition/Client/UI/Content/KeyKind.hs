@@ -7,9 +7,9 @@ import Control.Arrow (first)
 import qualified Game.LambdaHack.Client.Key as K
 import Game.LambdaHack.Client.UI.Content.KeyKind
 import Game.LambdaHack.Client.UI.HumanCmd
-import qualified Game.LambdaHack.Common.Effect as Effect
-import qualified Game.LambdaHack.Common.Feature as F
 import Game.LambdaHack.Common.Misc
+import qualified Game.LambdaHack.Content.ItemKind as IK
+import qualified Game.LambdaHack.Content.TileKind as TK
 
 standardKeys :: KeyKind
 standardKeys = KeyKind
@@ -30,25 +30,25 @@ standardKeys = KeyKind
       , ("less", ([CmdMove, CmdMinimal], TriggerTile
            [ TriggerFeature { verb = "ascend"
                             , object = "a level"
-                            , feature = F.Cause (Effect.Ascend 1) }
+                            , feature = TK.Cause (IK.Ascend 1) }
            , TriggerFeature { verb = "escape"
                             , object = "dungeon"
-                            , feature = F.Cause (Effect.Escape 1) } ]))
+                            , feature = TK.Cause (IK.Escape 1) } ]))
       , ("CTRL-less", ([CmdMove], TriggerTile
            [ TriggerFeature { verb = "ascend"
                             , object = "10 levels"
-                            , feature = F.Cause (Effect.Ascend 10) } ]))
+                            , feature = TK.Cause (IK.Ascend 10) } ]))
       , ("greater", ([CmdMove, CmdMinimal], TriggerTile
            [ TriggerFeature { verb = "descend"
                             , object = "a level"
-                            , feature = F.Cause (Effect.Ascend (-1)) }
+                            , feature = TK.Cause (IK.Ascend (-1)) }
            , TriggerFeature { verb = "escape"
                             , object = "dungeon"
-                            , feature = F.Cause (Effect.Escape (-1)) } ]))
+                            , feature = TK.Cause (IK.Escape (-1)) } ]))
       , ("CTRL-greater", ([CmdMove], TriggerTile
            [ TriggerFeature { verb = "descend"
                             , object = "10 levels"
-                            , feature = F.Cause (Effect.Ascend (-10)) } ]))
+                            , feature = TK.Cause (IK.Ascend (-10)) } ]))
       , ("semicolon", ([CmdMove], StepToTarget))
       , ("colon", ([CmdMove], Macro "go to target for 100 steps"
                                     ["semicolon", "V"]))
@@ -72,16 +72,16 @@ standardKeys = KeyKind
       , ("c", ([CmdMove], AlterDir
            [ AlterFeature { verb = "close"
                           , object = "door"
-                          , feature = F.CloseTo "vertical closed door Lit" }
+                          , feature = TK.CloseTo "vertical closed door Lit" }
            , AlterFeature { verb = "close"
                           , object = "door"
-                          , feature = F.CloseTo "horizontal closed door Lit" }
+                          , feature = TK.CloseTo "horizontal closed door Lit" }
            , AlterFeature { verb = "close"
                           , object = "door"
-                          , feature = F.CloseTo "vertical closed door Dark" }
+                          , feature = TK.CloseTo "vertical closed door Dark" }
            , AlterFeature { verb = "close"
                           , object = "door"
-                          , feature = F.CloseTo "horizontal closed door Dark" }
+                          , feature = TK.CloseTo "horizontal closed door Dark" }
            ]))
       , ("period", ([CmdMove], Macro "" ["KP_Begin"]))
       , ("i", ([CmdMove], Macro "" ["KP_Begin"]))
@@ -93,16 +93,16 @@ standardKeys = KeyKind
       , ("G", ([CmdItem], DescribeItem CGround))
       , ("A", ([CmdItem], AllOwned))
       , ("g", ([CmdItem, CmdMinimal],
-               MoveItem [CGround] CEqp "get" "an item" True))
+               MoveItem [CGround] CEqp (Just "get") "an item" True))
       , ("d", ([CmdItem], MoveItem [CEqp, CInv, CSha] CGround
-                                   "drop" "an item" False))
+                                   Nothing "an item" False))
       , ("e", ([CmdItem], MoveItem [CInv, CSha] CEqp
-                                   "equip" "an item" False))
+                                   Nothing "an item" False))
       , ("p", ([CmdItem], MoveItem [CEqp, CSha] CInv
-                                   "pack" "an item into inventory backpack"
+                                   Nothing "an item into inventory backpack"
                                    False))
       , ("s", ([CmdItem], MoveItem [CInv, CEqp] CSha
-                                   "stash" "and share an item" False))
+                                   Nothing "and share an item" False))
       , ("a", ([CmdItem, CmdMinimal], Apply
            [ ApplyItem { verb = "activate"
                        , object = "applicable item"
