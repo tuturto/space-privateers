@@ -27,6 +27,7 @@ executable SpacePrivateers
                       Content.ItemKindActor,
                       Content.ItemKindOrgan,
                       Content.ItemKindShrapnel,
+                      Content.ItemKindTemporary,
                       Content.ModeKind,
                       Content.ModeKindPlayer,
                       Content.PlaceKind,

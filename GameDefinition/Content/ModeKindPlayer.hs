@@ -6,9 +6,11 @@ module Content.ModeKindPlayer
 import qualified Data.EnumMap.Strict as EM
 
 import Game.LambdaHack.Common.Ability
+import Game.LambdaHack.Common.Dice
+import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ModeKind
 
-playerHero, playerMerchant, playerChaos, playerHorror, playerTechCult, playerSpawn :: Player
+playerHero, playerMerchant, playerChaos, playerHorror, playerTechCult, playerSpawn :: Player Dice
 
 playerHero = Player
   { fname = "Space Privateers"

@@ -22,7 +22,9 @@ speedGland n = fist
   , ifreq    = [(toGroupName $ "speed gland" <+> tshow n, 100)]
   , icount   = 1
   , iverbHit = "spit at"
-  , iaspects = [AddSpeed $ intToDice n, Periodic $ intToDice n]
+  , iaspects = [ AddSpeed $ intToDice n
+               , Periodic
+               , Timeout $ intToDice $ 100 `div` n ]
   , ieffects = [RefillHP 1]
   , ifeature = [Durable, Identified]
   , idesc    = ""
@@ -249,11 +251,12 @@ nostril = fist
 
 vent = fist
   { iname    = "vent"
-  , ifreq    = [("vent", 100)]
+  , ifreq    = [ ("vent", 100) ]
   , icount   = 1
   , iverbHit = "menace"
-  , iaspects = [Periodic $ 1 + d 2]
-  , ieffects = [Explode "boiling water"]
-  , ifeature = [Durable, Identified]
+  , iaspects = [ Periodic
+               , Timeout $ (2 + d 4) |*| 5 ]
+  , ieffects = [ Explode "boiling water" ]
+  , ifeature = [ Durable, Identified ]
   , idesc    = ""
   }

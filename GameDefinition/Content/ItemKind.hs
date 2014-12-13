@@ -6,6 +6,7 @@ import Data.List
 import Content.ItemKindActor
 import Content.ItemKindOrgan
 import Content.ItemKindShrapnel
+import Content.ItemKindTemporary
 import Game.LambdaHack.Common.Color
 import Game.LambdaHack.Common.ContentDef
 import Game.LambdaHack.Common.Dice
@@ -130,7 +131,7 @@ net = ItemKind
   , iaspects = []
   , ieffects = [ Hurt (d 2)
                , Paralyze (5 + d 5)
-               , DropBestWeapon, DropEqp ']' False ]
+               , DropBestWeapon, DropItem CEqp "torso armor" False ]
   , ifeature = []
   , idesc    = "A web made of monofilaments. Will both cut and entagle the prey."
   , ikit     = []
@@ -225,7 +226,10 @@ gorget = ItemKind
   , icount   = 1
   , iverbHit = "whip"
   , iweight  = 30
-  , iaspects = [Periodic $ d 4 + dl 4, AddArmorMelee 1, AddArmorRanged 1]
+  , iaspects = [ Periodic
+               , Timeout $ (d 3 + 3 - dl 3) |*| 10
+               , AddArmorMelee 1
+               , AddArmorRanged 1 ]
   , ieffects = [RefillCalm 1]
   , ifeature = [ Precious, EqpSlot EqpSlotPeriodic "", Identified
                , toVelocity 50 ]
@@ -241,7 +245,7 @@ necklace = ItemKind
   , icount   = 1
   , iverbHit = "whip"
   , iweight  = 30
-  , iaspects = []
+  , iaspects = [ Periodic ]
   , ieffects = []
   , ifeature = [ Precious, EqpSlot EqpSlotPeriodic ""
                , toVelocity 50 ]
@@ -249,37 +253,37 @@ necklace = ItemKind
   , ikit     = []
   }
 necklace1 = necklace
-  { iaspects = [Periodic $ d 2 + dl 2]
-  , ieffects = [RefillHP 1]
+  { iaspects = (Timeout $ (d 2 + dl 2)) : iaspects necklace
+  , ieffects = [ RefillHP 1 ]
   , idesc    = "A cord of dried herbs and healing berries."
   }
 necklace2 = necklace
   { irarity  = [(2, 0), (10, 1)]
-  , iaspects = [Periodic $ d 4 + dl 2]
+  , iaspects = (Timeout $ (d 4 + dl 2)) : iaspects necklace
   , ieffects = [ Impress
                , Summon [("summonable animal", 1)] $ 1 + dl 2, Explode "waste" ]
   }
 necklace3 = necklace
-  { iaspects = [Periodic $ d 4 + dl 2]
-  , ieffects = [Paralyze $ 5 + d 5 + dl 5, RefillCalm 999]
+  { iaspects = (Timeout $ (d 4 + dl 2)) : iaspects necklace
+  , ieffects = [ Paralyze $ 5 + d 5 + dl 5, RefillCalm 999 ]
   }
 necklace4 = necklace
-  { iaspects = [Periodic $ 2 * d 10 + dl 10]
-  , ieffects = [Teleport $ 2 + d 3]
+  { iaspects = (Timeout $ (2 * d 10 + dl 10)) : iaspects necklace
+  , ieffects = [ Teleport $ 2 + d 3 ]
   }
 necklace5 = necklace
-  { iaspects = [Periodic $ d 4 + dl 2]
-  , ieffects = [Teleport $ 10 + d 10]
+  { iaspects = (Timeout $ (d 4 + dl 2)) : iaspects necklace
+  , ieffects = [ Teleport $ 10 + d 10 ]
   }
 necklace6 = necklace
-  { iaspects = [Periodic $ 2 * d 5 + dl 5]
-  , ieffects = [PushActor (ThrowMod 100 50)]
+  { iaspects = (Timeout $ (2 * d 5 + dl 5)) : iaspects necklace
+  , ieffects = [ PushActor (ThrowMod 100 50) ]
   }
 necklace7 = necklace
-  { irarity  = [(4, 0), (10, 2)]
-  , iaspects = [Periodic $ 2 * d 5 + dl 15]
-  , ieffects = [InsertMove 1, RefillHP (-1)]
-  , ifeature = ifeature necklace ++ [Durable]
+  { irarity  = [ (4, 0), (10, 2) ]
+  , iaspects = (Timeout $ (2 * d 5 + dl 15)) : iaspects necklace
+  , ieffects = [ InsertMove 1, RefillHP (-1) ]
+  , ifeature = ifeature necklace ++ [ Durable ]
       -- evil players would throw before death, to destroy
       -- TODO: teach AI to wear only for fight; prevent players from meleeing
       -- allies with that (Durable)
@@ -498,7 +502,8 @@ scroll5 = scroll
   { irarity  = [(1, 4), (10, 6)]
   , ieffects = [ OneOf [ Summon standardSummon $ d 2
                        , CallFriend 1, Ascend (-1), Ascend 1
-                       , RefillCalm 30, RefillCalm (-30), CreateItem $ d 2
+                       , RefillCalm 30, RefillCalm (-30)
+                       , CreateItem CGround "useful" TimerNone
                        , PolyItem CGround ] ]
                -- TODO: ask player: Escape 1
   }
@@ -518,7 +523,7 @@ scroll9 = scroll
   , ieffects = [PolyItem CGround]
   }
 
-standardSummon :: Freqs
+standardSummon :: Freqs ItemKind
 standardSummon = [("monster", 30), ("summonable animal", 70)]
 
 -- * Armor

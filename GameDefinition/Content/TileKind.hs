@@ -72,7 +72,8 @@ pillarCache = TileKind
                , ("legendLit", 100), ("legendDark", 100) ]
   , tcolor   = BrWhite
   , tcolor2  = defFG
-  , tfeature = [Cause $ IK.CreateItem 1, ChangeTo "cachable"]
+  , tfeature = [ Cause $ IK.CreateItem CGround "useful" IK.TimerNone
+               , ChangeTo "cachable"]
   }
 lampPost = TileKind
   { tsymbol  = 'O'
@@ -289,8 +290,8 @@ floorBrownLit = floorRedLit
   }
 
 makeDark :: TileKind -> TileKind
-makeDark k = let darkText :: GroupName -> GroupName
-                 darkText t = maybe t (toGroupName . (<> "Dark")) 
+makeDark k = let darkText :: GroupName TileKind -> GroupName TileKind
+                 darkText t = maybe t (toGroupName . (<> "Dark"))
                               $ T.stripSuffix "Lit" $ tshow t
                  darkFrequency = map (first darkText) $ tfreq k
                  darkFeat (OpenTo t) = Just $ OpenTo $ darkText t
@@ -298,9 +299,9 @@ makeDark k = let darkText :: GroupName -> GroupName
                  darkFeat (ChangeTo t) = Just $ ChangeTo $ darkText t
                  darkFeat (HideAs t) = Just $ HideAs $ darkText t
                  darkFeat (RevealAs t) = Just $ RevealAs $ darkText t
-                 darkFeat OftenItem = Nothing
+                 darkFeat OftenItem = Nothing -- items not common in the dark
                  darkFeat feat = Just $ feat
-             in k { tfreq    = darkFrequency
+             in k { tfreq = darkFrequency
                   , tfeature = Dark : mapMaybe darkFeat (tfeature k)
                   }
 
