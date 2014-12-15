@@ -5,7 +5,6 @@ import qualified Data.IntMap.Strict as IM
 
 import Content.ModeKindPlayer
 import Game.LambdaHack.Common.ContentDef
-import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ModeKind
 
 cdefs :: ContentDef ModeKind
@@ -16,17 +15,28 @@ cdefs = ContentDef
   , validateSingle = validateSingleModeKind
   , validateAll = validateAllModeKind
   , content =
-      [campaign]
+      [ campaign
+      , screensaver ]
   }
-campaign :: ModeKind
+campaign, screensaver :: ModeKind
 
 campaign = ModeKind
   { msymbol  = 'a'
   , mname    = "campaign"
-  , mfreq    = [("campaign", 1), ("starting", 1)]
+  , mfreq    = [("campaign", 1)]
   , mroster  = rosterCampaign
   , mcaves   = cavesCampaign
   , mdesc    = "Get ready to assault the city vessel and plunder some loot!"
+  }
+
+screensaver = campaign
+  { mname   = "campaign screensaver"
+  , mfreq   = [ ("starting", 1)]
+  , mroster = rosterCampaign
+      { rosterList = (head (rosterList rosterCampaign))
+                       {fleaderMode = LeaderAI $ AutoLeader False False }
+                     : tail (rosterList rosterCampaign)
+      }
   }
 
 rosterCampaign :: Roster
