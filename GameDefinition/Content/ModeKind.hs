@@ -23,7 +23,7 @@ campaign :: ModeKind
 campaign = ModeKind
   { msymbol  = 'a'
   , mname    = "campaign"
-  , mfreq    = [("campaign", 1)]
+  , mfreq    = [("campaign", 1), ("starting", 1)]
   , mroster  = rosterCampaign
   , mcaves   = cavesCampaign
   , mdesc    = "Get ready to assault the city vessel and plunder some loot!"
