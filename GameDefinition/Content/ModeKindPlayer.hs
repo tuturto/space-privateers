@@ -1,6 +1,7 @@
 -- | Basic players definitions.
 module Content.ModeKindPlayer
-  ( playerHero, playerMerchant, playerChaos, playerTechCult, playerHorror, playerSpawn
+  ( playerHero, playerMerchant, playerChaos, playerTechCult, playerHorror, playerSpawn,
+    hiHero, hiDweller
   ) where
 
 import qualified Data.EnumMap.Strict as EM
@@ -18,6 +19,7 @@ playerHero = Player
   , fskillsOther = allSkills
   , fcanEscape = True
   , fneverEmpty = True
+  , fhiCondPoly = hiHero
   , fhasNumbers = True
   , fhasGender = True
   , ftactic = TFollow
@@ -33,6 +35,7 @@ playerMerchant = Player
   , fskillsOther = meleeAdjacent
   , fcanEscape = False
   , fneverEmpty = False
+  , fhiCondPoly = hiDweller
   , fhasNumbers = False
   , fhasGender = True
   , ftactic = TPatrol
@@ -48,6 +51,7 @@ playerChaos = Player
   , fskillsOther = _meleeAndRanged
   , fcanEscape = False
   , fneverEmpty = False
+  , fhiCondPoly = hiDweller
   , fhasNumbers = False
   , fhasGender = True
   , ftactic = TExplore
@@ -63,6 +67,7 @@ playerSpawn = Player
   , fskillsOther = animalSkills
   , fcanEscape = False
   , fneverEmpty = False
+  , fhiCondPoly = hiDweller
   , fhasNumbers = False
   , fhasGender = False
   , ftactic = TRoam
@@ -78,6 +83,7 @@ playerTechCult = Player
   , fskillsOther = techSkills
   , fcanEscape = False
   , fneverEmpty = True
+  , fhiCondPoly = hiDweller
   , fhasNumbers = False
   , fhasGender = False
   , ftactic = TFollow
@@ -99,6 +105,7 @@ playerHorror = Player
   , fskillsOther = unitSkills
   , fcanEscape = False
   , fneverEmpty = False
+  , fhiCondPoly = []
   , fhasNumbers = False
   , fhasGender = False
   , ftactic = TPatrol
@@ -107,6 +114,30 @@ playerHorror = Player
   , fleaderMode = LeaderNull
   , fhasUI = False
   }
+
+victoryOutcomes :: [Outcome]
+victoryOutcomes = [Conquer, Escape]
+
+hiHero, hiDweller :: HiCondPoly
+
+-- Heroes rejoice in loot.
+hiHero = [ ( [(HiLoot, 1)]
+           , [minBound..maxBound] )
+         , ( [(HiConst, 1000), (HiLoss, -100)]
+           , victoryOutcomes )
+         ]
+
+-- Spawners or skirmishers get no points from loot, but try to kill
+-- all opponents fast or at least hold up for long.
+hiDweller = [ ( [(HiConst, 1000)]  -- no loot
+              , victoryOutcomes )
+            , ( [(HiConst, 1000), (HiLoss, -10)]
+              , victoryOutcomes )
+            , ( [(HiBlitz, -100)]
+              , victoryOutcomes )
+            , ( [(HiSurvival, 100)]
+              , [minBound..maxBound] \\ victoryOutcomes )
+            ]
 
 minusHundred, meleeAdjacent, _meleeAndRanged, animalSkills, techSkills, allSkills :: Skills
 

@@ -27,8 +27,8 @@ burningIgnisium n = ItemKind
   , iverbHit = "burn"
   , iweight  = 1
   , iaspects = [AddLight 3]
-  , ieffects = [ Burn (n `div` 2)
-               , Paralyze (intToDice $ n `div` 2) ]
+  , ieffects = [ Burn 1
+               , Paralyze 1 ]
   , ifeature = [ toVelocity (min 100 $ n * 7)
                , Fragile, Identified ]
   , idesc    = "Flaming ignisium, burning brightly."
