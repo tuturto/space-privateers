@@ -495,16 +495,15 @@ scroll3 = scroll
   , ieffects = [Ascend (-1)]
   }
 scroll4 = scroll
-  { ieffects = [ OneOf [ Teleport $ 2 + d 5, RefillCalm 10, RefillCalm (-10)
-                       , InsertMove 4, Paralyze 10, Identify CGround ] ]
+  { ieffects = [ OneOf [ Teleport 5, RefillCalm 10, RefillCalm (-10)
+                       , InsertMove 4, Paralyze 10 ] ]
   }
 scroll5 = scroll
   { irarity  = [(1, 4), (10, 6)]
   , ieffects = [ OneOf [ Summon standardSummon $ d 2
                        , CallFriend 1, Ascend (-1), Ascend 1
                        , RefillCalm 30, RefillCalm (-30)
-                       , CreateItem CGround "useful" TimerNone
-                       , PolyItem CGround ] ]
+                       , CreateItem CGround "useful" TimerNone ] ]
                -- TODO: ask player: Escape 1
   }
 scroll6 = scroll
@@ -516,11 +515,11 @@ scroll7 = scroll
   }
 scroll8 = scroll
   { irarity  = [(3, 6), (10, 3)]
-  , ieffects = [Identify CGround]  -- TODO: ask player: AskPlayer cstore eff?
+  , ieffects = [Identify]  -- TODO: ask player: AskPlayer cstore eff?
   }
 scroll9 = scroll
   { irarity  = [(3, 3), (10, 9)]
-  , ieffects = [PolyItem CGround]
+  , ieffects = [PolyItem]
   }
 
 standardSummon :: Freqs ItemKind

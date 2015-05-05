@@ -23,7 +23,11 @@ standardKeys = KeyKind
 
       -- Main Menu, which apart of these includes a few extra commands
       [ ("CTRL-x", ([CmdMenu], GameExit))
-      , ("CTRL-a", ([CmdMenu], GameRestart "campaign"))
+      , ("CTRL-u", ([CmdMenu], GameRestart "duel"))
+      , ("CTRL-k", ([CmdMenu], GameRestart "skirmish"))
+      , ("CTRL-m", ([CmdMenu], GameRestart "ambush"))
+      , ("CTRL-b", ([CmdMenu], GameRestart "battle"))
+      , ("CTRL-n", ([CmdMenu], GameRestart "campaign"))
       , ("CTRL-d", ([CmdMenu], GameDifficultyCycle))
 
       -- Movement and terrain alteration
@@ -49,27 +53,32 @@ standardKeys = KeyKind
            [ TriggerFeature { verb = "descend"
                             , object = "10 levels"
                             , feature = TK.Cause (IK.Ascend (-10)) } ]))
-      , ("semicolon", ([CmdMove], StepToTarget))
-      , ("colon", ([CmdMove], Macro "go to target for 100 steps"
-                                    ["semicolon", "V"]))
-      , ("CTRL-colon", ([CmdMove], Macro "go to target for 10 steps"
-                                         ["semicolon", "CTRL-V"]))
-      , ("x", ([CmdMove], Macro "explore the closest unknown spot"
-                                [ "BackSpace"
-                                , "CTRL-question", "semicolon", "V" ]))
-      , ("X", ([CmdMove], Macro "autoexplore 100 times"
-                                [ "BackSpace"
-                                , "'", "CTRL-question", "semicolon", "'"
-                                , "V" ]))
-      , ("CTRL-X", ([CmdMove], Macro "autoexplore 10 times"
-                                      [ "BackSpace"
-                                      , "'", "CTRL-question", "semicolon", "'"
-                                      , "CTRL-V" ]))
+      , ("semicolon",
+         ( [CmdMove]
+         , Macro "go to crosshair for 100 steps"
+                 ["CTRL-semicolon", "CTRL-period", "V"] ))
+      , ("colon",
+         ( [CmdMove]
+         , Macro "run selected to crosshair for 100 steps"
+                 ["CTRL-colon", "CTRL-period", "V"] ))
+      , ("x",
+         ( [CmdMove]
+         , Macro "explore the closest unknown spot"
+                 [ "CTRL-question"  -- no semicolon
+                 , "CTRL-period", "V" ] ))
+      , ("X",
+         ( [CmdMove]
+         , Macro "autoexplore 100 times"
+                 ["'", "CTRL-question", "CTRL-period", "'", "V"] ))
+      , ("CTRL-X",
+         ( [CmdMove]
+         , Macro "autoexplore 25 times"
+                 ["'", "CTRL-question", "CTRL-period", "'", "CTRL-V"] ))
       , ("R", ([CmdMove], Macro "rest (wait 100 times)"
                                 ["KP_Begin", "V"]))
-      , ("CTRL-R", ([CmdMove], Macro "rest (wait 10 times)"
+      , ("CTRL-R", ([CmdMove], Macro "rest (wait 25 times)"
                                      ["KP_Begin", "CTRL-V"]))
-      , ("c", ([CmdMove], AlterDir
+      , ("c", ([CmdMove, CmdMinimal], AlterDir
            [ AlterFeature { verb = "close"
                           , object = "door"
                           , feature = TK.CloseTo "vertical closed door Lit" }
@@ -83,29 +92,29 @@ standardKeys = KeyKind
                           , object = "door"
                           , feature = TK.CloseTo "horizontal closed door Dark" }
            ]))
-      , ("period", ([CmdMove], Macro "" ["KP_Begin"]))
-      , ("i", ([CmdMove], Macro "" ["KP_Begin"]))
 
       -- Item use
-      , ("E", ([CmdItem], DescribeItem CEqp))
-      , ("P", ([CmdItem], DescribeItem CInv))
-      , ("S", ([CmdItem], DescribeItem CSha))
-      , ("G", ([CmdItem], DescribeItem CGround))
-      , ("A", ([CmdItem], AllOwned))
+      , ("E", ([CmdItem, CmdMinimal], DescribeItem $ MStore CEqp))
+      , ("P", ([CmdItem], DescribeItem $ MStore CInv))
+      , ("S", ([CmdItem], DescribeItem $ MStore CSha))
+      , ("A", ([CmdItem], DescribeItem MOwned))
+      , ("G", ([CmdItem], DescribeItem $ MStore CGround))
+      , ("@", ([CmdItem], DescribeItem $ MStore COrgan))
+      , ("exclam", ([CmdItem], DescribeItem MStats))
       , ("g", ([CmdItem, CmdMinimal],
-               MoveItem [CGround] CEqp (Just "get") "an item" True))
+               MoveItem [CGround] CEqp (Just "get") "items" True))
       , ("d", ([CmdItem], MoveItem [CEqp, CInv, CSha] CGround
-                                   Nothing "an item" False))
-      , ("e", ([CmdItem], MoveItem [CInv, CSha] CEqp
-                                   Nothing "an item" False))
-      , ("p", ([CmdItem], MoveItem [CEqp, CSha] CInv
-                                   Nothing "an item into inventory backpack"
+                                   Nothing "items" False))
+      , ("e", ([CmdItem], MoveItem [CGround, CInv, CSha] CEqp
+                                   Nothing "items" False))
+      , ("p", ([CmdItem], MoveItem [CGround, CEqp, CSha] CInv
+                                   Nothing "items into inventory"
                                    False))
-      , ("s", ([CmdItem], MoveItem [CInv, CEqp] CSha
-                                   Nothing "and share an item" False))
+      , ("s", ([CmdItem], MoveItem [CGround, CInv, CEqp] CSha
+                                   Nothing "and share items" False))
       , ("a", ([CmdItem, CmdMinimal], Apply
-           [ ApplyItem { verb = "activate"
-                       , object = "applicable item"
+           [ ApplyItem { verb = "apply"
+                       , object = "consumable"
                        , symbol = ' ' }
            , ApplyItem { verb = "quaff"
                        , object = "potion"
@@ -122,26 +131,27 @@ standardKeys = KeyKind
                                            , symbol = '?' }]))
       , ("f", ([CmdItem, CmdMinimal], Project
            [ApplyItem { verb = "fling"
-                      , object = "projectable item"
+                      , object = "projectile"
                       , symbol = ' ' }]))
       , ("t", ([CmdItem], Project [ApplyItem { verb = "throw"
                                              , object = "missile"
                                              , symbol = '|' }]))
-      , ("z", ([CmdItem], Project [ApplyItem { verb = "zap"
-                                             , object = "wand"
-                                             , symbol = '/' }]))
+--      , ("z", ([CmdItem], Project [ApplyItem { verb = "zap"
+--                                             , object = "wand"
+--                                             , symbol = '/' }]))
 
       -- Targeting
-      , ("KP_Multiply", ([CmdTgt, CmdMinimal], TgtEnemy))
+      , ("KP_Multiply", ([CmdTgt], TgtEnemy))
       , ("backslash", ([CmdTgt], Macro "" ["KP_Multiply"]))
-      , ("slash", ([CmdTgt], TgtFloor))
-      , ("plus", ([CmdTgt], EpsIncr True))
+      , ("KP_Divide", ([CmdTgt], TgtFloor))
+      , ("bar", ([CmdTgt], Macro "" ["KP_Divide"]))
+      , ("plus", ([CmdTgt, CmdMinimal], EpsIncr True))
       , ("minus", ([CmdTgt], EpsIncr False))
+      , ("CTRL-question", ([CmdTgt], CursorUnknown))
+      , ("CTRL-I", ([CmdTgt], CursorItem))
+      , ("CTRL-braceleft", ([CmdTgt], CursorStair True))
+      , ("CTRL-braceright", ([CmdTgt], CursorStair False))
       , ("BackSpace", ([CmdTgt], TgtClear))
-      , ("CTRL-question", ([CmdTgt], TgtUnknown))
-      , ("CTRL-I", ([CmdTgt], TgtItem))
-      , ("CTRL-braceleft", ([CmdTgt], TgtStair True))
-      , ("CTRL-braceright", ([CmdTgt], TgtStair False))
 
       -- Automation
       , ("equal", ([CmdAuto], SelectActor))
@@ -149,24 +159,50 @@ standardKeys = KeyKind
       , ("v", ([CmdAuto], Repeat 1))
       , ("V", ([CmdAuto], Repeat 100))
       , ("CTRL-v", ([CmdAuto], Repeat 1000))
-      , ("CTRL-V", ([CmdAuto], Repeat 10))
+      , ("CTRL-V", ([CmdAuto], Repeat 25))
       , ("apostrophe", ([CmdAuto], Record))
       , ("CTRL-T", ([CmdAuto], Tactic))
       , ("CTRL-A", ([CmdAuto], Automate))
 
       -- Assorted
       , ("question", ([CmdMeta], Help))
-      , ("D", ([CmdMeta], History))
-      , ("T", ([CmdMeta], MarkSuspect))
+      , ("D", ([CmdMeta, CmdMinimal], History))
+      , ("T", ([CmdMeta, CmdMinimal], MarkSuspect))
       , ("Z", ([CmdMeta], MarkVision))
       , ("C", ([CmdMeta], MarkSmell))
       , ("Tab", ([CmdMeta], MemberCycle))
-      , ("ISO_Left_Tab", ([CmdMeta], MemberBack))
+      , ("ISO_Left_Tab", ([CmdMeta, CmdMinimal], MemberBack))
       , ("space", ([CmdMeta], Clear))
       , ("Escape", ([CmdMeta, CmdMinimal], Cancel))
-      , ("Return", ([CmdMeta], Accept))
+      , ("Return", ([CmdMeta, CmdTgt], Accept))
+
+      -- Mouse
+      , ("LeftButtonPress",
+         ([CmdMouse], macroLeftButtonPress))
+      , ("SHIFT-LeftButtonPress",
+         ([CmdMouse], macroShiftLeftButtonPress))
+      , ("MiddleButtonPress", ([CmdMouse], CursorPointerEnemy))
+      , ("SHIFT-MiddleButtonPress", ([CmdMouse], CursorPointerFloor))
+      , ("CTRL-MiddleButtonPress",
+         ([CmdInternal], Macro "" ["SHIFT-MiddleButtonPress"]))
+      , ("RightButtonPress", ([CmdMouse], TgtPointerEnemy))
 
       -- Debug and others not to display in help screens
       , ("CTRL-s", ([CmdDebug], GameSave))
-      ]
+      , ("CTRL-i", ([CmdDebug], GameRestart "battle survival"))
+      , ("CTRL-f", ([CmdDebug], GameRestart "safari"))
+      , ("CTRL-r", ([CmdDebug], GameRestart "safari survival"))
+      , ("CTRL-e", ([CmdDebug], GameRestart "defense"))
+      , ("CTRL-g", ([CmdDebug], GameRestart "boardgame"))
+      , ("CTRL-semicolon", ([CmdInternal], MoveOnceToCursor))
+      , ("CTRL-colon", ([CmdInternal], RunOnceToCursor))
+      , ("CTRL-period", ([CmdInternal], ContinueToCursor))
+      , ("CTRL-comma", ([CmdInternal], RunOnceAhead))
+      , ("CTRL-LeftButtonPress",
+         ([CmdInternal], Macro "" ["SHIFT-LeftButtonPress"]))
+      , ("CTRL-MiddleButtonPress",
+         ([CmdInternal], Macro "" ["SHIFT-MiddleButtonPress"]))
+      , ("ALT-space", ([CmdInternal], StopIfTgtMode))
+      , ("ALT-minus", ([CmdInternal], SelectWithPointer))
+     ]
   }
