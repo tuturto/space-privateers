@@ -103,7 +103,7 @@ playerTechCult = Player
 playerHorror = Player
   { fname = "Horrors of Warp"
   , fgroup = "horror"
-  , fskillsOther = unitSkills
+  , fskillsOther = zeroSkills
   , fcanEscape = False
   , fneverEmpty = False
   , fhiCondPoly = []
@@ -146,17 +146,17 @@ minusHundred, meleeAdjacent, _meleeAndRanged, animalSkills, techSkills, allSkill
 minusHundred = EM.fromList $ zip [minBound..maxBound] [-100, -100..]
 
 meleeAdjacent = addSkills minusHundred
-                $ EM.fromList $ zip [AbWait, AbMelee] [101, 101..]
+                $ EM.fromList $ zip [AbWait, AbMelee] [-101, -101..]
 
 -- Melee and reaction fire.
 _meleeAndRanged = addSkills minusHundred
-                  $ EM.fromList $ zip [AbWait, AbMelee, AbProject] [101, 101..]
+                  $ EM.fromList $ zip [AbWait, AbMelee, AbProject] [-101, -101..]
 
 animalSkills = addSkills minusHundred
-               $ EM.fromList $ zip [AbMove, AbMelee, AbAlter, AbWait, AbTrigger] [101, 101..]
+               $ EM.fromList $ zip [AbMove, AbMelee, AbAlter, AbWait, AbTrigger] [-101, -101..]
 
 techSkills = addSkills minusHundred
-             $ EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait] [101, 101..]
+             $ EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait] [-101, -101..]
 
 allSkills = addSkills minusHundred
-            $ EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait, AbTrigger] [101, 101..]
+            $ EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait, AbTrigger] [-101, -101..]

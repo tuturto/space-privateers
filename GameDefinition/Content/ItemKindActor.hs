@@ -44,8 +44,8 @@ warrior = ItemKind
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "PBI, ready to take the next city vessel."
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
-                ("starting weapon", CEqp)]
+  , ikit     = [  ("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)
+                , ("starting weapon", CEqp)]
   }
 
 scout = warrior
@@ -73,7 +73,7 @@ merchant = ItemKind
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Merchant mariners are operating city vessels on their endless journey to stars."
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan)]
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)]
   }
 
 merchantSgt = merchant
@@ -109,8 +109,8 @@ chaosWarrior = ItemKind
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Warrior of Chaos, ready to wreck havoc."
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
-                ("starting weapon", CEqp)]
+  , ikit     = [  ("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)
+                , ("starting weapon", CEqp)]
   }
 
 chaosLord    = chaosWarrior
@@ -140,7 +140,7 @@ cultist = ItemKind
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Tech cultist, follower of the great Machinae"
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 3", COrgan)]
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 3", COrgan), ("sapient brain", COrgan)]
   }
 
 priest = cultist
@@ -170,7 +170,7 @@ warpBeast    = ItemKind
   , ifeature = [Durable, Identified]
   , idesc    = "Shambling beast of warp has phased into this corporeal realm."
   , ikit     = [("small claw", COrgan), ("foot", COrgan), ("eye 2", COrgan),
-                ("nostril", COrgan)]
+                ("nostril", COrgan), ("sapient brain", COrgan)]
   }
 
 -- * Animals
@@ -191,5 +191,5 @@ ventLizard = ItemKind
   , ifeature = [Durable, Identified]
   , idesc    = ""
   , ikit     = [ ("claw", COrgan), ("snout", COrgan), ("armored skin", COrgan)
-               , ("nostril", COrgan) ]
+               , ("nostril", COrgan), ("sapient brain", COrgan) ]
   }

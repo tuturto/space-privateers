@@ -1,3 +1,4 @@
+
 -- | Weapon and treasure definitions.
 module Content.ItemKind ( cdefs ) where
 
