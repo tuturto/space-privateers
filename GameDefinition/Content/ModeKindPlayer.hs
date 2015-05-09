@@ -17,7 +17,7 @@ playerHero, playerMerchant, playerChaos, playerHorror, playerTechCult, playerSpa
 playerHero = Player
   { fname = "Space Privateers"
   , fgroup = "hero"
-  , fskillsOther = allSkills
+  , fskillsOther = zeroSkills
   , fcanEscape = True
   , fneverEmpty = True
   , fhiCondPoly = hiHero
@@ -65,7 +65,7 @@ playerChaos = Player
 playerSpawn = Player
   { fname = "Spawns of Warp"
   , fgroup = "spawn"
-  , fskillsOther = animalSkills
+  , fskillsOther = meleeAdjacent
   , fcanEscape = False
   , fneverEmpty = False
   , fhiCondPoly = hiDweller
@@ -81,7 +81,7 @@ playerSpawn = Player
 playerTechCult = Player
   { fname = "Tech Cult"
   , fgroup = "tech"
-  , fskillsOther = techSkills
+  , fskillsOther = zeroSkills
   , fcanEscape = False
   , fneverEmpty = True
   , fhiCondPoly = hiDweller
@@ -140,23 +140,12 @@ hiDweller = [ ( [(HiConst, 1000)]  -- no loot
               , [minBound..maxBound] \\ victoryOutcomes )
             ]
 
-minusHundred, meleeAdjacent, _meleeAndRanged, animalSkills, techSkills, allSkills :: Skills
+minusTen, meleeAdjacent, _meleeAndRanged :: Skills
 
 -- To make sure weak items can't override move-only-leader, etc.
-minusHundred = EM.fromList $ zip [minBound..maxBound] [-100, -100..]
+minusTen = EM.fromList $ zip [minBound..maxBound] [-10, -10..]
 
-meleeAdjacent = addSkills minusHundred
-                $ EM.fromList $ zip [AbWait, AbMelee] [-101, -101..]
+meleeAdjacent = EM.delete AbWait $ EM.delete AbMelee minusTen
 
 -- Melee and reaction fire.
-_meleeAndRanged = addSkills minusHundred
-                  $ EM.fromList $ zip [AbWait, AbMelee, AbProject] [-101, -101..]
-
-animalSkills = addSkills minusHundred
-               $ EM.fromList $ zip [AbMove, AbMelee, AbAlter, AbWait, AbTrigger] [-101, -101..]
-
-techSkills = addSkills minusHundred
-             $ EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait] [-101, -101..]
-
-allSkills = addSkills minusHundred
-            $ EM.fromList $ zip [AbMove, AbMelee, AbProject, AbAlter, AbWait, AbTrigger] [-101, -101..]
+_meleeAndRanged = EM.delete AbProject meleeAdjacent
