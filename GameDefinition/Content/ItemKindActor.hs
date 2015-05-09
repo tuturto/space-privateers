@@ -53,7 +53,7 @@ scout = warrior
   , iaspects = [ AddMaxHP 40, AddMaxCalm 60, AddSpeed 25
                , AddSight 4 ]
   , idesc    = "Fast and keen scouts are essential any fighting force."
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 5", COrgan),
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 5", COrgan), ("sapient brain", COrgan),
                 ("any arrow", CInv), ("any vial", CInv), ("any vial", CInv)]
   }
 
@@ -89,7 +89,7 @@ merchantSgt = merchant
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Squad leader for merchant mariners"
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan),
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan),
                 ("starting weapon", CEqp)]
   }
 
@@ -150,7 +150,7 @@ priest = cultist
   , iaspects = [ AddMaxHP 20, AddMaxCalm 70, AddSpeed 20
                , AddSight 3, AddSkills $ EM.singleton AbTrigger (-1) ]
   , idesc    = "Cultist priest, voice of the great Machinae"
-  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan)]
+  , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)]
   }
   
 -- * Horrors (spawn)
