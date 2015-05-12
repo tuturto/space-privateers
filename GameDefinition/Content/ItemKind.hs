@@ -27,9 +27,9 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2, grog]
+  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2, grog, gladiusSolis]
 
-decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2, grog :: ItemKind
+decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, whetstone, grenade1, grenade2, grog, gladiusSolis :: ItemKind
 
 gem, grenade, necklace, potion, ring, scroll, wand :: ItemKind  -- generic templates
 
@@ -686,7 +686,22 @@ halberd = ItemKind
   , idesc    = "Versatile, with great reach and leverage. Foes are held at a distance."
   , ikit     = []
   }
-
+gladiusSolis = ItemKind
+  { isymbol  = symbolEdged
+  , iname    = "gladius solis"
+  , ifreq    = [("useful", 100), ("weapon", 1)]
+  , iflavour = zipPlain [BrWhite]
+  , icount   = 1
+  , irarity  = [(1, 1), (1, 10)]
+  , iverbHit = "slash"
+  , iweight  = 2000
+  , iaspects = [ AddLight 2, AddHurtMelee 25, Unique ]
+  , ieffects = [Hurt (d 8)]
+  , ifeature = [ toVelocity 20
+               , Precious, Durable, EqpSlot EqpSlotWeapon "", Identified ]
+  , idesc    = "Sword of light, emanating cold light."
+  , ikit     = []
+  }
 -- * Wands
 
 wand = ItemKind
