@@ -40,7 +40,8 @@ warrior = ItemKind
   , iverbHit = "thud"
   , iweight  = 80000
   , iaspects = [ AddMaxHP 50, AddMaxCalm 60, AddSpeed 20
-               , AddSight 3 ]
+               , AddSight 3
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "PBI, ready to take the next city vessel."
@@ -51,7 +52,8 @@ warrior = ItemKind
 scout = warrior
   { iname    = "scout"
   , iaspects = [ AddMaxHP 40, AddMaxCalm 60, AddSpeed 25
-               , AddSight 4 ]
+               , AddSight 4
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , idesc    = "Fast and keen scouts are essential any fighting force."
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 5", COrgan), ("sapient brain", COrgan),
                 ("any arrow", CInv), ("any vial", CInv), ("any vial", CInv)]
@@ -69,7 +71,8 @@ merchant = ItemKind
   , iverbHit = "thud"
   , iweight  = 80000
   , iaspects = [ AddMaxHP 30, AddMaxCalm 40, AddSpeed 20
-               , AddSight 3 ]
+               , AddSight 3
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Merchant mariners are operating city vessels on their endless journey to stars."
@@ -85,7 +88,8 @@ merchantSgt = merchant
   , iverbHit = "thud"
   , iweight  = 80000
   , iaspects = [ AddMaxHP 40, AddMaxCalm 60, AddSpeed 20
-               , AddSight 3 ]
+               , AddSight 3
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Squad leader for merchant mariners"
@@ -105,7 +109,8 @@ chaosWarrior = ItemKind
   , iverbHit = "thud"
   , iweight  = 100000
   , iaspects = [ AddMaxHP 40, AddMaxCalm 70, AddSpeed 20
-               , AddSight 3 ]
+               , AddSight 3
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Warrior of Chaos, ready to wreck havoc."
@@ -120,7 +125,8 @@ chaosLord    = chaosWarrior
   , irarity  = [(5, 1), (10, 3)]
   , iflavour = zipPlain [BrRed]
   , iaspects = [ AddMaxHP 60, AddMaxCalm 70, AddSpeed 20
-               , AddSight 3 ]
+               , AddSight 3
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , idesc    = "Lord of Chaos, leader of warriors"
   }
 
@@ -136,7 +142,8 @@ cultist = ItemKind
   , iverbHit = "thud"
   , iweight  = 100000
   , iaspects = [ AddMaxHP 10, AddMaxCalm 50, AddSpeed 20
-               , AddSight 2, AddSkills $ EM.singleton AbTrigger (-1) ]
+               , AddSight 2
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Tech cultist, follower of the great Machinae"
@@ -148,7 +155,8 @@ priest = cultist
   , iflavour = zipPlain [BrWhite]
   , irarity  = [(1, 1)]
   , iaspects = [ AddMaxHP 20, AddMaxCalm 70, AddSpeed 20
-               , AddSight 3, AddSkills $ EM.singleton AbTrigger (-1) ]
+               , AddSight 3
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
   , idesc    = "Cultist priest, voice of the great Machinae"
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)]
   }
