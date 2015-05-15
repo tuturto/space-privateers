@@ -1,7 +1,7 @@
 -- | Basic players definitions.
 module Content.ModeKindPlayer
-  ( playerHero, playerMerchant, playerChaos, playerTechCult, playerHorror, playerSpawn,
-    hiHero, hiDweller
+  ( playerHero, playerAntiHero, playerMerchant, playerAntiMerchant, playerChaos, playerTechCult, playerHorror, playerSpawn,
+    hiHero, hiDweller, hiRaid
   ) where
 
 import qualified Data.EnumMap.Strict as EM
@@ -12,7 +12,7 @@ import Game.LambdaHack.Common.Dice
 import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Content.ModeKind
 
-playerHero, playerMerchant, playerChaos, playerHorror, playerTechCult, playerSpawn :: Player Dice
+playerHero, playerAntiHero, playerMerchant, playerAntiMerchant, playerChaos, playerHorror, playerTechCult, playerSpawn :: Player Dice
 
 playerHero = Player
   { fname = "Space Privateers"
@@ -30,6 +30,11 @@ playerHero = Player
   , fhasUI = True
   }
 
+playerAntiHero = playerHero
+  { fleaderMode = LeaderAI $ AutoLeader True False
+  , fhasUI = False
+  }
+
 playerMerchant = Player
   { fname = "Merchant Mariners"
   , fgroup = "merchant"
@@ -39,11 +44,16 @@ playerMerchant = Player
   , fhiCondPoly = hiDweller
   , fhasNumbers = False
   , fhasGender = True
-  , ftactic = TPatrol
+  , ftactic = TFollow  -- TODO: change when implemented TPatrol
   , fentryLevel = -1
   , finitialActors = 3
   , fleaderMode = LeaderAI $ AutoLeader True False
   , fhasUI = False
+  }
+
+playerAntiMerchant = playerMerchant
+  { fhasUI = True
+  , fleaderMode = LeaderUI $ AutoLeader True False
   }
 
 playerChaos = Player
@@ -62,10 +72,26 @@ playerChaos = Player
   , fhasUI = False
   }
 
+playerTechCult = Player
+  { fname = "Tech Cult"
+  , fgroup = "tech"
+  , fskillsOther = zeroSkills
+  , fcanEscape = False
+  , fneverEmpty = True  -- makes sense, because never spawned
+  , fhiCondPoly = hiDweller
+  , fhasNumbers = False
+  , fhasGender = False
+  , ftactic = TFollow
+  , fentryLevel = -2
+  , finitialActors = 5  -- many initial, because never spawned
+  , fleaderMode = LeaderAI $ AutoLeader True False
+  , fhasUI = False
+  }
+
 playerSpawn = Player
   { fname = "Spawns of Warp"
   , fgroup = "spawn"
-  , fskillsOther = meleeAdjacent
+  , fskillsOther = zeroSkills
   , fcanEscape = False
   , fneverEmpty = False
   , fhiCondPoly = hiDweller
@@ -73,30 +99,14 @@ playerSpawn = Player
   , fhasGender = False
   , ftactic = TRoam
   , fentryLevel = -2
-  , finitialActors = 3
-  , fleaderMode = LeaderAI $ AutoLeader True False
+  , finitialActors = 2
+  , fleaderMode = LeaderNull
   , fhasUI = False
   }
 
-playerTechCult = Player
-  { fname = "Tech Cult"
-  , fgroup = "tech"
-  , fskillsOther = zeroSkills
-  , fcanEscape = False
-  , fneverEmpty = True
-  , fhiCondPoly = hiDweller
-  , fhasNumbers = False
-  , fhasGender = False
-  , ftactic = TFollow
-  , fentryLevel = -2
-  , finitialActors = 4
-  , fleaderMode = LeaderAI $ AutoLeader True False
-  , fhasUI = False
-  } -- TODO: change fleaderMode = LeaderAI $ AutoLeader False True
-
 -- | A special player, for summoned actors that don't belong to any
 -- of the main players of a given game. E.g., animals summoned during
--- a duel game between two hero players land in the horror faction.
+-- a skirmish game between two hero factions land in the horror faction.
 -- In every game, either all factions for which summoning items exist
 -- should be present or a horror player should be added to host them.
 -- Actors that can be summoned should have "horror" in their @ifreq@ set.
@@ -109,7 +119,7 @@ playerHorror = Player
   , fhiCondPoly = []
   , fhasNumbers = False
   , fhasGender = False
-  , ftactic = TPatrol
+  , ftactic = TPatrol  -- disoriented
   , fentryLevel = -3
   , finitialActors = 0
   , fleaderMode = LeaderNull
@@ -119,7 +129,7 @@ playerHorror = Player
 victoryOutcomes :: [Outcome]
 victoryOutcomes = [Conquer, Escape]
 
-hiHero, hiDweller :: HiCondPoly
+hiHero, hiDweller, hiRaid :: HiCondPoly
 
 -- Heroes rejoice in loot.
 hiHero = [ ( [(HiLoot, 1)]
@@ -140,9 +150,15 @@ hiDweller = [ ( [(HiConst, 1000)]  -- no loot
               , [minBound..maxBound] \\ victoryOutcomes )
             ]
 
+hiRaid = [ ( [(HiLoot, 1)]
+           , [minBound..maxBound] )
+         , ( [(HiConst, 100)]
+           , victoryOutcomes )
+         ]
+
 minusTen, meleeAdjacent, _meleeAndRanged :: Skills
 
--- To make sure weak items can't override move-only-leader, etc.
+-- To make sure only a lot of weak items can override move-only-leader, etc.
 minusTen = EM.fromList $ zip [minBound..maxBound] [-10, -10..]
 
 meleeAdjacent = EM.delete AbWait $ EM.delete AbMelee minusTen
