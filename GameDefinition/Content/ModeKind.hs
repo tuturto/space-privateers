@@ -136,7 +136,6 @@ rosterCampaign = Roster
                   , playerMerchant
                   , playerChaos
                   , playerTechCult
-                  , playerHorror
                   , playerSpawn ]
   , rosterEnemy = [ ("Space Privateers", "Merchant Mariners")
                   , ("Space Privateers", "Forces of Chaos")
@@ -225,7 +224,6 @@ rosterDefense = rosterCampaign
                   , playerAntiMerchant
                   , playerChaos
                   , playerTechCult
-                  , playerHorror
                   , playerSpawn ] }
 
 cavesCampaign, cavesRaid, cavesSkirmish, cavesAmbush, cavesBattle, cavesSafari :: Caves
