@@ -1,4 +1,4 @@
--- | Cave layouts for Space Privateers.
+-- | Cave layouts.
 module Content.CaveKind ( cdefs ) where
 
 import Data.Ratio
@@ -30,14 +30,14 @@ rogue = CaveKind
   , cminPlaceSize   = DiceXY (2 * d 2 + 2) 4
   , cmaxPlaceSize   = DiceXY 15 10
   , cdarkChance     = d 54 + dl 20
-  , cnightChance    = 51
+  , cnightChance    = 51  -- always night
   , cauxConnects    = 1%3
   , cmaxVoid        = 1%6
   , cminStairDist   = 30
   , cdoorChance     = 1%2
   , copenChance     = 1%10
   , chidden         = 8
-  , cactorCoeff     = 20
+  , cactorCoeff     = 130  -- the maze requires time to explore
   , cactorFreq      = [("merchant", 50), ("chaos", 45), ("spawn", 5)]
   , citemNum        = 10 * d 2
   , citemFreq       = [("useful", 70), ("treasure", 30)]
@@ -58,8 +58,8 @@ munitorium = rogue
   , cgrid           = DiceXY 3 3
   , cminPlaceSize   = DiceXY 15 4
   , cmaxPlaceSize   = DiceXY 25 10
-  , cdarkChance     = dl 5
-  , cnightChance    = d 20
+  , cdarkChance     = d 55
+  , cnightChance    = d 70
   , cactorFreq      = [("merchant", 80), ("chaos", 5), ("spawn", 15)]
   , citemNum        = 8 * d 2
   , citemFreq       = [("weapon", 70), ("armour", 20), ("useful", 10)]
@@ -76,9 +76,9 @@ temple = rogue
   , cgrid           = DiceXY 3 3
   , cminPlaceSize   = DiceXY 15 4
   , cmaxPlaceSize   = DiceXY 25 10
-  , cdarkChance     = dl 5
-  , cnightChance    = d 20
-  , cactorFreq      = [("chaos", 5), ("spawn", 5)]
+  , cdarkChance     = d 55
+  , cnightChance    = d 70
+  , cactorFreq      = [("chaos", 50), ("spawn", 50)]
   , citemNum        = 8 * d 2
   , citemFreq       = [("weapon", 70), ("armour", 20), ("useful", 10)]
   , cplaceFreq      = [("rogue", 100)]
