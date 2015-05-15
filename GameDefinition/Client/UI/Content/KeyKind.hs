@@ -1,4 +1,4 @@
--- | The default game key-command mapping to be used for UI. Can be overriden
+-- | The default game key-command mapping to be used for UI. Can be overridden
 -- via macros in the config file.
 module Client.UI.Content.KeyKind ( standardKeys ) where
 
@@ -23,11 +23,16 @@ standardKeys = KeyKind
 
       -- Main Menu, which apart of these includes a few extra commands
       [ ("CTRL-x", ([CmdMenu], GameExit))
-      , ("CTRL-u", ([CmdMenu], GameRestart "duel"))
-      , ("CTRL-k", ([CmdMenu], GameRestart "skirmish"))
-      , ("CTRL-m", ([CmdMenu], GameRestart "ambush"))
-      , ("CTRL-b", ([CmdMenu], GameRestart "battle"))
-      , ("CTRL-n", ([CmdMenu], GameRestart "campaign"))
+      , ("CTRL-r", ([CmdMenu], GameRestart "raid"))
+      , ("CTRL-k", ([CmdDebug], GameRestart "skirmish"))
+      , ("CTRL-m", ([CmdDebug], GameRestart "ambush"))
+      , ("CTRL-b", ([CmdDebug], GameRestart "battle"))
+      , ("CTRL-c", ([CmdMenu], GameRestart "campaign"))
+      , ("CTRL-i", ([CmdDebug], GameRestart "battle survival"))
+      , ("CTRL-f", ([CmdDebug], GameRestart "safari"))
+      , ("CTRL-u", ([CmdDebug], GameRestart "safari survival"))
+      , ("CTRL-e", ([CmdDebug], GameRestart "defense"))
+      , ("CTRL-g", ([CmdDebug], GameRestart "boardgame"))
       , ("CTRL-d", ([CmdMenu], GameDifficultyCycle))
 
       -- Movement and terrain alteration
@@ -36,7 +41,7 @@ standardKeys = KeyKind
                             , object = "a level"
                             , feature = TK.Cause (IK.Ascend 1) }
            , TriggerFeature { verb = "escape"
-                            , object = "dungeon"
+                            , object = "vessel"
                             , feature = TK.Cause (IK.Escape 1) } ]))
       , ("CTRL-less", ([CmdMove], TriggerTile
            [ TriggerFeature { verb = "ascend"
@@ -47,7 +52,7 @@ standardKeys = KeyKind
                             , object = "a level"
                             , feature = TK.Cause (IK.Ascend (-1)) }
            , TriggerFeature { verb = "escape"
-                            , object = "dungeon"
+                            , object = "vessel"
                             , feature = TK.Cause (IK.Escape (-1)) } ]))
       , ("CTRL-greater", ([CmdMove], TriggerTile
            [ TriggerFeature { verb = "descend"
@@ -188,12 +193,7 @@ standardKeys = KeyKind
       , ("RightButtonPress", ([CmdMouse], TgtPointerEnemy))
 
       -- Debug and others not to display in help screens
-      , ("CTRL-s", ([CmdDebug], GameSave))
-      , ("CTRL-i", ([CmdDebug], GameRestart "battle survival"))
-      , ("CTRL-f", ([CmdDebug], GameRestart "safari"))
-      , ("CTRL-r", ([CmdDebug], GameRestart "safari survival"))
-      , ("CTRL-e", ([CmdDebug], GameRestart "defense"))
-      , ("CTRL-g", ([CmdDebug], GameRestart "boardgame"))
+      , ("CTRL-S", ([CmdDebug], GameSave))
       , ("CTRL-semicolon", ([CmdInternal], MoveOnceToCursor))
       , ("CTRL-colon", ([CmdInternal], RunOnceToCursor))
       , ("CTRL-period", ([CmdInternal], ContinueToCursor))
