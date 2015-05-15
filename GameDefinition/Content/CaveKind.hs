@@ -16,9 +16,9 @@ cdefs = ContentDef
   , validateSingle = validateSingleCaveKind
   , validateAll = validateAllCaveKind
   , content =
-      [rogue, munitorium, temple]
+      [rogue, munitorium, temple, rogueLit]
   }
-rogue,        munitorium, temple :: CaveKind
+rogue,        munitorium, temple, rogueLit :: CaveKind
 
 rogue = CaveKind
   { csymbol         = 'R'
@@ -87,3 +87,12 @@ temple = rogue
   , cdarkCorTile    = "floorArenaDark"
   , clitCorTile     = "floorArenaLit"
 }
+rogueLit = rogue
+  { csymbol       = 'S'
+  , cfreq         = [("caveRogueLit", 1)]
+  , cdarkChance   = 0
+  , cmaxVoid      = 1%10
+  , cactorCoeff   = 1000  -- deep level with no eqp, so slow spawning
+  , citemNum      = 30 * d 2  -- just one level, hard enemies, treasure
+  , citemFreq     = [("useful", 33), ("gem", 33), ("currency", 33)]
+  }

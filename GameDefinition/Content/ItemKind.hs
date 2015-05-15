@@ -1,4 +1,3 @@
-
 -- | Weapon and treasure definitions.
 module Content.ItemKind ( cdefs ) where
 
@@ -178,7 +177,7 @@ brassLantern = ItemKind
 gem = ItemKind
   { isymbol  = symbolGem
   , iname    = "gem"
-  , ifreq    = [("treasure", 100)]
+  , ifreq    = [("treasure", 100), ("gem", 100)]
   , iflavour = zipPlain $ delete BrYellow brightCol
   , icount   = 1
   , irarity  = []
@@ -203,7 +202,7 @@ gem3 = gem
 currency = ItemKind
   { isymbol  = symbolGold
   , iname    = "gold piece"
-  , ifreq    = [("treasure", 100), ("currency", 1)]
+  , ifreq    = [("treasure", 100), ("currency", 100)]
   , iflavour = zipPlain [BrYellow]
   , icount   = 10 + d 20 + dl 20
   , irarity  = [(1, 0), (5, 20), (10, 10)]
@@ -434,7 +433,7 @@ grenade = ItemKind
   , iaspects = []
   , ieffects = []
   , ifeature = [ toVelocity 200
-               , Fragile 
+               , Fragile
                , Identified ]
   , idesc    = "Small metal canister, with safety latch and finely engraved surface."
   , ikit     = []

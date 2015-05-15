@@ -236,7 +236,7 @@ cavesCampaign = IM.fromList $ [ (-1, ("caveRogue", Just True))
                               ++ zip [-4, -5..(-9)] (repeat ("campaign random", Nothing))
                               ++ [(-10, ("caveRogue", Nothing))]
 
-cavesRaid = IM.fromList [(-4, ("caveRogue", Just True))]
+cavesRaid = IM.fromList [(-4, ("caveRogueLit", Just True))]
 
 cavesSkirmish = IM.fromList [(-3, ("munitorium", Nothing))]
 
