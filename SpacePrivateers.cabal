@@ -26,7 +26,7 @@ executable SpacePrivateers
                       Content.ItemKind,
                       Content.ItemKindActor,
                       Content.ItemKindOrgan,
-                      Content.ItemKindShrapnel,
+                      Content.ItemKindBlast,
                       Content.ItemKindTemporary,
                       Content.ModeKind,
                       Content.ModeKindPlayer,
@@ -54,4 +54,3 @@ executable SpacePrivateers
   ghc-options: -fno-warn-auto-orphans -fno-warn-implicit-prelude
   ghc-options: -fno-ignore-asserts -funbox-strict-fields
   ghc-options: -threaded -with-rtsopts=-C0.005
-

@@ -1,5 +1,5 @@
--- | Shrapnel definitions.
-module Content.ItemKindShrapnel ( shrapnels ) where
+-- | Blast definitions.
+module Content.ItemKindBlast ( blasts ) where
 
 import Game.LambdaHack.Common.Color
 import Game.LambdaHack.Common.Dice
@@ -8,13 +8,13 @@ import Game.LambdaHack.Common.Misc
 import Game.LambdaHack.Common.Msg
 import Game.LambdaHack.Content.ItemKind
 
-shrapnels :: [ItemKind]
-shrapnels =
+blasts :: [ItemKind]
+blasts =
   [fragrance, pheromone, firecracker2, firecracker3, firecracker4, firecracker5, firecracker6, firecracker7, mistHealing, mistWounding, distortion, waste, burningIgnisium2, burningIgnisium3, burningIgnisium4, explosionBlast10, explosionBlast20, glassPiece, smoke, boilingWater, glue]
 
 fragrance,    pheromone, firecracker2, firecracker3, firecracker4, firecracker5, firecracker6, firecracker7, mistHealing, mistWounding, distortion, waste, burningIgnisium2, burningIgnisium3, burningIgnisium4, explosionBlast10, explosionBlast20, glassPiece, smoke, boilingWater, glue :: ItemKind
 
--- * Parameterized shrapnel
+-- * Parameterized blasts
 
 burningIgnisium :: Int -> ItemKind
 burningIgnisium n = ItemKind
