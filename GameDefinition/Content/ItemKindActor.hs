@@ -160,13 +160,13 @@ priest = cultist
   , idesc    = "Cultist priest, voice of the great Machinae"
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)]
   }
-  
--- * Horrors (spawn)
+
+-- * Spawn
 
 warpBeast    = ItemKind
   { isymbol  = 'w'
   , iname    = "warp beast"
-  , ifreq    = [("spawn", 100)]
+  , ifreq    = [("spawn", 100), ("horror", 100)]
   , iflavour = zipPlain [BrRed]
   , icount   = 1
   , irarity  = [(1, 5)]
@@ -186,7 +186,9 @@ warpBeast    = ItemKind
 ventLizard = ItemKind
   { isymbol  = ':'
   , iname    = "vent lizard"
-  , ifreq    = [("summonable animal", 100)]
+  , ifreq    = [ ("summonable animal", 100)  -- can be summoned
+               , ("spawn", 1)  -- almost never spawned
+               , ("horror", 100)]  -- if no Spawn faction, belongs to horrors
   , iflavour = zipPlain [Green]
   , icount   = 1
   , irarity  = [(1, 5)]
