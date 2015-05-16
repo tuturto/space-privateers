@@ -21,7 +21,7 @@ cdefs = ContentDef
   , getFreq = ifreq
   , validateSingle = validateSingleItemKind
   , validateAll = validateAllItemKind
-  , content = items ++ organs ++ shrapnels ++ actors
+  , content = items ++ organs ++ shrapnels ++ actors ++ temporaries
   }
 
 items :: [ItemKind]
@@ -523,7 +523,7 @@ scroll9 = scroll
   }
 
 standardSummon :: Freqs ItemKind
-standardSummon = [("monster", 30), ("summonable animal", 70)]
+standardSummon = [("summonable animal", 100)]
 
 -- * Armor
 
