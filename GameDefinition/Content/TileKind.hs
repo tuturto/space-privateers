@@ -1,4 +1,4 @@
--- | Terrain tiles for Space Privateers
+-- | Terrain tile definitions.
 module Content.TileKind ( cdefs ) where
 
 import Control.Arrow (first)
@@ -207,7 +207,7 @@ stairsDownLit = TileKind
   }
 escapeUpLit = TileKind
   { tsymbol  = '<'
-  , tname    = "exit trapdoor up"
+  , tname    = "exit hatch up"
   , tfreq    = [("legendLit", 100)]
   , tcolor   = BrYellow
   , tcolor2  = BrYellow
@@ -265,14 +265,14 @@ floorArenaShade = floorActorLit
   }
 floorRedLit = floorArenaLit
   { tname    = "brick pavement"
-  , tfreq    = [("trailLit", 30)]
+  , tfreq    = [("trailLit", 30), ("trailChessLit", 30)]
   , tcolor   = BrRed
   , tcolor2  = Red
   , tfeature = Trail : tfeature floorArenaLit
   }
 floorBlueLit = floorRedLit
-  { tname    = "granite cobblestones"
-  , tfreq    = [("trailLit", 100)]
+  { tname    = "cobblestone path"
+  , tfreq    = [("trailLit", 100), ("trailChessLit", 70)]
   , tcolor   = BrBlue
   , tcolor2  = Blue
   }
@@ -300,7 +300,7 @@ makeDark k = let darkText :: GroupName TileKind -> GroupName TileKind
                  darkFeat (HideAs t) = Just $ HideAs $ darkText t
                  darkFeat (RevealAs t) = Just $ RevealAs $ darkText t
                  darkFeat OftenItem = Nothing -- items not common in the dark
-                 darkFeat feat = Just $ feat
+                 darkFeat feat = Just feat
              in k { tfreq = darkFrequency
                   , tfeature = Dark : mapMaybe darkFeat (tfeature k)
                   }
