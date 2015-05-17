@@ -15,14 +15,14 @@ actors = privateers ++ merchants ++ forcesOfChaos ++ spawns ++ techCultists ++ a
 privateers, merchants, forcesOfChaos, spawns, techCultists, animals :: [ItemKind]
 
 privateers    = [warrior, scout]
-merchants     = [merchant, merchantSgt]
+merchants     = [merchant, merchantSgt, guardianSpider]
 forcesOfChaos = [chaosWarrior, chaosLord]
 techCultists  = [priest, cultist]
 spawns        = [warpBeast]
 animals       = [ventLizard]
 
 warrior, scout :: ItemKind
-merchant, merchantSgt :: ItemKind
+merchant, merchantSgt, guardianSpider :: ItemKind
 chaosWarrior, chaosLord :: ItemKind
 priest, cultist :: ItemKind
 warpBeast :: ItemKind
@@ -46,7 +46,7 @@ warrior = ItemKind
   , ifeature = [Durable, Identified]
   , idesc    = "PBI, ready to take the next city vessel."
   , ikit     = [  ("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan)
-                , ("starting weapon", CEqp)]
+                , ("starting weapon", CEqp), ("starting weapon", CEqp)]
   }
 
 scout = warrior
@@ -82,7 +82,7 @@ merchant = ItemKind
 merchantSgt = merchant
   { iname    = "merchant mariner sgt"
   , ifreq    = [("merchant", 100)]
-  , iflavour = zipPlain [BrBlue]
+  , iflavour = zipPlain [Cyan]
   , icount   = 1
   , irarity  = [(1, 1), (10, 3)]
   , iverbHit = "thud"
@@ -95,6 +95,24 @@ merchantSgt = merchant
   , idesc    = "Squad leader for merchant mariners"
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan),
                 ("starting weapon", CEqp)]
+  }
+
+guardianSpider = ItemKind
+  { isymbol  = 's'
+  , iname    = "guardian spider"
+  , ifreq    = [("merchant", 100)]
+  , iflavour = zipPlain [White]
+  , icount   = 3
+  , irarity  = [(1, 10)]
+  , iverbHit = "thud"
+  , iweight  = 40000
+  , iaspects = [ AddMaxHP 10, AddMaxCalm 20, AddSpeed 25
+               , AddSight 5
+               , AddSkills $ EM.fromList [(AbApply, 1)]]
+  , ieffects = []
+  , ifeature = [Durable, Identified]
+  , idesc    = "Guardian spiders patrol corridors of city vessel and protect merchant mariners"
+  , ikit     = [("small claw", COrgan), ("sting", COrgan), ("eye 5", COrgan), ("animal brain", COrgan)]
   }
 
 -- * Forces of Chaos (chaos)
