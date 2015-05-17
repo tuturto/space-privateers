@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tuturto/space-privateers.svg)](https://travis-ci.org/tuturto/space-privateers)
+
 Space Privateers is a adventure game set in far future. Player plays a space
 privateer who has recently docked with a merchant city vessel and plans to
 plunder some of the loot before escaping. The task will not be easy and there
