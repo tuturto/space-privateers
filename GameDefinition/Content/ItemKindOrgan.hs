@@ -31,7 +31,7 @@ fist = ItemKind
   , iverbHit = "punch"
   , iweight  = 2000
   , iaspects = []
-  , ieffects = [Hurt (4 * d 1)]
+  , ieffects = [Hurt (1 * d 2)]
   , ifeature = [Durable, Identified]
   , idesc    = ""
   , ikit     = []
@@ -41,7 +41,7 @@ foot = fist
   , ifreq    = [("foot", 50)]
   , icount   = 2
   , iverbHit = "kick"
-  , ieffects = [Hurt (4 * d 1)]
+  , ieffects = [Hurt (1 * d 2)]
   , idesc    = ""
   }
 
@@ -53,7 +53,7 @@ claw = fist
   , icount   = 2  -- even if more, only the fore claws used for fighting
   , iverbHit = "hook"
   , iaspects = [Timeout $ 4 + d 4]
-  , ieffects = [Hurt (2 * d 1), Recharging (toOrganGameTurn "slow 10" 2)]
+  , ieffects = [Hurt (1 * d 3), Recharging (toOrganGameTurn "slow 10" 2)]
   , idesc    = ""
   }
 smallClaw = fist
@@ -61,14 +61,14 @@ smallClaw = fist
   , ifreq    = [("small claw", 50)]
   , icount   = 2
   , iverbHit = "slash"
-  , ieffects = [Hurt (2 * d 1)]
+  , ieffects = [Hurt (1 * d 2)]
   , idesc    = ""
   }
 snout = fist
   { iname    = "snout"
   , ifreq    = [("snout", 10)]
   , iverbHit = "bite"
-  , ieffects = [Hurt (2 * d 1)]
+  , ieffects = [Hurt (1 * d 2)]
   , idesc    = ""
   }
 smallJaw = fist
@@ -76,7 +76,7 @@ smallJaw = fist
   , ifreq    = [("small jaw", 20)]
   , icount   = 1
   , iverbHit = "rip"
-  , ieffects = [Hurt (3 * d 1)]
+  , ieffects = [Hurt (1 * d 3)]
   , idesc    = ""
   }
 jaw = fist
@@ -84,7 +84,7 @@ jaw = fist
   , ifreq    = [("jaw", 20)]
   , icount   = 1
   , iverbHit = "rip"
-  , ieffects = [Hurt (5 * d 1)]
+  , ieffects = [Hurt (1 * d 4)]
   , idesc    = ""
   }
 largeJaw = fist
@@ -92,7 +92,7 @@ largeJaw = fist
   , ifreq    = [("large jaw", 100)]
   , icount   = 1
   , iverbHit = "crush"
-  , ieffects = [Hurt (12 * d 1)]
+  , ieffects = [Hurt (1 * d 6)]
   , idesc    = ""
   }
 tooth = fist
@@ -100,7 +100,7 @@ tooth = fist
   , ifreq    = [("tooth", 20)]
   , icount   = 3
   , iverbHit = "nail"
-  , ieffects = [Hurt (2 * d 1)]
+  , ieffects = [Hurt (1 * d 2)]
   , idesc    = ""
   }
 horn = fist
@@ -108,7 +108,7 @@ horn = fist
   , ifreq    = [("horn", 20)]
   , icount   = 2
   , iverbHit = "impale"
-  , ieffects = [Hurt (8 * d 1)]
+  , ieffects = [Hurt (1 * d 6)]
   , idesc    = ""
   }
 
@@ -119,7 +119,7 @@ tentacle = fist
   , ifreq    = [("tentacle", 50)]
   , icount   = 4
   , iverbHit = "slap"
-  , ieffects = [Hurt (4 * d 1)]
+  , ieffects = [Hurt (2 * d 4)]
   , idesc    = ""
   }
 lash = fist
@@ -128,7 +128,7 @@ lash = fist
   , icount   = 1
   , iverbHit = "lash"
   , iaspects = [Timeout $ 3 + d 3]
-  , ieffects = [Hurt (3 * d 1), Recharging $ DropItem COrgan "far-sighted" True]
+  , ieffects = [Hurt (2 * d 4), Recharging $ DropItem COrgan "far-sighted" True]
   , idesc    = ""
   }
 noseTip = fist
@@ -136,7 +136,7 @@ noseTip = fist
   , ifreq    = [("nose tip", 50)]
   , icount   = 1
   , iverbHit = "poke"
-  , ieffects = [Hurt (2 * d 1)]
+  , ieffects = [Hurt (1 * d 2)]
   , idesc    = ""
   }
 lip = fist
@@ -145,7 +145,7 @@ lip = fist
   , icount   = 2
   , iverbHit = "lap"
   , iaspects = [Timeout $ 3 + d 3]
-  , ieffects = [ Hurt (1 * d 1)
+  , ieffects = [ Hurt (1 * d 4)
                , Recharging $ DropItem COrgan "keen-smelling" True ]
   , idesc    = ""
   }
@@ -155,7 +155,7 @@ torsionRight = fist
   , icount   = 1
   , iverbHit = "twist"
   , iaspects = [Timeout $ 5 + d 5]
-  , ieffects = [ Hurt (17 * d 1)
+  , ieffects = [ Hurt (2 * d 4)
                , Recharging (toOrganGameTurn "slow 10" (3 + d 3)) ]
   , idesc    = ""
   }
@@ -165,7 +165,7 @@ torsionLeft = fist
   , icount   = 1
   , iverbHit = "twist"
   , iaspects = [Timeout $ 5 + d 5]
-  , ieffects = [ Hurt (17 * d 1)
+  , ieffects = [ Hurt (2 * d 4)
                , Recharging (toOrganGameTurn "weakened" (3 + d 3)) ]
   , idesc    = ""
   }
@@ -177,7 +177,7 @@ thorn = fist
   , ifreq    = [("thorn", 100)]
   , icount   = 2 + d 3
   , iverbHit = "impale"
-  , ieffects = [Hurt (2 * d 1)]
+  , ieffects = [Hurt (2 * d 4)]
   , ifeature = [Identified]  -- not Durable
   , idesc    = ""
   }
@@ -186,7 +186,7 @@ boilingFissure = fist
   , ifreq    = [("boiling fissure", 100)]
   , icount   = 5 + d 5
   , iverbHit = "hiss at"
-  , ieffects = [Burn $ 1 * d 1]
+  , ieffects = [Burn $ 2 * d 4]
   , ifeature = [Identified]  -- not Durable
   , idesc    = ""
   }
@@ -194,13 +194,13 @@ arsenicFissure = boilingFissure
   { iname    = "fissure"
   , ifreq    = [("arsenic fissure", 100)]
   , icount   = 2 + d 2
-  , ieffects = [Burn $ 1 * d 1, toOrganGameTurn "weakened" (2 + d 2)]
+  , ieffects = [Burn $ 2 * d 4, toOrganGameTurn "weakened" (2 + d 2)]
   }
 sulfurFissure = boilingFissure
   { iname    = "fissure"
   , ifreq    = [("sulfur fissure", 100)]
   , icount   = 2 + d 2
-  , ieffects = [Burn $ 1 * d 1, RefillHP 6]
+  , ieffects = [Burn $ 2 * d 4, RefillHP 6]
   }
 beeSting = fist
   { iname    = "bee sting"
@@ -208,7 +208,7 @@ beeSting = fist
   , icount   = 1
   , iverbHit = "sting"
   , iaspects = [AddArmorMelee 90, AddArmorRanged 90]
-  , ieffects = [Burn $ 2 * d 1, Paralyze 10, RefillHP 5]
+  , ieffects = [Burn $ 1 * d 2, Paralyze 10, RefillHP 5]
   , ifeature = [Identified]  -- not Durable
   , idesc    = "Painful, but beneficial."
   }
@@ -218,7 +218,7 @@ sting = fist
   , icount   = 1
   , iverbHit = "sting"
   , iaspects = [Timeout $ 1 + d 5]
-  , ieffects = [Burn $ 1 * d 1, Recharging (Paralyze 3)]
+  , ieffects = [Burn $ 1 * d 2, Recharging (Paralyze 3)]
   , idesc    = "Painful, debilitating and harmful."
   }
 venomTooth = fist
@@ -227,7 +227,7 @@ venomTooth = fist
   , icount   = 2
   , iverbHit = "bite"
   , iaspects = [Timeout $ 5 + d 3]
-  , ieffects = [ Hurt (2 * d 1)
+  , ieffects = [ Hurt (1 * d 4)
                , Recharging (toOrganGameTurn "slow 10" (3 + d 3)) ]
   , idesc    = ""
   }
@@ -239,7 +239,7 @@ venomFang = fist
   , icount   = 2
   , iverbHit = "bite"
   , iaspects = [Timeout $ 7 + d 5]
-  , ieffects = [ Hurt (2 * d 1)
+  , ieffects = [ Hurt (2 * d 4)
                , Recharging (toOrganNone "poisoned") ]
   , idesc    = ""
   }
