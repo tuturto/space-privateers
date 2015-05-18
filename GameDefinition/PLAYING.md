@@ -24,7 +24,7 @@ The currently chosen party leader is highlighted on the screen
 and his attributes are displayed at the bottommost status line,
 which in its most complex form may look as follows.
 
-    *@12 Captain     4d1+5% Calm: 20/60 HP: 33/50 Target: merchant  [**___]
+    *@12 Captain     4d1+5% Calm: 20/60 HP: 33/50 Target: merchant  [**__]
 
 The line starts with the list of party members (unless only one member
 resides on the currently displayed level) and the shortened name of the team.
@@ -36,14 +36,15 @@ is described, in this case a merchant mariner, with hit points drawn as a bar.
 
 The other status line describes the current location in relation to the party.
 
-    5  Lofty hall   [33% seen] Cursor: exact spot (71,12)  p15 l10
+    5  Lofty hall   [33% seen] X-hair: exact spot (71,12)  p15 l10
 
 First comes the depth of the current level and its name.
 Then the percentage of its explorable tiles already seen by the heroes.
-The 'cursor' is the common target of the whole party,
-directly manipulated with movement keys in the targeting mode.
-At the end comes the length of the shortest path from the leader
-to the cursor position and the straight-line distance between the two points.
+The 'X-hair' (meaning 'crosshair') is the common focus of the whole party,
+denoted on the map by a white box and manipulated with movement keys
+in aiming mode. At the end of the status line comes the length of the shortest
+path from the leader to the crosshair position and the straight-line distance
+between the two points.
 
 
 City vessel
@@ -71,10 +72,10 @@ during a single game, its layout is the same.
 Commands
 --------
 
-You move throughout the level using the numerical keypad (left diagram)
-or its compact laptop replacement (middle) or Vi text editor keys
-(right, also known as "Rogue-like keys", which have to be enabled
-in config.ui.ini).
+You walk throughout a level using the left mouse button or the numeric
+keypad (left diagram) or its compact laptop replacement (middle)
+or Vi text editor keys (right, also known as "Rogue-like keys",
+which have to be enabled in config.ui.ini).
 
                 7 8 9          7 8 9          y k u
                  \|/            \|/            \|/
@@ -82,124 +83,80 @@ in config.ui.ini).
                  /|\            /|\            /|\
                 1 2 3          j k l          b j n
 
-In targeting mode the keys above move the targeting cursor. In normal mode,
+In aiming mode (`KEYPAD_*` or `\`) the same keys (or the middle and right
+mouse buttons) move the crosshair (the white box). In normal mode,
 `SHIFT` (or `CTRL`) and a movement key make the current party leader
-(and currently selected party members, if any) run in the indicated
-direction, until anything of interest is spotted.
-The '5', 'i' and '.' keys consume a turn and make you brace for combat,
-which reduces any damage taken for a turn and makes it impossible
-for foes to displace you. You displace enemies or friends by bumping
-into them with SHIFT (or CTRL).
+run in the indicated direction, until anything of interest is spotted.
+The `5` keypad key and the `i` and `.` keys consume a turn and make you
+brace for combat, which reduces any damage taken for a turn and makes it
+impossible for foes to displace you. You displace enemies or friends
+by bumping into them with `SHIFT` (or `CTRL`).
 
 Melee, searching for secret doors, looting and opening closed doors
 can be done by bumping into a monster, a wall and a door, respectively.
 Few commands other than movement, 'g'etting an item from the floor,
 'a'pplying an item and 'f'linging an item are necessary for casual play.
-Some are provided only as specialized versions of more general commands
-or as building blocks for more complex convenience commands,
-e.g., the autoexplore command (key `X`) could be defined
-by the player as a macro using `BACKSPACE`, `CTRL-?`, `;` and `V`.
+Some are provided only as specialized versions of the more general
+commands or as building blocks for more complex convenience macros.
+E.g., the autoexplore command (key `X`) could be defined
+by the player as a macro using `CTRL-?`, `CTRL-.` and `V`.
 
-Below are the remaining keys for terrain exploration and alteration.
+The following minimal command set lets you accomplish almost anything
+in the game, though not necessarily with the fewest number of keystrokes.
+The full list of commands can be seen in the in-game help accessible
+from the Main Menu.
 
                 keys           command
                 <              ascend a level
-                CTRL-<         ascend 10 levels
                 >              descend a level
-                CTRL->         descend 10 levels
-                ;              make one step towards the target
-                :              go to target for 100 steps
-                CTRL-:         go to target for 10 steps
-                x              explore the closest unknown spot
-                X              autoexplore 100 times
-                CTRL-X         autoexplore 10 times
-                R              rest (wait 100 times)
-                CTRL-R         rest (wait 10 times)
                 c              close door
+        E               manage equipment of the leader
+        g or ,          get items
+        a               apply consumable
+        f               fling projectile
+        +               swerve the aiming line
+        D               display player diary
+        T               toggle suspect terrain display
+        SHIFT-TAB       cycle among all party members
+        ESC             cancel action, open Main Menu
 
-Item-use related keys are as follows.
-
-                keys           command
-                E              describe equipment of the leader
-                P              describe backpack inventory of the leader
-                S              describe the shared party stash
-                G              describe items on the ground
-                A              describe all owned items
-                g and ,        get an item
-                d              drop an item
-                e              equip an item
-                p              pack an item into inventory backpack
-                s              stash and share an item
-                a              activate applicable item
-                q              quaff potion
-                r              read scroll
-                f              fling projectable item
-                t              throw missile
-                z              zap wand
-
-To make a ranged attack, as in the last few commands above,
-you need to set your target first (however, initial target is set
-automatically as soon as a monster comes into view). Once in targeting mode,
-you can move the targeting cursor with arrow keys and switch focus
-among enemies with `*` (or among friends, projectiles and enemies, depending
-on targeting mode set by `/`). The details of the shared cursor position
-and of the personal target are described at the bottom of the screen.
-All targeting keys are listed below.
+The only activity not possible with the commands above is the management
+of non-leader party members. You don't need it, unless your non-leader actors
+can move or fire opportunistically (via innate skills or rare equipment).
+If really needed, you can manually set party tactics with `CTRL-T`
+and you can assign individual targets to party members using the aiming
+and targeting commands listed below.
 
                 keys           command
-                KEYPAD_* and \ target enemy
-                /              cycle targeting mode
-                +              swerve targeting line
-                -              unswerve targeting line
-                BACKSPACE      clear target/cursor
-                CTRL-?         target the closest unknown spot
-                CTRL-I         target the closest item
-                CTRL-{         target the closest stairs up
-                CTRL-}         target the closest stairs down
+        KEYPAD_* or \   aim at an enemy
+        KEYPAD_/ or |   cycle aiming styles
+        +               swerve the aiming line
+        -               unswerve the aiming line
+        CTRL-?          set crosshair to the closest unknown spot
+        CTRL-I          set crosshair to the closest item
+        CTRL-{          set crosshair to the closest stairs up
+        CTRL-}          set crosshair to the closest stairs down
+        BACKSPACE       reset target/crosshair
+        RET or INSERT   accept target/choice
 
-Here are the commands for automating the actions of one or more members
-of the team.
-
-                keys           command
-                =              select (or deselect) a party member
-                _              deselect (or select) all on the level
-                v              voice again the recorded commands
-                V              voice the recorded commands 100 times
-                CTRL-v         voice the recorded commands 1000 times
-                CTRL-V         voice the recorded commands 10 times
-                '              start recording commands
-                CTRL-A         automate faction (ESC to retake control)
-
-Assorted remaining keys and commands follow.
-
-                keys           command
-                ?              display help
-                D              display player diary
-                T              mark suspect terrain
-                Z              mark visible zone
-                C              mark smell clues
-                TAB            cycle among party members on the level
-                SHIFT-TAB      cycle among all party members
-                SPACE          clear messages
-                ESC            cancel action, open Main Menu
-                RET            accept choice
-                0--6           pick a new hero leader anywhere in the dungeon
+For ranged attacks, setting the crosshair or individual targets
+beforehand is not mandatory, because the crosshair is set automatically
+as soon as a monster comes into view and can still be adjusted while
+in the missile choice menu. However, if you want to assign persistent
+personal targets or just inspect the level map closely, you can enter
+the detailed aiming mode with the right mouse button or with
+the `*` keypad key that selects enemies or the `/` keypad key that
+marks a tile. You can move the aiming crosshair with direction keys
+and assign a personal target to the leader with `RET`.
+The details of the shared crosshair position and of the personal target
+are described in the status lines at the bottom of the screen.
 
 Commands for saving and exiting the current game, starting a new game, etc.,
 are listed in the Main Menu, brought up by the `ESC` key.
 Game difficulty setting affects hitpoints at birth for any actors
-of any UI-using faction. For a person new to roguelikes, the Duel game mode
-offers a gentle introduction. The subsequent game modes gradually introduce
-squad combat, stealth, asymmetric battles and more game elements.
+of any UI-using faction. For a person new to the game or even
+to roguelikes in general, the Raid scenario offers a gentle introduction.
 
-                keys           command
-                CTRL-x         save and exit
-                CTRL-u         new Duel game
-                CTRL-k         new Skirmish game
-                CTRL-m         new Ambush game
-                CTRL-b         new Battle game
-                CTRL-a         new Campaign game
-                CTRL-d         cycle next game difficulty
 
 Monsters
 --------
