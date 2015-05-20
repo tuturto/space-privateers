@@ -111,7 +111,7 @@ guardianSpider = ItemKind
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Guardian spiders patrol corridors of city vessel and protect merchant mariners"
-  , ikit     = [("small claw", COrgan), ("sting", COrgan), ("eye 5", COrgan), ("animal brain", COrgan)]
+  , ikit     = [("small claw", COrgan), ("eye 5", COrgan), ("animal brain", COrgan)]
   }
 
 -- * Forces of Chaos (chaos)
