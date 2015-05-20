@@ -105,10 +105,9 @@ guardianSpider = ItemKind
   , icount   = 3
   , irarity  = [(1, 10)]
   , iverbHit = "thud"
-  , iweight  = 40000
-  , iaspects = [ AddMaxHP 10, AddMaxCalm 20, AddSpeed 25
-               , AddSight 5
-               , AddSkills $ EM.fromList [(AbApply, 1)]]
+  , iweight  = 20000
+  , iaspects = [ AddMaxHP 5, AddMaxCalm 20, AddSpeed 25
+               , AddSight 5 ]
   , ieffects = []
   , ifeature = [Durable, Identified]
   , idesc    = "Guardian spiders patrol corridors of city vessel and protect merchant mariners"

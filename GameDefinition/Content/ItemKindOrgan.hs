@@ -218,7 +218,7 @@ sting = fist
   , icount   = 1
   , iverbHit = "sting"
   , iaspects = [Timeout $ 1 + d 5]
-  , ieffects = [Burn $ 1 * d 2, Recharging (Paralyze 3)]
+  , ieffects = [Burn $ 1 * d 2, Recharging (Paralyze 2)]
   , idesc    = "Painful, debilitating and harmful."
   }
 venomTooth = fist
