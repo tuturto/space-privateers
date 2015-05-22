@@ -634,8 +634,9 @@ hammer = ItemKind
   , irarity  = [(4, 12), (10, 2)]
   , iverbHit = "club"
   , iweight  = 1500
-  , iaspects = [AddHurtMelee $ d 3 + 2 * dl 5]
-  , ieffects = [Hurt (d 6), PushActor (ThrowMod 200 50)]
+  , iaspects = [ AddHurtMelee $ d 3 + 2 * dl 5
+               , Timeout $ d 4 + 2 ]
+  , ieffects = [Hurt (d 6), Recharging $ PushActor (ThrowMod 200 50)]
   , ifeature = [ toVelocity 20
                , Durable, EqpSlot EqpSlotWeapon "", Identified ]
   , idesc    = "Mighty hammer that releases blast of electricity when it hits target."
