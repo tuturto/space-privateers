@@ -509,6 +509,35 @@ scroll9 = scroll
 standardSummon :: Freqs ItemKind
 standardSummon = [("summonable animal", 100)]
 
+booster = ItemKind
+  { isymbol  = symbolPotion
+  , iname    = "booster drug"
+  , ifreq    = [("useful", 10)]
+  , iflavour = zipPlain stdCol
+  , icount   = 1
+  , irarity  = [(1, 3), (10, 1)]
+  , iverbHit = "thud"
+  , iweight  = 50
+  , iaspects = []
+  , ieffects = [ ]
+  , ifeature = [ toVelocity 25
+               , Applicable, Identified ]
+  , idesc    = "Small metal vial with a button in one end and needle in another."
+  , ikit     = []
+  }
+
+hpBooster = booster
+  { ieffects = [ NoEffect "of healing"
+               , RefillHP 15
+               , Paralyze (2 + d 4) ]
+  }
+
+moveBooster = booster
+  { ieffects = [ NoEffect "of speed"
+               , InsertMove $ 2 + d 2
+               , Hurt 2 ]
+  }
+
 -- * Armor
 
 armorLeather = ItemKind
