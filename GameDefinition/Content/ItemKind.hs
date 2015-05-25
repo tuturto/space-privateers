@@ -26,11 +26,11 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster ]
+  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster, boardingManual, boardingTome, turtleBook ]
 
-decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, wand1, wand2, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, booster, hpBooster, moveBooster :: ItemKind
+decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster, boardingManual, boardingTome, turtleBook :: ItemKind
 
-necklace, ring, potion, grenade, scroll, wand, gem :: ItemKind  -- generic templates
+necklace, ring, potion, booster, grenade, scroll, book, gem :: ItemKind  -- generic templates
 
 -- * Item group symbols, partially from Nethack
 
@@ -158,6 +158,55 @@ sharpeningTool = ItemKind
   , idesc    = "A portable sharpening stone that lets you fix your weapons between or even during fights, without the need to set up camp, fish out tools and assemble a proper sharpening workshop."
   , ikit     = []
   }
+
+book = ItemKind
+  { isymbol  = symbolScroll
+  , iname    = "book"
+  , ifreq    = []
+  , iflavour = zipPlain stdCol
+  , icount   = 1
+  , irarity  = [(1, 1)]
+  , iverbHit = "smack"
+  , iweight  = 400
+  , iaspects = []
+  , ieffects = []
+  , ifeature = [EqpSlot EqpSlotAddHurtMelee "", Identified]
+  , idesc    = "A portable sharpening stone that lets you fix your weapons between or even during fights, without the need to set up camp, fish out tools and assemble a proper sharpening workshop."
+  , ikit     = []
+  }
+
+boardingManual = book
+  { iname    = "boarding manual"
+  , ifreq    = [("useful", 10), ("book", 50)]
+  , iaspects = [ AddHurtMelee 2
+               , AddHurtRanged 2
+               , AddMaxCalm (-10) ]
+  , ieffects = [ NoEffect "of boarding operations"]
+  , ifeature = [ EqpSlot EqpSlotAddHurtMelee "", Identified ]
+  , idesc    = "A manual detailing boarding operations. A must read for every privateer."
+  }
+
+boardingTome = book
+  { iname    = "boarding ops, 2nd ed"
+  , ifreq    = [("useful", 1), ("book", 5)]
+  , iaspects = [ AddHurtMelee 4
+               , AddHurtRanged 4
+               , AddMaxCalm (-10) ]
+  , ieffects = [ NoEffect "of boarding operations, unabridged"]
+  , ifeature = [ EqpSlot EqpSlotAddHurtRanged "", Identified ]
+  , idesc    = "A hefty tome detailing boarding operations. A must read for every privateer."
+  }
+
+turtleBook = book
+  { iname    = "book of turtles"
+  , ifreq    = [("useful", 10), ("book", 50)]
+  , iaspects = [ AddArmorMelee 3
+               , AddArmorRanged 3
+               , AddSpeed (-10) ]
+  , ifeature = [ EqpSlot EqpSlotAddArmorMelee "", Identified ]
+  , idesc    = "thick book detailing patterns of turtle shells."
+  }
+
 
 -- * Lights
 
@@ -722,28 +771,6 @@ gladiusSolis = ItemKind
 
 -- * Wands
 
-wand = ItemKind
-  { isymbol  = symbolWand
-  , iname    = "wand"
-  , ifreq    = [("useful", 100)]
-  , iflavour = zipFancy brightCol
-  , icount   = 1
-  , irarity  = []  -- TODO: add charges, etc.
-  , iverbHit = "club"
-  , iweight  = 300
-  , iaspects = [AddLight 1, AddSpeed (-1)]
-  , ieffects = []
-  , ifeature = [ toVelocity 125
-               , Applicable, Durable ]
-  , idesc    = "Buzzing with dazzling light that shines even through appendages that handle it."
-  , ikit     = []
-  }
-wand1 = wand
-  { ieffects = []
-  }
-wand2 = wand
-  { ieffects = []
-  }
 
 -- * Treasure
 
