@@ -14,15 +14,21 @@ actors = privateers ++ merchants ++ forcesOfChaos ++ spawns ++ techCultists ++ a
 
 privateers, merchants, forcesOfChaos, spawns, techCultists, animals :: [ItemKind]
 
-privateers    = [warrior, scout]
-merchants     = [merchant, merchantSgt, guardianSpider]
-forcesOfChaos = [chaosWarrior, chaosLord]
-techCultists  = [priest, cultist]
-spawns        = [warpBeast]
-animals       = [ventLizard]
+privateers    = [ warrior
+                , scout ]
+merchants     = [ merchant
+                , merchantSgt
+                , merchantLibrarian
+                , guardianSpider ]
+forcesOfChaos = [ chaosWarrior
+                , chaosLord ]
+techCultists  = [ priest
+                , cultist]
+spawns        = [ warpBeast ]
+animals       = [ ventLizard ]
 
 warrior, scout :: ItemKind
-merchant, merchantSgt, guardianSpider :: ItemKind
+merchant, merchantSgt, merchantLibrarian, guardianSpider :: ItemKind
 chaosWarrior, chaosLord :: ItemKind
 priest, cultist :: ItemKind
 warpBeast :: ItemKind
@@ -95,6 +101,29 @@ merchantSgt = merchant
   , idesc    = "Squad leader for merchant mariners"
   , ikit     = [("fist", COrgan), ("foot", COrgan), ("eye 4", COrgan), ("sapient brain", COrgan),
                 ("starting weapon", CEqp)]
+  }
+
+merchantLibrarian = merchant
+  { iname    = "librarian"
+  , ifreq    = [("merchant", 25)]
+  , iflavour = zipPlain [Green]
+  , icount   = 1
+  , irarity  = [(1, 1), (10, 3)]
+  , iverbHit = "thud"
+  , iweight  = 80000
+  , iaspects = [ AddMaxHP 35, AddMaxCalm 80, AddSpeed 25
+               , AddSight 2
+               , AddSkills $ EM.fromList [(AbProject, 2), (AbApply, 1)]]
+  , ieffects = []
+  , ifeature = [Durable, Identified]
+  , idesc    = "Librarian of merchant mariners"
+  , ikit     = [ ("fist", COrgan)
+               , ("foot", COrgan)
+               , ("eye 4", COrgan)
+               , ("sapient brain", COrgan)
+               , ("starting weapon", CEqp)
+               , ("book", CInv)
+               , ("book", CInv) ]
   }
 
 guardianSpider = ItemKind
