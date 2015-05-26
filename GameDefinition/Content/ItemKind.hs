@@ -26,9 +26,9 @@ cdefs = ContentDef
 
 items :: [ItemKind]
 items =
-  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster, boardingManual, boardingTome, turtleBook ]
+  [decipulum, brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster, boardingManual, boardingTome, turtleBook, cqcBook, rangedCombatBook ]
 
-decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster, boardingManual, boardingTome, turtleBook :: ItemKind
+decipulum,    brassLantern, buckler, dart, dart200, gem1, gem2, gem3, gloveFencing, gloveGauntlet, gloveJousting, currency, gorget, harpoon, oculus, necklace1, necklace2, necklace3, necklace4, necklace5, necklace6, necklace7, net, oilLamp, potion1, potion2, potion3, potion4, potion5, potion6, potion7, potion8, potion9, potion10, ring1, ring2, ring3, ring4, ring5, scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7, scroll8, scroll9, shield, dagger, hammer, sword, halberd, armorLeather, armorMail, sharpeningTool, grenade1, grenade2, grog, gladiusSolis, hpBooster, moveBooster, boardingManual, boardingTome, turtleBook, cqcBook, rangedCombatBook :: ItemKind
 
 necklace, ring, potion, booster, grenade, scroll, book, gem :: ItemKind  -- generic templates
 
@@ -205,6 +205,24 @@ turtleBook = book
                , AddSpeed (-10) ]
   , ifeature = [ EqpSlot EqpSlotAddArmorMelee "", Identified ]
   , idesc    = "thick book detailing patterns of turtle shells."
+  }
+
+cqcBook = book
+  { iname    = "book of close combat"
+  , ifreq    = [("useful", 10), ("book", 50)]
+  , iaspects = [ AddHurtMelee 3
+               , AddHurtRanged (-3)]
+  , ifeature = [ EqpSlot EqpSlotAddHurtMelee "", Identified ]
+  , idesc    = "thin booklet detailing some close quarter combat techniques."
+  }
+
+rangedCombatBook = book
+  { iname    = "book of ranged combat"
+  , ifreq    = [("useful", 10), ("book", 50)]
+  , iaspects = [ AddHurtMelee (-3)
+               , AddHurtRanged 3]
+  , ifeature = [ EqpSlot EqpSlotAddHurtRanged "", Identified ]
+  , idesc    = "thin booklet detailing some ranged combat techniques."
   }
 
 
