@@ -171,17 +171,16 @@ book = ItemKind
   , iaspects = []
   , ieffects = []
   , ifeature = [EqpSlot EqpSlotAddHurtMelee "", Identified]
-  , idesc    = "A portable sharpening stone that lets you fix your weapons between or even during fights, without the need to set up camp, fish out tools and assemble a proper sharpening workshop."
+  , idesc    = "An old tome"
   , ikit     = []
   }
 
 boardingManual = book
   { iname    = "boarding manual"
-  , ifreq    = [("useful", 10), ("book", 50)]
-  , iaspects = [ AddHurtMelee 2
-               , AddHurtRanged 2
+  , ifreq    = [("useful", 10), ("book", 50) ]
+  , iaspects = [ AddHurtMelee $ d 5 + 5
                , AddMaxCalm (-10) ]
-  , ieffects = [ NoEffect "of boarding operations"]
+  , ieffects = [ NoEffect "of boarding operations" ]
   , ifeature = [ EqpSlot EqpSlotAddHurtMelee "", Identified ]
   , idesc    = "A manual detailing boarding operations. A must read for every privateer."
   }
@@ -189,8 +188,7 @@ boardingManual = book
 boardingTome = book
   { iname    = "boarding ops, 2nd ed"
   , ifreq    = [("useful", 1), ("book", 5)]
-  , iaspects = [ AddHurtMelee 4
-               , AddHurtRanged 4
+  , iaspects = [ AddHurtMelee $ d 10 + 10
                , AddMaxCalm (-10) ]
   , ieffects = [ NoEffect "of boarding operations, unabridged"]
   , ifeature = [ EqpSlot EqpSlotAddHurtRanged "", Identified ]
@@ -199,9 +197,9 @@ boardingTome = book
 
 turtleBook = book
   { iname    = "book of turtles"
-  , ifreq    = [("useful", 10), ("book", 50)]
-  , iaspects = [ AddArmorMelee 3
-               , AddArmorRanged 3
+  , ifreq    = [("useful", 10), ("book", 50) ]
+  , iaspects = [ AddArmorMelee $ d 5 + 5
+               , AddArmorRanged $ d 5 + 5
                , AddSpeed (-10) ]
   , ifeature = [ EqpSlot EqpSlotAddArmorMelee "", Identified ]
   , idesc    = "thick book detailing patterns of turtle shells."
@@ -209,9 +207,10 @@ turtleBook = book
 
 cqcBook = book
   { iname    = "book of close combat"
-  , ifreq    = [("useful", 10), ("book", 50)]
-  , iaspects = [ AddHurtMelee 3
-               , AddHurtRanged (-3)]
+  , ifreq    = [("useful", 10), ("book", 50) ]
+  , iaspects = [ AddHurtMelee $ d 5 + 5
+               , AddArmorMelee $ d 5 + 5
+               , AddArmorRanged $ -(d 10 + 5)]
   , ifeature = [ EqpSlot EqpSlotAddHurtMelee "", Identified ]
   , idesc    = "thin booklet detailing some close quarter combat techniques."
   }
@@ -219,8 +218,8 @@ cqcBook = book
 rangedCombatBook = book
   { iname    = "book of ranged combat"
   , ifreq    = [("useful", 10), ("book", 50)]
-  , iaspects = [ AddHurtMelee (-3)
-               , AddHurtRanged 3]
+  , iaspects = [ AddHurtMelee (- 10)
+               , AddArmorRanged $ d 10 + 5]
   , ifeature = [ EqpSlot EqpSlotAddHurtRanged "", Identified ]
   , idesc    = "thin booklet detailing some ranged combat techniques."
   }
