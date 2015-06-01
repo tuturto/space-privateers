@@ -509,7 +509,7 @@ grog = ItemKind
   , iverbHit = "splash"
   , iweight  = 50
   , iaspects = []
-  , ieffects = [ RefillCalm 30, Paralyze (3 + d 5)]
+  , ieffects = [ toOrganActorTurn "drunk" (20 + d 5) ]
   , ifeature = [ toVelocity 25
                , Applicable, Identified ]
   , idesc    = "A tankard full of disgusting looking liquid, probably containing at least one or more of the following: kerosene, propylene glycol, sulphuric acid, rum, acetone, scumm, axle grease and battery acid."
