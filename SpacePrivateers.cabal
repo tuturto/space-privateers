@@ -1,5 +1,5 @@
 name:                 SpacePrivateers
-version:              0.1.2.0
+version:              0.1.3.0
 synopsis:             Simple space pirate roguelike
 description:          Space Privateers is a roguelike game set in space.
 homepage:             https://github.com/tuturto/space-privateers
@@ -36,13 +36,17 @@ executable SpacePrivateers
                       TieKnot,
                       Paths_SpacePrivateers
 
-  build-depends:      base              >= 4         && < 5,
-                      LambdaHack        >= 0.5.0.0   && < 0.5.1.0,
-                      containers        >= 0.5       && < 1,
-                      enummapset-th     >= 0.6.0.0   && < 1,
-                      filepath          >= 1.2.0.1   && < 2,
-                      template-haskell  >= 2.6       && < 3,
-                      text              >= 0.11.2.3  && < 2
+  build-depends:      LambdaHack        >= 0.6.0.0   && < 0.6.1.0,
+                      template-haskell  >= 2.6,
+
+                      async             >= 2,
+                      base              >= 4         && < 99,
+                      containers        >= 0.5.3.0,
+                      enummapset-th     >= 0.6.0.0,
+                      filepath          >= 1.2.0.1,
+                      random            >= 1.1,
+                      text              >= 0.11.2.3
+                      
   default-language:   Haskell2010
 
   default-extensions: MonoLocalBinds, ScopedTypeVariables, OverloadedStrings
