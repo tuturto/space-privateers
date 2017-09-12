@@ -36,7 +36,7 @@ executable SpacePrivateers
                       TieKnot,
                       Paths_SpacePrivateers
 
-  build-depends:      LambdaHack        >= 0.6.0.0   && < 0.6.1.0,
+  build-depends:      LambdaHack        >= 0.6.1.0   && < 0.6.2.0,
                       template-haskell  >= 2.6,
 
                       async             >= 2,
