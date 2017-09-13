@@ -1,15 +1,15 @@
 -- | Terrain tile definitions.
 module Content.TileKind ( cdefs ) where
 
-import Control.Arrow (first)
-import Data.Maybe
+import Prelude ()
+
+import Game.LambdaHack.Common.Prelude
+
 import qualified Data.Text as T
 
 import Game.LambdaHack.Common.Color
 import Game.LambdaHack.Common.ContentDef
 import Game.LambdaHack.Common.Misc
-import Game.LambdaHack.Common.Msg
-import qualified Game.LambdaHack.Content.ItemKind as IK
 import Game.LambdaHack.Content.TileKind
 
 cdefs :: ContentDef TileKind
@@ -46,14 +46,27 @@ wall = TileKind
       -- but that is yet different aesthetics and it's inconsistent
       -- with console frontends.
   }
+  
+unknown = TileKind  -- needs to have index 0 and alter 1
+  { tsymbol  = ' '
+  , tname    = "unknown space"
+  , tfreq    = [("unknown space", 1)]
+  , tcolor   = defFG
+  , tcolor2  = defFG
+  , talter   = 1
+  , tfeature = [Dark, Indistinct]
+  }
+  
 hardRock = TileKind
   { tsymbol  = ' '
   , tname    = "impenetrable bedrock"
   , tfreq    = [("basic outer fence", 1)]
-  , tcolor   = BrWhite
-  , tcolor2  = BrWhite
-  , tfeature = [Dark, Impenetrable]
+  , tcolor   = defFG
+  , tcolor2  = defFG
+  , talter   = maxBound  -- impenetrable
+  , tfeature = [Dark, Indistinct]
   }
+ 
 pillar = TileKind
   { tsymbol  = 'O'
   , tname    = "rock"
@@ -61,10 +74,12 @@ pillar = TileKind
                , ("legendLit", 100), ("legendDark", 100)
                , ("noiseSet", 100), ("skirmishSet", 5)
                , ("battleSet", 250) ]
-  , tcolor   = BrWhite
-  , tcolor2  = defFG
-  , tfeature = []
+  , tcolor   = BrCyan  -- not BrWhite, to tell from heroes
+  , tcolor2  = Cyan
+  , talter   = 100
+  , tfeature = [Indistinct]
   }
+
 pillarCache = TileKind
   { tsymbol  = '&'
   , tname    = "cache"
@@ -203,7 +218,8 @@ stairsDownLit = TileKind
   , tfreq    = [("legendLit", 100)]
   , tcolor   = BrWhite
   , tcolor2  = defFG
-  , tfeature = [Walkable, Clear, NoItem, NoActor, Cause $ IK.Ascend (-1)]
+  , talter   = 0
+  , tfeature = [Embed "Escape", ConsideredByAI]
   }
 escapeUpLit = TileKind
   { tsymbol  = '<'
@@ -211,7 +227,8 @@ escapeUpLit = TileKind
   , tfreq    = [("legendLit", 100)]
   , tcolor   = BrYellow
   , tcolor2  = BrYellow
-  , tfeature = [Walkable, Clear, NoItem, NoActor, Cause $ IK.Escape 1]
+  , talter   = 0 -- anybody can escape
+  , tfeature = [Embed "Escape", ConsideredByAI]
   }
 escapeDownLit = TileKind
   { tsymbol  = '>'
@@ -221,14 +238,7 @@ escapeDownLit = TileKind
   , tcolor2  = BrYellow
   , tfeature = [Walkable, Clear, NoItem, NoActor, Cause $ IK.Escape (-1)]
   }
-unknown = TileKind
-  { tsymbol  = ' '
-  , tname    = "unknown space"
-  , tfreq    = [("unknown space", 1)]
-  , tcolor   = defFG
-  , tcolor2  = defFG
-  , tfeature = [Dark]
-  }
+
 floorCorridorLit = TileKind
   { tsymbol  = '#'
   , tname    = "corridor"
